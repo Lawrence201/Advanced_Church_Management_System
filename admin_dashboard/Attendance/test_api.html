@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Attendance API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input {
+            width: 300px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .result {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #4CAF50;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        .error {
+            border-left-color: #f44336;
+            background: #ffebee;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stat-card {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🧪 Test Attendance Statistics API</h2>
+        <div class="form-group">
+            <label for="serviceId">Service ID:</label>
+            <input type="text" id="serviceId" placeholder="Enter service ID (or leave blank for auto-generate)">
+        </div>
+        <div class="form-group">
+            <label for="checkInDate">Date:</label>
+            <input type="date" id="checkInDate">
+        </div>
+        <button onclick="testGetStats()">Get Statistics</button>
+        <button onclick="testGetMembers()">Get All Members</button>
+        <button onclick="generateTestServiceId()">Generate New Service ID</button>
+    </div>
+
+    <div class="container">
+        <h2>📊 Dashboard Statistics</h2>
+        <div class="stats-grid" id="statsGrid" style="display: none;"></div>
+    </div>
+
+    <div class="container">
+        <h2>📄 Raw API Response</h2>
+        <div id="result" class="result">Results will appear here...</div>
+    </div>
+
+    <script>
+        // Set today's date as default
+        document.getElementById('checkInDate').value = new Date().toISOString().split('T')[0];
+
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        function generateTestServiceId() {
+            const newId = generateUUID();
+            document.getElementById('serviceId').value = newId;
+            showResult(`Generated new Service ID: ${newId}`, false);
+        }
+
+        function showResult(data, isError = false) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = typeof data === 'object' ? JSON.stringify(data, null, 2) : data;
+            resultDiv.className = 'result' + (isError ? ' error' : '');
+        }
+
+        function displayStats(stats) {
+            const statsGrid = document.getElementById('statsGrid');
+            statsGrid.style.display = 'grid';
+            statsGrid.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-value">${stats.total_members}</div>
+                    <div class="stat-label">Total Members</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${stats.members_present}</div>
+                    <div class="stat-label">Members Present</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${stats.total_present}</div>
+                    <div class="stat-label">Total Present</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${stats.visitors_count}</div>
+                    <div class="stat-label">Visitors</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${stats.absent_count}</div>
+                    <div class="stat-label">Absent</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${stats.males_count}</div>
+                    <div class="stat-label">Males</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${stats.females_count}</div>
+                    <div class="stat-label">Females</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${stats.children_count}</div>
+                    <div class="stat-label">Children</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${stats.avg_arrival}</div>
+                    <div class="stat-label">Avg Arrival</div>
+                </div>
+            `;
+        }
+
+        async function testGetStats() {
+            const serviceId = document.getElementById('serviceId').value || generateUUID();
+            const checkInDate = document.getElementById('checkInDate').value;
+
+            if (!serviceId || !checkInDate) {
+                showResult('Please provide Service ID and Date', true);
+                return;
+            }
+
+            try {
+                showResult('Loading...');
+                const response = await fetch(`get_stats.php?service_id=${serviceId}&check_in_date=${checkInDate}`);
+                const result = await response.json();
+                
+                showResult(result);
+                
+                if (result.success) {
+                    displayStats(result.data);
+                } else {
+                    document.getElementById('statsGrid').style.display = 'none';
+                }
+            } catch (error) {
+                showResult(`Error: ${error.message}`, true);
+            }
+        }
+
+        async function testGetMembers() {
+            try {
+                showResult('Loading...');
+                const response = await fetch('absent.php?service_id=0&check_in_date=1970-01-01');
+                const result = await response.json();
+                showResult(result);
+                
+                if (result.success) {
+                    alert(`Total Active Members: ${result.data.length}`);
+                }
+            } catch (error) {
+                showResult(`Error: ${error.message}`, true);
+            }
+        }
+
+        // Auto-load on page load
+        window.onload = function() {
+            generateTestServiceId();
+        };
+    </script>
+</body>
+</html>

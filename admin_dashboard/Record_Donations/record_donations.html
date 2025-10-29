@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Record Donation - Church Management System</title>
+    <link rel="stylesheet" href="../style.css">
+    
+</head>
+
+<body>
+    <body>
+        <style>
+           
+            /* ---------- Layout Container ---------- */
+           .zorp_mainwrap {
+  width: 100%;
+  padding-top: 40px; /* adds internal space on top */
+  display: block;
+}
+
+
+    
+            /* ---------- Top Bar (if present) ---------- */
+            .rrap_topbar {
+                background: linear-gradient(135deg, #5B4FDE 0%, #8B5CF6 100%);
+                padding: 24px 0;
+                color: #fff;
+                border-radius: 14px;
+                margin-bottom: 18px;
+                box-shadow: 0 8px 30px rgba(86, 67, 225, 0.12);
+            }
+    
+            .rrap_barinner {
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 0 24px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between
+            }
+    
+            .rrap_textblock h1 {
+                font-size: 22px;
+                font-weight: 700;
+                margin-bottom: 4px
+            }
+    
+            .rrap_textblock p {
+                font-size: 13px;
+                opacity: 0.95
+            }
+    
+            /* ---------- Card ---------- */
+            .rray_cardbox {
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), #ffffff);
+                border-radius: 12px;
+                box-shadow: 0 6px 20px rgba(17, 24, 39, 0.06);
+                overflow: hidden;
+                border: 1px solid rgba(15, 23, 42, 0.03);
+            }
+    
+            .rray_cardtop {
+                padding: 18px 22px;
+                border-bottom: 1px solid #EEF2FF;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+    
+            .rray_titline {
+                font-size: 24px;
+            
+                color: #0f1724
+            }
+    
+            .rray_subtext {
+                font-size: 13px;
+                color: #6B7280;
+                margin-top: 4px
+            }
+    
+            .rray_cardmain {
+                padding: 22px
+            }
+    
+            /* ---------- Tab group (pill tabs) ---------- */
+            .rrap_tabgroup {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                margin-bottom: 18px
+            }
+    
+            .rrap_tabitem {
+                padding: 9px 16px;
+                border-radius: 999px;
+                background: #ffffff;
+                color: #374151;
+                font-weight: 700;
+                border: 1px solid rgba(15, 23, 42, 0.06);
+                cursor: pointer;
+                transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+                box-shadow: 0 1px 4px rgba(12, 18, 30, 0.03);
+            }
+    
+            .rrap_tabitem:hover {
+                transform: translateY(-3px)
+            }
+    
+            .rrap_tabitem.active {
+                background: linear-gradient(90deg, #5B4FDE, #7C3AED);
+                color: white;
+                box-shadow: 0 8px 28px rgba(92, 64, 216, 0.18);
+                border: none;
+            }
+    
+            /* ---------- Form grids ---------- */
+            .rray_gridlay {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px
+            }
+    
+            .rray_grid3 {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px
+            }
+    
+            .rray_flexrow {
+                display: flex;
+                gap: 16px;
+                align-items: center
+            }
+    
+            /* Make grids collapse nicely on small screens */
+            @media (max-width:1024px) {
+    
+                .rray_gridlay,
+                .rray_grid3 {
+                    grid-template-columns: 1fr
+                }
+            }
+    
+            /* ---------- Field groups & inputs ---------- */
+            .rrap_fieldgrp {
+                display: flex;
+                flex-direction: column;
+                gap: 8px
+            }
+    
+            .rrap_fldlab {
+                font-size: 13px;
+                font-weight: 700;
+                color: #374151
+            }
+    
+            .rrap_fldinp,
+            .rrap_fldsel,
+            .rrap_fldtxt {
+                width: 100%;
+                padding: 12px 14px;
+                border-radius: 10px;
+                border: 1px solid #E6E9F2;
+                background: #FFFFFF;
+                font-size: 14px;
+                color: #0b1220;
+                transition: box-shadow .18s ease, border-color .18s ease, transform .12s ease;
+    
+            }
+    
+            .rrap_fldtxt {
+                min-height: 92px;
+                resize: vertical
+            }
+    
+            .rrap_fldinp:focus,
+            .rrap_fldsel:focus,
+            .rrap_fldtxt:focus {
+                outline: none;
+                border-color: #7C5AF0;
+                box-shadow: 0 6px 22px rgba(124, 90, 240, 0.12);
+                transform: translateY(-1px);
+            }
+    
+            /* subtle placeholder style */
+            .rrap_fldinp::placeholder,
+            .rrap_fldtxt::placeholder {
+                color: #9CA3AF
+            }
+    
+            /* compact helper inline */
+            .rrap_inln {
+                display: flex;
+                align-items: center;
+                gap: 8px
+            }
+    
+            /* ---------- Section titles ---------- */
+            .rray_sectit {
+                font-size: 13px;
+                font-weight: 800;
+                color: #6B7280;
+                margin: 18px 0 8px;
+                text-transform: uppercase;
+                letter-spacing: .08em;
+            }
+    
+            /* ---------- Upload zone ---------- */
+            .rray_uploadz {
+                border: 1px dashed #E6E9F2;
+                border-radius: 12px;
+                padding: 18px;
+                background: linear-gradient(180deg, #FBFCFF, #F7F8FE);
+                text-align: center;
+                color: #6B7280;
+                cursor: pointer;
+                transition: background .18s ease, border-color .18s ease, transform .12s ease;
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            }
+    
+            .rray_uploadz:hover {
+                background: #F3F5FF;
+                border-color: #C7D2FE;
+                transform: translateY(-2px)
+            }
+    
+            .rray_uploadz.dragover {
+                background: #EEF2FF;
+                border-color: #7C5AF0;
+                color: #5B4FDE
+            }
+    
+            /* accepted helper */
+            .rrap_helper {
+                font-size: 12px;
+                color: #6B7280;
+                margin-top: 6px
+            }
+    
+            /* ---------- Buttons ---------- */
+            .rray_btnarea {
+                display: flex;
+                justify-content: flex-end;
+                gap: 12px;
+                margin-top: 22px
+            }
+    
+            .rrap_btn {
+                padding: 10px 18px;
+                border-radius: 10px;
+                border: 1px solid #E6E9F2;
+                background: #fff;
+                color: #111827;
+                font-weight: 800;
+                cursor: pointer;
+                transition: transform .12s ease, box-shadow .18s ease;
+            }
+    
+            .rrap_btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06)
+            }
+    
+            .rrap_btnprim {
+                background: linear-gradient(90deg, #5B4FDE 0%, #7C3AED 100%);
+                color: #fff;
+                border: none;
+                box-shadow: 0 10px 30px rgba(92, 64, 216, 0.12);
+            }
+    
+            .rrap_btnprim:hover {
+                transform: translateY(-4px)
+            }
+    
+            /* warning button */
+            .rrap_btnwarn {
+                background: #F59E0B;
+                color: #111827;
+                border: none;
+                box-shadow: 0 6px 18px rgba(245, 158, 11, 0.12)
+            }
+    
+            .rrap_btnwarn:hover {
+                transform: translateY(-3px)
+            }
+    
+            /* ---------- Summary Sidebar ---------- */
+            .rray_layout {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 22px
+            }
+    
+            .rray_sumside {
+                position: sticky;
+                top: 22px;
+                align-self: start
+            }
+    
+            .rray_sumrow {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 0;
+                font-size: 14px;
+                color: #111827
+            }
+    
+            .rray_divline {
+                height: 1px;
+                background: #EEF2FF;
+                margin: 16px 0
+            }
+    
+            .rray_sumtot {
+                display: flex;
+                justify-content: space-between;
+                padding: 12px 0;
+                font-weight: 800;
+                font-size: 16px;
+                border-top: 1px dashed #EEF2FF;
+                margin-top: 8px
+            }
+    
+            /* badges */
+            .rrap_badge {
+                padding: 6px 12px;
+                border-radius: 999px;
+                font-size: 12px;
+                font-weight: 800
+            }
+    
+            .rrap_bdggrn {
+                background: #ECFDF5;
+                color: #065F46
+            }
+    
+            .rrap_bdgyel {
+                background: #FFFAEB;
+                color: #92400E
+            }
+    
+            /* small utilities */
+            .hidden {
+                display: none !important
+            }
+    
+            .muted {
+                color: #6B7280;
+                font-weight: 600
+            }
+    
+            .kicker {
+                font-size: 12px;
+                color: #9CA3AF
+            }
+    
+            /* subtle helper for currency display */
+            .amount-strong {
+                font-weight: 900;
+                color: #0B1220;
+                font-size: 16px
+            }
+    
+            /* Accessibility focus outlines (keyboard users) */
+            .rrap_tabitem:focus,
+            .rrap_fldinp:focus,
+            .rrap_fldsel:focus,
+            .rrap_fldtxt:focus {
+                outline: 3px solid rgba(124, 90, 240, 0.14);
+                outline-offset: 2px;
+            }
+    
+            /* small screens */
+            @media (max-width:720px) {
+                .zorp_mainwrap {
+                    padding: 18px
+                }
+    
+                .rray_layout {
+                    grid-template-columns: 1fr
+                }
+    
+                .rrap_tabitem {
+                    padding: 9px 12px
+                }
+            }
+        </style>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+            
+                <svg class="church-logo" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 9h4" />
+                    <path d="M12 7v5" />
+                    <path d="M14 22v-4a2 2 0 0 0-4 0v4" />
+                    <path d="M18 22V5.618a1 1 0 0 0-.553-.894l-4.553-2.277a2 2 0 0 0-1.788 0L6.553 4.724A1 1 0 0 0 6 5.618V22" />
+                    <path d="m18 7 3.447 1.724a1 1 0 0 1 .553.894V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.618a1 1 0 0 1 .553-.894L6 7" />
+                </svg>
+            
+            
+                <div class="logo-text">
+                    <h3>Church</h3>
+                    <p>Management System</p>
+                </div>
+            
+                <!-- Close button for mobile -->
+                <button class="sidebar-close" onclick="toggleSidebar()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="sidebar-content">
+                <div class="menu-section">
+                    <div class="menu-label">Main Menu</div>
+                    <a href="../index.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg></span>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="../Members/members.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </span>
+                        <span>Members</span>
+                    </a>
+                    <a href="../Members/visitors_management.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-user-check h-5 w-5">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <polyline points="16 11 18 13 22 9"></polyline>
+                            </svg>
+                        </span>
+                        <span>Visitors</span>
+                    </a>
+                    <a href="../Events/events.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M8 2v4"></path>
+                                <path d="M16 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                            </svg>
+                        </span>
+                        <span>Events</span>
+                    </a>
+                    <a href="../Finance/finance.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <line x1="12" x2="12" y1="2" y2="22"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </span>
+                        <span>Finances</span>
+                    </a>
+                    <a href="../Communication/communication.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </span>
+                        <span>Communications</span>
+                    </a>
+                    <a href="../Attendance/attendance.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <polyline points="16 11 18 13 22 9"></polyline>
+                            </svg>
+                        </span>
+                        <span>Attendance</span>
+                    </a>
+                    <a href="../Report/report.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                <path d="M18 17V9"></path>
+                                <path d="M13 17V5"></path>
+                                <path d="M8 17v-3"></path>
+                            </svg>
+                        </span>
+                        <span>Reports</span>
+                    </a>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">AI Features</div>
+                    <a href="../AI/ai_insight.html" class="menu-item has-badge">
+                        <span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L13.5 7.5H19L14.5 11L16 16.5L12 13L8 16.5L9.5 11L5 7.5H10.5L12 2Z" fill="currentColor"
+                                    opacity="0.2" />
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" />
+                                <path d="M12 5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M12 16V19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M5 12H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M16 12H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M7.5 7.5L9.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M14.5 14.5L16.5 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M7.5 16.5L9.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M14.5 9.5L16.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <circle cx="12" cy="5" r="1.5" fill="currentColor" />
+                                <circle cx="19" cy="12" r="1.5" fill="currentColor" />
+                                <circle cx="12" cy="19" r="1.5" fill="currentColor" />
+                                <circle cx="5" cy="12" r="1.5" fill="currentColor" />
+                            </svg>
+                    
+                        </span>
+                        <span>AI Insights</span>
+                        <span class="badge">New</span>
+                    </a>
+                    <a href="../AI/members_analytics.html" class="menu-item has-badge">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                <path d="M18 17V9"></path>
+                                <path d="M13 17V5"></path>
+                                <path d="M8 17v-3"></path>
+                            </svg></span>
+                        <span>Member Analytics</span>
+                        <span class="badge">New</span>
+                    </a>
+                    <a href="../AI/ai_smart_report.html" class="menu-item has-badge">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                <path d="M10 9H8"></path>
+                                <path d="M16 13H8"></path>
+                                <path d="M16 17H8"></path>
+                            </svg></span>
+                        <span>Smart Reports</span>
+                        <span class="badge">New</span>
+                    </a>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">Quick Actions</div>
+                    <a href="../Add_Members/enroll_members.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <line x1="19" x2="19" y1="8" y2="14"></line>
+                                <line x1="22" x2="16" y1="11" y2="11"></line>
+                            </svg></span>
+                        <span>Add Member</span>
+                    </a>
+                    <a href="../Add_Event/New_Event.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M8 2v4"></path>
+                                <path d="M16 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                            </svg></span>
+                        <span>New Event</span>
+                    </a>
+                    <a href="../Record_Donations/record_donations.html" class="menu-item active">
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 10C20 6.5 17 4 14 4C12.5 4 11.2 4.6 10.3 5.6C9.9 5.2 9.4 5 8.8 5C7.3 5 6 6.3 6 7.8C6 8.4 6.2 8.9 6.5 9.3C4.5 10.2 3 12.2 3 14.5C3 17.5 5.5 20 8.5 20H16.5C19 20 21 18 21 15.5C21 13.2 19.5 11.3 17.5 10.5C18.4 10.8 19 11.7 19 12.7"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M12 20C11.4 20 9.5 19.5 8.5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <circle cx="12" cy="8" r="1" fill="currentColor" />
+                                <path d="M12 11V15M10 13H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path
+                                    d="M8.5 4C9.5 3 11 3 12 4C13 3 14.5 3 15.5 4C16 4.5 16 5.5 16 6C16 7 15 8 12 10C9 8 8 7 8 6C8 5.5 8 4.5 8.5 4Z"
+                                    fill="currentColor" opacity="0.2" />
+                                <path
+                                    d="M12 5.5C10.5 4 9 4 8 5C7 6 7 7.5 7 8.5C7 10 8.5 11.5 12 14C15.5 11.5 17 10 17 8.5C17 7.5 17 6 16 5C15 4 13.5 4 12 5.5Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <span>Record Donation</span>
+                    </a>
+                    <a href="../Send_Message/send_message.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                            </svg></span>
+                        <span>Send Message</span>
+                    </a>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label"></div>
+                    <a href="../Settings/settings.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+                                </path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg></span>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search members, events, or anything...">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+                </div>
+                <div class="header-right">
+                    <div class="notification-icon">
+                        <span style="font-size: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                            </svg>
+                        </span>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <span style="font-size: 14px; font-weight: 500;">Pastor Lawrence</span>
+                        <span style="font-size: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Record Donation Form -->
+         
+            <div class="dashboard-content">
+                <div class="cf-donation-header">
+                    <h1>Record New Donation</h1>
+                    <p>Capture donation details and generate receipt for church members</p>
+                </div>
+
+
+                <main class="zorp_mainwrap">
+                    <div class="rray_layout">
+                        <!-- Main Form Card -->
+                        <div class="rray_cardbox">
+                            <div class="rray_cardtop">
+                                <div>
+                                    <div class="rray_titline">New Record</div>
+                                    <div class="rray_subtext">Fill in the details below. Fields adapt based on the selected type.</div>
+                                </div>
+                                <div class="rrap_inln">
+                                    <span class="rrap_badge rrap_bdggrn" id="autosaveStatus">Autosaved</span>
+                                </div>
+                            </div>
+                            <div class="rray_cardmain">
+                                <!-- Type Tabs -->
+                                <div class="rrap_tabgroup" id="typeTabs">
+                                    <button class="rrap_tabitem active" data-type="offering">Offering</button>
+                                    <button class="rrap_tabitem" data-type="projectoffering">Project Offering</button>
+                                    <button class="rrap_tabitem" data-type="tithe">Tithe (CPS)</button>
+                                    <button class="rrap_tabitem" data-type="welfare">Welfare</button>
+                                    <button class="rrap_tabitem" data-type="expense">Expense</button>
+                                </div>
+                
+                                <!-- Common Fields -->
+                                <div class="rray_gridlay">
+                                    <div class="rrap_fieldgrp">
+                                        <label class="rrap_fldlab">Date</label>
+                                        <input class="rrap_fldinp" type="date" id="date" />
+                                    </div>
+                                    <div class="rrap_fieldgrp">
+                                        <label class="rrap_fldlab">Payment Method</label>
+                                        <select class="rrap_fldsel" id="paymentMethod">
+                                            <option>Cash</option>
+                                            <option>Mobile Money</option>
+                                            <option>Bank Transfer</option>
+                                            <option>Cheque</option>
+                                            <option>Mixed</option>
+                                        </select>
+                                    </div>
+                                </div>
+                
+                                <!-- Offering Specific -->
+                                <div id="formOffering">
+                                    <div class="rray_sectit">Offering details</div>
+                                    <div class="rray_gridlay">
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Service Type</label>
+                                            <select class="rrap_fldsel" id="offeringServiceType">
+                                                <option>Sunday Worship</option>
+                                                <option>Wednesday Service</option>
+                                                <option>Prayer Meeting</option>
+                                                <option>Special Offering</option>
+                                            </select>
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Service Time</label>
+                                            <input class="rrap_fldinp" type="time" id="offeringTime" />
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Amount Collected (₵)</label>
+                                            <input class="rrap_fldinp" type="number" id="offeringAmount" min="0" step="0.01"
+                                                placeholder="0.00" />
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Counted By</label>
+                                            <input class="rrap_fldinp" type="text" id="offeringCountedBy"
+                                                placeholder="Deacon/Officer name" />
+                                        </div>
+                                    </div>
+                                    <div class="rrap_fieldgrp">
+                                        <label class="rrap_fldlab">Notes</label>
+                                        <textarea class="rrap_fldtxt" id="offeringNotes" placeholder="Additional details..."></textarea>
+                                    </div>
+                                </div>
+                
+                                <!-- Project Offering Specific -->
+                                <div id="formProjectOffering" style="display:none">
+                                    <div class="rray_sectit">Project Offering details</div>
+                                    <div class="rray_gridlay">
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Service Type</label>
+                                            <select class="rrap_fldsel" id="projectServiceType">
+                                                <option>Sunday Worship</option>
+                                                <option>Wednesday Service</option>
+                                                <option>Prayer Meeting</option>
+                                                <option>Special Project Offering</option>
+                                            </select>
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Project Name</label>
+                                            <select class="rrap_fldsel" id="projectName" onchange="toggleCustomProject()">
+                                                <option>Building Fund</option>
+                                                <option>Mission Project</option>
+                                                <option>Church Expansion</option>
+                                                <option>Renovation</option>
+                                                <option>Community Outreach</option>
+                                                <option value="custom">Other (Type Custom)</option>
+                                            </select>
+                                        </div>
+                                        <div class="rrap_fieldgrp" id="customProjectField" style="display:none">
+                                            <label class="rrap_fldlab">Custom Project Name</label>
+                                            <input class="rrap_fldinp" type="text" id="customProjectName"
+                                                placeholder="Enter custom project name" />
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Service Time</label>
+                                            <input class="rrap_fldinp" type="time" id="projectTime" />
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Amount Collected (₵)</label>
+                                            <input class="rrap_fldinp" type="number" id="projectAmount" min="0" step="0.01"
+                                                placeholder="0.00" />
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Counted By</label>
+                                            <input class="rrap_fldinp" type="text" id="projectCountedBy"
+                                                placeholder="Deacon/Officer name" />
+                                        </div>
+                                    </div>
+                                    <div class="rrap_fieldgrp">
+                                        <label class="rrap_fldlab">Notes</label>
+                                        <textarea class="rrap_fldtxt" id="projectNotes"
+                                            placeholder="Additional details about the project offering..."></textarea>
+                                    </div>
+                                </div>
+                
+                                <!-- Tithe (CPS) Specific -->
+                                <div id="formTithe" style="display:none">
+                                    <div class="rray_sectit">Tithe details</div>
+                                    <div class="rray_gridlay">
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Member Name</label>
+                                            <input class="rrap_fldinp" type="text" id="titheMember" placeholder="Full name" />
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Member Email (optional)</label>
+                                            <input class="rrap_fldinp" type="email" id="titheEmail" placeholder="name@example.com" />
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Amount (₵)</label>
+                                            <input class="rrap_fldinp" type="number" id="titheAmount" min="0" step="0.01"
+                                                placeholder="0.00" />
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Receipt Number</label>
+                                            <input class="rrap_fldinp" type="text" id="titheReceipt" placeholder="Auto or manual" />
+                                        </div>
+                                    </div>
+                                    <div class="rrap_fieldgrp">
+                                        <label class="rrap_fldlab">Notes</label>
+                                        <textarea class="rrap_fldtxt" id="titheNotes"
+                                            placeholder="Thank you note, remarks..."></textarea>
+                                    </div>
+                                </div>
+                
+                                <!-- Welfare Specific -->
+                                <div id="formWelfare" style="display:none">
+                                    <div class="rray_sectit">Welfare details</div>
+                                    <div class="rray_gridlay">
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Member Name</label>
+                                            <input class="rrap_fldinp" type="text" id="welfareMember" placeholder="Full name" />
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Amount (₵)</label>
+                                            <input class="rrap_fldinp" type="number" id="welfareAmount" min="0" step="0.01"
+                                                placeholder="0.00" />
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Payment Period</label>
+                                            <select class="rrap_fldsel" id="welfarePeriod">
+                                                <option>Monthly</option>
+                                                <option>Quarterly</option>
+                                                <option>Annually</option>
+                                            </select>
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Status</label>
+                                            <select class="rrap_fldsel" id="welfareStatus">
+                                                <option>Paid</option>
+                                                <option>Pending</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="rrap_fieldgrp">
+                                        <label class="rrap_fldlab">Notes</label>
+                                        <textarea class="rrap_fldtxt" id="welfareNotes" placeholder="Additional notes..."></textarea>
+                                    </div>
+                                </div>
+                
+                                <!-- Expense Specific -->
+                                <div id="formExpense" style="display:none">
+                                    <div class="rray_sectit">Expense details</div>
+                                    <div class="rray_grid3">
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Category</label>
+                                            <select class="rrap_fldsel" id="expenseCategory" onchange="toggleCustomCategory()">
+                                                <option value="utilities">Utilities</option>
+                                                <option value="maintenance">Maintenance</option>
+                                                <option value="salaries">Salaries</option>
+                                                <option value="supplies">Supplies</option>
+                                                <option value="events">Events</option>
+                                                <option value="transportation">Transportation</option>
+                                                <option value="custom">Other (Type Custom)</option>
+                                            </select>
+                                        </div>
+                                        <div class="rrap_fieldgrp" id="customCategoryField" style="display:none">
+                                            <label class="rrap_fldlab">Custom Category</label>
+                                            <input class="rrap_fldinp" type="text" id="customCategoryName"
+                                                placeholder="Enter custom category" />
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Vendor/Payee</label>
+                                            <input class="rrap_fldinp" type="text" id="expenseVendor" placeholder="Company or person" />
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Amount (₵)</label>
+                                            <input class="rrap_fldinp" type="number" id="expenseAmount" min="0" step="0.01"
+                                                placeholder="0.00" />
+                                        </div>
+                                    </div>
+                                    <div class="rray_gridlay">
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Description</label>
+                                            <input class="rrap_fldinp" type="text" id="expenseDescription"
+                                                placeholder="What was paid for?" />
+                                        </div>
+                                        <div class="rrap_fieldgrp">
+                                            <label class="rrap_fldlab">Status</label>
+                                            <select class="rrap_fldsel" id="expenseStatus">
+                                                <option value="pending">Pending</option>
+                                                <option value="approved">Approved</option>
+                                                <option value="rejected">Rejected</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="rrap_fieldgrp">
+                                        <label class="rrap_fldlab">Notes</label>
+                                        <textarea class="rrap_fldtxt" id="expenseNotes" placeholder="Additional details..."></textarea>
+                                    </div>
+                                </div>
+                
+                                <div class="rray_sectit">Receipt Upload (optional)</div>
+                                <div class="rray_uploadz" id="uploadZone">Drag & drop receipt here or click to upload</div>
+                                <div class="rrap_helper">Accepted: JPG, PNG, PDF up to 10MB</div>
+                
+                                <div class="rray_btnarea">
+                                    <button class="rrap_btn" onclick="resetForm()">Reset</button>
+                                    <button class="rrap_btn rrap_btnprim" onclick="submitForm()">Save Record</button>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Summary Sidebar -->
+                        <aside class="rray_sumside rray_cardbox">
+                            <div class="rray_cardtop">
+                                <div class="rray_titline">Quick Summary</div>
+                            </div>
+                            <div class="rray_cardmain">
+                                <div class="rray_sumrow"><span>Type</span><strong id="sumType">Offering</strong></div>
+                                <div class="rray_sumrow"><span>Date</span><strong id="sumDate">—</strong></div>
+                                <div class="rray_sumrow"><span>Payment</span><strong id="sumMethod">Cash</strong></div>
+                                <div class="rray_divline"></div>
+                                <div class="rray_sumrow"><span>Primary Field</span><strong id="sumPrimary">—</strong></div>
+                                <div class="rray_sumrow"><span>Amount</span><strong id="sumAmount">₵0.00</strong></div>
+                                <div class="rray_sumtot"><span>Ready to Save</span><span class="rrap_badge rrap_bdgyel"
+                                        id="sumStatus">Draft</span></div>
+                            </div>
+                        </aside>
+                    </div>
+                </main>
+                
+                <script>
+                    const tabs = document.querySelectorAll('.rrap_tabitem');
+                    const sections = {
+                        offering: document.getElementById('formOffering'),
+                        projectoffering: document.getElementById('formProjectOffering'),
+                        tithe: document.getElementById('formTithe'),
+                        welfare: document.getElementById('formWelfare'),
+                        expense: document.getElementById('formExpense')
+                    };
+
+                    const sum = {
+                        type: document.getElementById('sumType'),
+                        date: document.getElementById('sumDate'),
+                        method: document.getElementById('sumMethod'),
+                        primary: document.getElementById('sumPrimary'),
+                        amount: document.getElementById('sumAmount'),
+                        status: document.getElementById('sumStatus'),
+                        autosave: document.getElementById('autosaveStatus')
+                    };
+
+                    function setActive(type) {
+                        tabs.forEach(t => t.classList.toggle('active', t.dataset.type === type));
+                        Object.keys(sections).forEach(k => sections[k].style.display = k === type ? 'block' : 'none');
+                        sum.type.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+                        autosave();
+                    }
+
+                    tabs.forEach(t => t.addEventListener('click', () => setActive(t.dataset.type)));
+
+                    // Summary bindings
+                    document.getElementById('date').addEventListener('change', e => sum.date.textContent = e.target.value || '—');
+                    document.getElementById('paymentMethod').addEventListener('change', e => { sum.method.textContent = e.target.value; autosave(); });
+
+                    const offeringAmount = document.getElementById('offeringAmount');
+                    const projectAmount = document.getElementById('projectAmount');
+                    const titheAmount = document.getElementById('titheAmount');
+                    const welfareAmount = document.getElementById('welfareAmount');
+                    const expenseAmount = document.getElementById('expenseAmount');
+
+                    function fmt(v) { return `₵${Number(v || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` }
+
+                    function toggleCustomProject() {
+                        const projectName = document.getElementById('projectName').value;
+                        const customField = document.getElementById('customProjectField');
+                        if (projectName === 'custom') {
+                            customField.style.display = 'flex';
+                        } else {
+                            customField.style.display = 'none';
+                        }
+                        bindPrimary();
+                    }
+
+                    function toggleCustomCategory() {
+                        const category = document.getElementById('expenseCategory').value;
+                        const customField = document.getElementById('customCategoryField');
+                        if (category === 'custom') {
+                            customField.style.display = 'flex';
+                        } else {
+                            customField.style.display = 'none';
+                        }
+                        bindPrimary();
+                    }
+
+                    function bindPrimary() {
+                        // Updates primary field and amount based on active tab
+                        if (sections.offering.style.display !== 'none') {
+                            const svc = document.getElementById('offeringServiceType').value;
+                            sum.primary.textContent = svc; sum.amount.textContent = fmt(offeringAmount.value);
+                        } else if (sections.projectoffering.style.display !== 'none') {
+                            const projSelect = document.getElementById('projectName').value;
+                            const customProj = document.getElementById('customProjectName').value;
+                            const proj = projSelect === 'custom' && customProj ? customProj : projSelect;
+                            sum.primary.textContent = proj; sum.amount.textContent = fmt(projectAmount.value);
+                        } else if (sections.tithe.style.display !== 'none') {
+                            const n = document.getElementById('titheMember').value || '—';
+                            sum.primary.textContent = n; sum.amount.textContent = fmt(titheAmount.value);
+                        } else if (sections.welfare.style.display !== 'none') {
+                            const n = document.getElementById('welfareMember').value || '—';
+                            sum.primary.textContent = n; sum.amount.textContent = fmt(welfareAmount.value);
+                        } else if (sections.expense.style.display !== 'none') {
+                            const d = document.getElementById('expenseDescription').value || '—';
+                            sum.primary.textContent = d; sum.amount.textContent = fmt(expenseAmount.value);
+                        }
+                        autosave();
+                    }
+
+                    ['offeringServiceType', 'offeringAmount', 'projectName', 'customProjectName', 'projectAmount', 'titheMember', 'titheAmount', 'welfareMember', 'welfareAmount', 'expenseCategory', 'customCategoryName', 'expenseDescription', 'expenseAmount']
+                        .forEach(id => document.getElementById(id).addEventListener('input', bindPrimary));
+
+                    // Upload zone
+                    const uploadZone = document.getElementById('uploadZone');
+                    uploadZone.addEventListener('click', () => {
+                        const i = document.createElement('input'); i.type = 'file'; i.accept = '.jpg,.jpeg,.png,.pdf'; i.onchange = () => {
+                            sum.status.textContent = 'Attachment added'; sum.status.className = 'rrap_badge rrap_bdggrn'; autosave();
+                        }; i.click();
+                    });
+
+                    function autosave() {
+                        sum.autosave.textContent = 'Autosaved';
+                        sum.autosave.className = 'rrap_badge rrap_bdggrn';
+                        // Hook for future localStorage/draft persistence
+                    }
+
+                    function saveDraft() { sum.status.textContent = 'Draft'; sum.status.className = 'rrap_badge rrap_bdgyel'; alert('Draft saved locally (demo).'); }
+                    function resetForm() { location.reload(); }
+
+                    function validate() {
+                        const active = [...tabs].find(t => t.classList.contains('active')).dataset.type;
+                        if (!document.getElementById('date').value) return [false, 'Please select a date'];
+                        if (active === 'offering' && !offeringAmount.value) return [false, 'Enter offering amount'];
+                        if (active === 'projectoffering' && !projectAmount.value) return [false, 'Enter project offering amount'];
+                        if (active === 'tithe' && (!document.getElementById('titheMember').value || !titheAmount.value)) return [false, 'Enter member name and tithe amount'];
+                        if (active === 'welfare' && (!document.getElementById('welfareMember').value || !welfareAmount.value)) return [false, 'Enter member name and welfare amount'];
+                        if (active === 'expense' && (!document.getElementById('expenseDescription').value || !expenseAmount.value)) return [false, 'Enter expense description and amount'];
+                        return [true, active];
+                    }
+
+                    async function submitForm() {
+                        const [ok, activeType] = validate();
+                        if (!ok) return alert(activeType);
+                        
+                        // Gather form data based on active type
+                        const formData = {
+                            type: activeType,
+                            date: document.getElementById('date').value,
+                            paymentMethod: document.getElementById('paymentMethod').value
+                        };
+                        
+                        // Add type-specific fields
+                        if (activeType === 'offering') {
+                            formData.serviceType = document.getElementById('offeringServiceType').value;
+                            formData.serviceTime = document.getElementById('offeringTime').value;
+                            formData.amount = document.getElementById('offeringAmount').value;
+                            formData.countedBy = document.getElementById('offeringCountedBy').value;
+                            formData.notes = document.getElementById('offeringNotes').value;
+                        } else if (activeType === 'projectoffering') {
+                            formData.serviceType = document.getElementById('projectServiceType').value;
+                            formData.serviceTime = document.getElementById('projectTime').value;
+                            const projName = document.getElementById('projectName').value;
+                            formData.projectName = projName === 'custom' ? 
+                                document.getElementById('customProjectName').value : projName;
+                            formData.amount = document.getElementById('projectAmount').value;
+                            formData.countedBy = document.getElementById('projectCountedBy').value;
+                            formData.notes = document.getElementById('projectNotes').value;
+                        } else if (activeType === 'tithe') {
+                            formData.memberName = document.getElementById('titheMember').value;
+                            formData.memberEmail = document.getElementById('titheEmail').value;
+                            formData.amount = document.getElementById('titheAmount').value;
+                            formData.receiptNumber = document.getElementById('titheReceipt').value;
+                            formData.notes = document.getElementById('titheNotes').value;
+                        } else if (activeType === 'welfare') {
+                            formData.memberName = document.getElementById('welfareMember').value;
+                            formData.amount = document.getElementById('welfareAmount').value;
+                            formData.paymentPeriod = document.getElementById('welfarePeriod').value;
+                            formData.status = document.getElementById('welfareStatus').value;
+                            formData.notes = document.getElementById('welfareNotes').value;
+                        } else if (activeType === 'expense') {
+                            const expCategory = document.getElementById('expenseCategory').value;
+                            formData.category = expCategory === 'custom' ? 'Other' : expCategory;
+                            if (expCategory === 'custom') {
+                                formData.customCategory = document.getElementById('customCategoryName').value;
+                            }
+                            formData.description = document.getElementById('expenseDescription').value;
+                            formData.vendor = document.getElementById('expenseVendor').value;
+                            formData.amount = document.getElementById('expenseAmount').value;
+                            formData.status = document.getElementById('expenseStatus').value;
+                            formData.notes = document.getElementById('expenseNotes').value;
+                        }
+                        
+                        // Show loading state
+                        const submitBtn = event.target;
+                        const originalText = submitBtn.textContent;
+                        submitBtn.textContent = 'Saving...';
+                        submitBtn.disabled = true;
+                        
+                        try {
+                            // Send data to PHP backend
+                            const response = await fetch('save_donation.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(formData)
+                            });
+                            
+                            const result = await response.json();
+                            
+                            if (result.success) {
+                                alert(result.message + '\nTransaction ID: ' + result.transaction_id);
+                                // Redirect to finance page
+                                window.location.href = '../Finance/finance.html';
+                            } else {
+                                alert('Error: ' + result.message);
+                                submitBtn.textContent = originalText;
+                                submitBtn.disabled = false;
+                            }
+                        } catch (error) {
+                            alert('Error saving record: ' + error.message);
+                            submitBtn.textContent = originalText;
+                            submitBtn.disabled = false;
+                        }
+                    }
+
+                    // Initialize
+                    setActive('offering');
+                    document.getElementById('date').valueAsDate = new Date();
+                    sum.date.textContent = document.getElementById('date').value;
+                </script>
+
+                
+            </div>
+        </div>
+    </div>
+
+   
+</body>
+
+</html>

@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Management System - Add Member</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .xax-form-error.show {
+            display: block;
+            color: red;
+            font-size: 0.875rem;
+            margin-top: 4px;
+        }
+
+        .xax-form-error {
+            display: none;
+        }
+
+        .xax-form-input.error,
+        .xax-form-select.error {
+            border-color: red;
+        }
+
+        .xax-ministry-card.selected {
+            border-color: #007bff;
+            background-color: #e7f1ff;
+        }
+
+        .cuttin-success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .cuttin-success-message.show {
+            display: block;
+        }
+
+        .xax-form-container {
+            display: block;
+        }
+
+        .cuttin-form-section {
+            display: none;
+        }
+
+        .cuttin-form-section.active {
+            display: block;
+        }
+
+        .xax-summary-photo {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+
+        .xax-summary-photo-placeholder {
+            width: 100px;
+            height: 100px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <svg class="church-logo" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 9h4" />
+                    <path d="M12 7v5" />
+                    <path d="M14 22v-4a2 2 0 0 0-4 0v4" />
+                    <path
+                        d="M18 22V5.618a1 1 0 0 0-.553-.894l-4.553-2.277a2 2 0 0 0-1.788 0L6.553 4.724A1 1 0 0 0 6 5.618V22" />
+                    <path
+                        d="m18 7 3.447 1.724a1 1 0 0 1 .553.894V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.618a1 1 0 0 1 .553-.894L6 7" />
+                </svg>
+                <div class="logo-text">
+                    <h3>Church</h3>
+                    <p>Management System</p>
+                </div>
+                <button class="sidebar-close" onclick="toggleSidebar()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="sidebar-content">
+                <div class="menu-section">
+                    <div class="menu-label">Main Menu</div>
+                    <a href="../index.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-layout-dashboard h-5 w-5">
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg></span>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="../Members/members.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-users h-5 w-5">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg></span>
+                        <span>Members</span>
+                    </a>
+                    <a href="../Members/visitors_management.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-user-check h-5 w-5">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <polyline points="16 11 18 13 22 9"></polyline>
+                            </svg>
+                        </span>
+                        <span>Visitors</span>
+                    </a>
+                    <a href="../Events/events.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-calendar h-5 w-5">
+                                <path d="M8 2v4"></path>
+                                <path d="M16 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                            </svg></span>
+                        <span>Events</span>
+                    </a>
+                    <a href="../Finance/finance.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-dollar-sign h-5 w-5">
+                                <line x1="12" x2="12" y1="2" y2="22"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg></span>
+                        <span>Finances</span>
+                    </a>
+                    <a href="../Communication/communication.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-message-square h-5 w-5">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg></span>
+                        <span>Communications</span>
+                    </a>
+                    <a href="../Attendance/attendance.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-user-check h-5 w-5">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <polyline points="16 11 18 13 22 9"></polyline>
+                            </svg></span>
+                        <span>Attendance</span>
+                    </a>
+                    <a href="../Reports/reports.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-chart-column h-5 w-5">
+                                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                <path d="M18 17V9"></path>
+                                <path d="M13 17V5"></path>
+                                <path d="M8 17v-3"></path>
+                            </svg></span>
+                        <span>Reports</span>
+                    </a>
+                </div>
+                <div class="menu-section">
+                    <div class="menu-label">AI Features</div>
+                    <a href="../AI/ai_insight.html" class="menu-item has-badge">
+                        <span><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L13.5 7.5H19L14.5 11L16 16.5L12 13L8 16.5L9.5 11L5 7.5H10.5L12 2Z"
+                                    fill="currentColor" opacity="0.2" />
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" />
+                                <path d="M12 5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M12 16V19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M5 12H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M16 12H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M7.5 7.5L9.5 9.5" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <path d="M14.5 14.5L16.5 16.5" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <path d="M7.5 16.5L9.5 14.5" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <path d="M14.5 9.5L16.5 7.5" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <circle cx="12" cy="5" r="1.5" fill="currentColor" />
+                                <circle cx="19" cy="12" r="1.5" fill="currentColor" />
+                                <circle cx="12" cy="19" r="1.5" fill="currentColor" />
+                                <circle cx="5" cy="12" r="1.5" fill="currentColor" />
+                            </svg></span>
+                        <span>AI Insights</span>
+                        <span class="badge">New</span>
+                    </a>
+                    <a href="../AI/members_analytics.html" class="menu-item has-badge">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-chart-column h-5 w-5">
+                                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                <path d="M18 17V9"></path>
+                                <path d="M13 17V5"></path>
+                                <path d="M8 17v-3"></path>
+                            </svg></span>
+                        <span>Member Analytics</span>
+                        <span class="badge">New</span>
+                    </a>
+                    <a href="../AI/ai_smart_report.html" class="menu-item has-badge">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-file-text h-5 w-5">
+                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                <path d="M10 9H8"></path>
+                                <path d="M16 13H8"></path>
+                                <path d="M16 17H8"></path>
+                            </svg></span>
+                        <span>Smart Reports</span>
+                        <span class="badge">New</span>
+                    </a>
+                </div>
+                <div class="menu-section">
+                    <div class="menu-label">Quick Actions</div>
+                    <a href="enroll_members.html" class="menu-item active">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-user-plus h-5 w-5">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <line x1="19" x2="19" y1="8" y2="14"></line>
+                                <line x1="22" x2="16" y1="11" y2="11"></line>
+                            </svg></span>
+                        <span>Add Member</span>
+                    </a>
+                    <a href="../Add_Event/New_Event.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-calendar h-5 w-5">
+                                <path d="M8 2v4"></path>
+                                <path d="M16 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                            </svg></span>
+                        <span>New Event</span>
+                    </a>
+                    <a href="../Record_Donations/record_donations.html" class="menu-item">
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 22" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 10C20 6.5 17 4 14 4C12.5 4 11.2 4.6 10.3 5.6C9.9 5.2 9.4 5 8.8 5C7.3 5 6 6.3 6 7.8C6 8.4 6.2 8.9 6.5 9.3C4.5 10.2 3 12.2 3 14.5C3 17.5 5.5 20 8.5 20H16.5C19 20 21 18 21 15.5C21 13.2 19.5 11.3 17.5 10.5C18.4 10.8 19 11.7 19 12.7"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M12 20C11.4 20 9.5 19.5 8.5 19" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <circle cx="12" cy="8" r="1" fill="currentColor" />
+                                <path d="M12 11V15M10 13H14" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <path
+                                    d="M8.5 4C9.5 3 11 3 12 4C13 3 14.5 3 15.5 4C16 4.5 16 5.5 16 6C16 7 15 8 12 10C9 8 8 7 8 6C8 5.5 8 4.5 8.5 4Z"
+                                    fill="currentColor" opacity="0.2" />
+                                <path
+                                    d="M12 5.5C10.5 4 9 4 8 5C7 6 7 7.5 7 8.5C7 10 8.5 11.5 12 14C15.5 11.5 17 10 17 8.5C17 7.5 17 6 16 5C15 4 13.5 4 12 5.5Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <span>Record Donation</span>
+                    </a>
+                    <a href="../Send_Message/send_message.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-bell h-5 w-5">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                            </svg></span>
+                        <span>Send Message</span>
+                    </a>
+                </div>
+                <div class="menu-section">
+                    <div class="menu-label"></div>
+                    <a href="../Settings/settings.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-settings h-5 w-5">
+                                <path
+                                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+                                </path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg></span>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search members, events, or anything...">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+                </div>
+                <div class="header-right">
+                    <div class="notification-icon">
+                        <span style="font-size: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell h-5 w-5">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                            </svg></span>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <span style="font-size: 14px; font-weight: 500;">Pastor Lawrence</span>
+                        <span style="font-size: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-5 w-5">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <div class="xax-page-header">
+                    <div class="cuttin-header-content">
+                        <h1>Add New Member</h1>
+                        <p>Register a new member to your church community</p>
+                    </div>
+                    <div class="xax-header-actions">
+                        <button class="cuttin-btn cuttin-btn-secondary" onclick="saveDraft()">
+                            <i class="fa-regular fa-floppy-disk"></i> Save Draft
+                        </button>
+                        <button class="cuttin-btn cuttin-btn-primary" onclick="cancelForm()">
+                            <i class="fa-solid fa-xmark"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+                <div class="xax-progress-container">
+                    <div class="cuttin-progress-steps">
+                        <div class="xax-progress-line">
+                            <div class="cuttin-progress-line-fill" id="progressFill" style="width: 20%"></div>
+                        </div>
+                        <div class="xax-step active" data-step="1">
+                            <div class="cuttin-step-circle">1</div>
+                            <span class="cuttin-step-label">Personal Info</span>
+                        </div>
+                        <div class="xax-step" data-step="2">
+                            <div class="cuttin-step-circle">2</div>
+                            <span class="cuttin-step-label">Contact Details</span>
+                        </div>
+                        <div class="xax-step" data-step="3">
+                            <div class="cuttin-step-circle">3</div>
+                            <span class="cuttin-step-label">Ministry & Groups</span>
+                        </div>
+                        <div class="xax-step" data-step="4">
+                            <div class="cuttin-step-circle">4</div>
+                            <span class="cuttin-step-label">Spiritual Info</span>
+                        </div>
+                        <div class="xax-step" data-step="5">
+                            <div class="cuttin-step-circle">5</div>
+                            <span class="cuttin-step-label">Review & Submit</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="memberForm" enctype="multipart/form-data">
+                    <div class="xax-form-container">
+                        <!-- Step 1: Personal Information -->
+                        <div class="cuttin-form-section active" id="step1">
+                            <div class="xax-section-header">
+                                <h2 class="cuttin-section-title">Personal Information</h2>
+                                <p class="cuttin-section-subtitle">Basic details about the new member</p>
+                            </div>
+                            <div class="cuttin-form-group full-width">
+                                <label class="xax-form-label">Profile Photo</label>
+                                <div class="cuttin-photo-upload">
+                                    <div class="xax-photo-preview" id="photoPreview">
+                                        <div class="cuttin-photo-placeholder">👤</div>
+                                    </div>
+                                    <div class="xax-photo-controls">
+                                        <div class="cuttin-file-input-wrapper">
+                                            <input type="file" id="photoInput" name="photoInput" accept="image/*"
+                                                onchange="handlePhotoUpload(event)">
+                                            <label for="photoInput" class="xax-file-input-label">Upload Photo</label>
+                                        </div>
+                                        <p class="cuttin-form-helper">JPG, PNG or GIF. Max 2MB</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="xax-form-grid">
+                                <div class="cuttin-form-group">
+                                    <label class="xax-form-label">First Name <span
+                                            class="cuttin-required">*</span></label>
+                                    <input type="text" class="xax-form-input" id="firstName" name="firstName" required>
+                                    <span class="xax-form-error" id="firstNameError">First name is required</span>
+                                </div>
+                                <div class="cuttin-form-group">
+                                    <label class="xax-form-label">Last Name <span
+                                            class="cuttin-required">*</span></label>
+                                    <input type="text" class="xax-form-input" id="lastName" name="lastName" required>
+                                    <span class="xax-form-error" id="lastNameError">Last name is required</span>
+                                </div>
+                                <div class="cuttin-form-group">
+                                    <label class="xax-form-label">Date of Birth</label>
+                                    <input type="date" class="xax-form-input" id="dateOfBirth" name="dateOfBirth">
+                                </div>
+                                <div class="cuttin-form-group">
+                                    <label class="xax-form-label">Gender</label>
+                                    <select class="xax-form-select" id="gender" name="gender">
+                                        <option value="">Select gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="cuttin-form-group">
+                                    <label class="xax-form-label">Marital Status</label>
+                                    <select class="xax-form-select" id="maritalStatus" name="maritalStatus">
+                                        <option value="">Select status</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Widowed">Widowed</option>
+                                    </select>
+                                </div>
+                                <div class="cuttin-form-group">
+                                    <label class="xax-form-label">Occupation</label>
+                                    <input type="text" class="xax-form-input" id="occupation" name="occupation"
+                                        placeholder="e.g., Teacher, Engineer">
+                                </div>
+                            </div>
+                            <div class="cuttin-form-actions">
+                                <div class="xax-actions-left"></div>
+                                <div class="xax-actions-right">
+                                    <button type="button" class="cuttin-btn cuttin-btn-primary"
+                                        onclick="nextStep()">Next Step</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Contact Details -->
+                        <div class="cuttin-form-section" id="step2">
+                            <div class="xax-section-header">
+                                <h2 class="cuttin-section-title">Contact Details</h2>
+                                <p class="cuttin-section-subtitle">How can we reach this member?</p>
+                            </div>
+                            <div class="xax-form-grid">
+                                <div class="cuttin-form-group">
+                                    <label class="xax-form-label">Phone Number <span
+                                            class="cuttin-required">*</span></label>
+                                    <input type="tel" class="xax-form-input" id="phone" name="phone"
+                                        placeholder="0551234567" required>
+                                    <span class="xax-form-error" id="phoneError">Valid phone number is required</span>
+                                </div>
+                                <div class="cuttin-form-group">
+                                    <label class="xax-form-label">Email Address <span
+                                            class="cuttin-required">*</span></label>
+                                    <input type="email" class="xax-form-input" id="email" name="email"
+                                        placeholder="member@example.com" required>
+                                    <span class="xax-form-error" id="emailError">Valid email is required</span>
+                                </div>
+                                <div class="cuttin-form-group full-width">
+                                    <label class="xax-form-label">Home Address</label>
+                                    <input type="text" class="xax-form-input" id="address" name="address"
+                                        placeholder="Street address">
+                                </div>
+                                <div class="cuttin-form-group">
+                                    <label class="xax-form-label">City</label>
+                                    <input type="text" class="xax-form-input" id="city" name="city" placeholder="City">
+                                </div>
+                                <div class="cuttin-form-group">
+                                    <label class="xax-form-label">Region</label>
+                                    <input type="text" class="xax-form-input" id="region" name="region"
+                                        placeholder="Region/State">
+                                </div>
+                            </div>
+                            <div class="cuttin-info-card">
+                                <h4 class="xax-info-card-title">Emergency Contact</h4>
+                                <p class="xax-info-card-text">Please provide an emergency contact person in case we need
+                                    to reach someone on behalf of this member.</p>
+                            </div>
+                            <div class="xax-form-grid">
+                                <div class="cuttin-form-group">
+                                    <label class="xax-form-label">Emergency Contact Name</label>
+                                    <input type="text" class="xax-form-input" id="emergencyName" name="emergencyName"
+                                        placeholder="Full name">
+                                </div>
+                                <div class="cuttin-form-group">
+                                    <label class="xax-form-label">Emergency Contact Phone</label>
+                                    <input type="tel" class="xax-form-input" id="emergencyPhone" name="emergencyPhone"
+                                        placeholder="Phone number">
+                                </div>
+                                <div class="cuttin-form-group full-width">
+                                    <label class="xax-form-label">Relationship</label>
+                                    <input type="text" class="xax-form-input" id="emergencyRelation"
+                                        name="emergencyRelation" placeholder="e.g., Spouse, Parent, Sibling">
+                                </div>
+                            </div>
+                            <div class="cuttin-form-actions">
+                                <div class="xax-actions-left">
+                                    <button type="button" class="cuttin-btn cuttin-btn-secondary"
+                                        onclick="previousStep()">Previous</button>
+                                </div>
+                                <div class="xax-actions-right">
+                                    <button type="button" class="cuttin-btn cuttin-btn-primary"
+                                        onclick="nextStep()">Next Step</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Ministry & Groups -->
+                        <div class="cuttin-form-section" id="step3">
+                            <div class="xax-section-header">
+                                <h2 class="cuttin-section-title">Church Groups & Ministries</h2>
+                                <p class="cuttin-section-subtitle">Select the church groups, departments, leadership
+                                    roles, and ministries this member will join</p>
+                            </div>
+                            <div class="cuttin-info-card warning">
+                                <h4 class="xax-info-card-title">Member Status</h4>
+                                <p class="xax-info-card-text">New members typically start with "Active" status. You can
+                                    change this later if needed.</p>
+                            </div>
+                            <div class="cuttin-form-group">
+                                <label class="xax-form-label">Member Status <span
+                                        class="cuttin-required">*</span></label>
+                                <div class="cuttin-radio-group">
+                                    <div class="xax-radio-item">
+                                        <input type="radio" id="statusActive" name="status" value="active" checked>
+                                        <label for="statusActive">Active</label>
+                                    </div>
+                                    <div class="xax-radio-item">
+                                        <input type="radio" id="statusInactive" name="status" value="inactive">
+                                        <label for="statusInactive">Inactive</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cuttin-form-group">
+                                <label class="xax-form-label">Church Group <span
+                                        class="cuttin-required">*</span></label>
+                                <p class="cuttin-form-helper" style="margin-bottom: 16px;">Select the main church group
+                                    this member will be part of</p>
+                                <div class="cuttin-ministry-grid">
+                                    <div class="xax-ministry-card" onclick="selectMinistry(this, 'Dunamis')">
+                                        <div class="cuttin-ministry-icon">🌟</div>
+                                        <div class="xax-ministry-name">DUNAMIS</div>
+                                    </div>
+                                    <div class="xax-ministry-card" onclick="selectMinistry(this, 'Kabod')">
+                                        <div class="cuttin-ministry-icon">🤝</div>
+                                        <div class="xax-ministry-name">Kabod</div>
+                                    </div>
+                                    <div class="xax-ministry-card" onclick="selectMinistry(this, 'Judah')">
+                                        <div class="cuttin-ministry-icon">🎉</div>
+                                        <div class="xax-ministry-name">Judah</div>
+                                    </div>
+                                    <div class="xax-ministry-card" onclick="selectMinistry(this, 'Karis')">
+                                        <div class="cuttin-ministry-icon">🙌</div>
+                                        <div class="xax-ministry-name">Karis</div>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="selectedMinistry" name="selectedMinistry" value="">
+                                <span class="xax-form-error" id="ministryError">Please select a church group</span>
+                            </div>
+                            <div class="cuttin-form-group">
+                                <label class="xax-form-label">Department</label>
+                                <p class="cuttin-form-helper" style="margin-bottom: 12px;">Select any departments this
+                                    member will participate in</p>
+                                <div class="cuttin-checkbox-group" style="flex-direction: column;">
+                                    <div class="xax-checkbox-item">
+                                        <input type="checkbox" id="None" name="departments[]" value="None"
+                                            onclick="handleDepartmentSelection('None')">
+                                        <label for="None">None</label>
+                                    </div>
+                                    <div class="xax-checkbox-item">
+                                        <input type="checkbox" id="Usher" name="departments[]" value="Usher" onclick="handleDepartmentSelection('Usher')">
+                                        <label for="Usher">Usher</label>
+                                    </div>
+                                    <div class="xax-checkbox-item">
+                                        <input type="checkbox" id="Choir" name="departments[]" value="Choir"
+                                            onclick="handleDepartmentSelection('Choir')">
+                                        <label for="Choir">Choir</label>
+                                    </div>
+                                    <div class="xax-checkbox-item">
+                                        <input type="checkbox" id="Media" name="departments[]" value="Media"
+                                            onclick="handleDepartmentSelection('Media')">
+                                        <label for="Media">MEDIA</label>
+                                    </div>
+                                    <div class="xax-checkbox-item">
+                                        <input type="checkbox" id="Instrumentalist" name="departments[]"
+                                            value="Instrumentalist"
+                                            onclick="handleDepartmentSelection('Instrumentalist')">
+                                        <label for="Instrumentalist">INSTRUMENTALIST</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cuttin-form-group">
+                                <label class="xax-form-label">Leadership Role</label>
+                                <p class="cuttin-form-helper" style="margin-bottom: 12px;">Select a leadership role if
+                                    applicable</p>
+                                <div class="cuttin-radio-group">
+                                    <div class="xax-radio-item">
+                                        <input type="radio" id="noLeader" name="leadership" value="None" checked>
+                                        <label for="noLeader">None</label>
+                                    </div>
+                                    <div class="xax-radio-item">
+                                        <input type="radio" id="pastor" name="leadership" value="Pastor">
+                                        <label for="pastor">Pastor</label>
+                                    </div>
+                                    <div class="xax-radio-item">
+                                        <input type="radio" id="minister" name="leadership" value="Minister">
+                                        <label for="minister">Minister</label>
+                                    </div>
+                                    <div class="xax-radio-item">
+                                        <input type="radio" id="groupLeader" name="leadership" value="Group leader">
+                                        <label for="groupLeader">Group Leader</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cuttin-form-group">
+                                <label class="xax-form-label">Ministries</label>
+                                <p class="cuttin-form-helper" style="margin-bottom: 12px;">Select any ministries this
+                                    member will participate in</p>
+                                <div class="cuttin-checkbox-group" style="flex-direction: column;">
+                                    <div class="xax-checkbox-item">
+                                        <input type="checkbox" id="childrenMinistry" name="ministries[]"
+                                            value="children-ministry">
+                                        <label for="childrenMinistry">Children Ministry</label>
+                                    </div>
+                                    <div class="xax-checkbox-item">
+                                        <input type="checkbox" id="womenMinistry" name="ministries[]"
+                                            value="women-ministry">
+                                        <label for="womenMinistry">Women Ministry</label>
+                                    </div>
+                                    <div class="xax-checkbox-item">
+                                        <input type="checkbox" id="menMinistry" name="ministries[]"
+                                            value="men-ministry">
+                                        <label for="menMinistry">Men Ministry</label>
+                                    </div>
+                                    <div class="xax-checkbox-item">
+                                        <input type="checkbox" id="youthMinistry" name="ministries[]"
+                                            value="youth-ministry">
+                                        <label for="youthMinistry">Youth Ministry</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cuttin-form-actions">
+                                <div class="xax-actions-left">
+                                    <button type="button" class="cuttin-btn cuttin-btn-secondary"
+                                        onclick="previousStep()">Previous</button>
+                                </div>
+                                <div class="xax-actions-right">
+                                    <button type="button" class="cuttin-btn cuttin-btn-primary"
+                                        onclick="nextStep()">Next Step</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Spiritual & Membership Information -->
+                        <div class="cuttin-form-section" id="step4">
+                            <div class="xax-section-header">
+                                <h2 class="cuttin-section-title">Spiritual & Membership Information</h2>
+                                <p class="cuttin-section-subtitle">Provide details about the member’s spiritual
+                                    background and church
+                                    involvement</p>
+                            </div>
+                            <div class="cuttin-info-card">
+                                <h4 class="xax-info-card-title">Membership Details</h4>
+                                <p class="xax-info-card-text">
+                                    Help us understand the member’s background, spiritual growth, and participation in
+                                    church activities.
+                                </p>
+                            </div>
+                            <div class="cuttin-form-group">
+                                <label class="xax-form-label">Baptism Status</label>
+                                <select class="xax-form-select" id="baptismStatus" name="baptismStatus">
+                                    <option value="">Select status</option>
+                                    <option value="Baptized">Baptized</option>
+                                    <option value="Not baptized">Not Yet Baptized</option>
+                                    <option value="Pending">Scheduled for Baptism</option>
+                                </select>
+                            </div>
+                            <div class="cuttin-form-group">
+                                <label class="xax-form-label">Spiritual Growth Level</label>
+                                <select class="xax-form-select" id="spiritualGrowth" name="spiritualGrowth">
+                                    <option value="">Select level</option>
+                                    <option value="New believer">New Believer</option>
+                                    <option value="Growing">Growing Spiritually</option>
+                                    <option value="Committed">Committed Member</option>
+                                    <option value="Leader">Spiritually Mature / Leader</option>
+                                </select>
+                                <span class="xax-form-error" id="spiritualGrowthError">Invalid spiritual growth level selected</span>
+                            </div>
+                            <div class="cuttin-form-group">
+                                <label class="xax-form-label">Membership Type</label>
+                                <select class="xax-form-select" id="membershipType" name="membershipType">
+                                    <option value="">Select type</option>
+                                    <option value="Full Member">Full Member</option>
+                                    <option value="Associate Member">Associate Member</option>
+                                    <option value="Visitor">Visitor</option>
+                                </select>
+                            </div>
+                            <div class="cuttin-form-group full-width" style="margin-top: 24px;">
+                                <label class="xax-form-label">Additional Notes</label>
+                                <textarea class="xax-form-textarea" id="notes" name="notes"
+                                    placeholder="Any other relevant information (e.g., spiritual gifts, previous church, testimony, etc.)"></textarea>
+                            </div>
+                            <div class="cuttin-form-actions">
+                                <div class="xax-actions-left">
+                                    <button type="button" class="cuttin-btn cuttin-btn-secondary"
+                                        onclick="previousStep()">Previous</button>
+                                </div>
+                                <div class="xax-actions-right">
+                                    <button type="button" class="cuttin-btn cuttin-btn-primary"
+                                        onclick="nextStep()">Review & Submit</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Review & Submit -->
+                        <div class="cuttin-form-section" id="step5">
+                            <div class="xax-section-header">
+                                <h2 class="cuttin-section-title">Review Information</h2>
+                                <p class="cuttin-section-subtitle">Please review all details before submitting</p>
+                            </div>
+                            <div class="cuttin-summary-section">
+                                <h3 class="xax-summary-title">Personal Information</h3>
+                                <div class="cuttin-summary-grid">
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Profile Photo</span>
+                                        <div class="xax-summary-value" id="summaryPhoto">
+                                            <div class="xax-summary-photo-placeholder">👤</div>
+                                        </div>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Name</span>
+                                        <span class="xax-summary-value" id="summaryName">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Date of Birth</span>
+                                        <span class="xax-summary-value" id="summaryDOB">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Gender</span>
+                                        <span class="xax-summary-value" id="summaryGender">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Marital Status</span>
+                                        <span class="xax-summary-value" id="summaryMarital">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Occupation</span>
+                                        <span class="xax-summary-value" id="summaryOccupation">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cuttin-summary-section">
+                                <h3 class="xax-summary-title">Contact Information</h3>
+                                <div class="cuttin-summary-grid">
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Phone</span>
+                                        <span class="xax-summary-value" id="summaryPhone">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Email</span>
+                                        <span class="xax-summary-value" id="summaryEmail">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Address</span>
+                                        <span class="xax-summary-value" id="summaryAddress">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">City</span>
+                                        <span class="xax-summary-value" id="summaryCity">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Region</span>
+                                        <span class="xax-summary-value" id="summaryRegion">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Emergency Contact</span>
+                                        <span class="xax-summary-value" id="summaryEmergency">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cuttin-summary-section">
+                                <h3 class="xax-summary-title">Ministry & Groups</h3>
+                                <div class="cuttin-summary-grid">
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Status</span>
+                                        <span class="xax-summary-value" id="summaryStatus">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Church Group</span>
+                                        <span class="xax-summary-value" id="summaryMinistry">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Departments</span>
+                                        <span class="xax-summary-value" id="summaryDepartments">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Leadership Role</span>
+                                        <span class="xax-summary-value" id="summaryLeadership">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Ministries</span>
+                                        <span class="xax-summary-value" id="summaryMinistries">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cuttin-summary-section">
+                                <h3 class="xax-summary-title">Spiritual & Membership Information</h3>
+                                <div class="cuttin-summary-grid">
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Baptism Status</span>
+                                        <span class="xax-summary-value" id="summaryBaptism">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Spiritual Growth</span>
+                                        <span class="xax-summary-value" id="summarySpiritualGrowth">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Membership Type</span>
+                                        <span class="xax-summary-value" id="summaryMembershipType">-</span>
+                                    </div>
+                                    <div class="xax-summary-item">
+                                        <span class="cuttin-summary-label">Notes</span>
+                                        <span class="xax-summary-value" id="summaryNotes">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cuttin-info-card">
+                                <h4 class="xax-info-card-title">What happens next?</h4>
+                                <p class="xax-info-card-text">After submitting, this member will be added to your church
+                                    database. They will receive a welcome email with login credentials and information
+                                    about upcoming events.</p>
+                            </div>
+                            <div class="cuttin-form-group">
+                                <label class="xax-form-label">Welcome Actions</label>
+                                <div class="cuttin-checkbox-group" style="flex-direction: column;">
+                                    <div class="xax-checkbox-item">
+                                        <input type="checkbox" id="sendWelcomeEmail" name="sendWelcomeEmail" checked>
+                                        <label for="sendWelcomeEmail">Send welcome email to member</label>
+                                    </div>
+                                    <div class="xax-checkbox-item">
+                                        <input type="checkbox" id="notifyPastor" name="notifyPastor" checked>
+                                        <label for="notifyPastor">Notify pastor and ministry leader</label>
+                                    </div>
+                                    <div class="xax-checkbox-item">
+                                        <input type="checkbox" id="createAccount" name="createAccount">
+                                        <label for="createAccount">Create member portal account</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cuttin-form-actions">
+                                <div class="xax-actions-left">
+                                    <button type="button" class="cuttin-btn cuttin-btn-secondary"
+                                        onclick="previousStep()">Previous</button>
+                                </div>
+                                <div class="xax-actions-right">
+                                    <button type="button" class="cuttin-btn cuttin-btn-secondary"
+                                        onclick="saveDraft()">Save as Draft</button>
+                                    <button type="button" class="cuttin-btn cuttin-btn-primary"
+                                        onclick="submitForm()">Add Member</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Success Message -->
+                        <!-- Success Message -->
+                        <div class="cuttin-success-message">
+                            <div class="xax-success-icon">🎉</div>
+                            <h2 class="cuttin-success-title">Successfully Registered</h2>
+                            <p class="xax-success-text">The new member has been successfully added to the Church Management System. Welcome
+                                them to the community!</p>
+                            <div class="cuttin-quick-actions">
+                                <button class="cuttin-btn cuttin-btn-secondary" onclick="window.location.href='members.html'">View Member
+                                    Profile</button>
+                                <button class="cuttin-btn cuttin-btn-primary" onclick="window.location.href='enroll_members.html'">Add Another
+                                    Member</button>
+                            </div>
+                        </div>
+                        <!-- Draft Saved Message -->
+                        <div class="cuttin-success-message" id="draftMessage" style="display: none;">
+                            <div class="xax-success-icon">✓</div>
+                            <h2 class="cuttin-success-title">Draft Saved Successfully!</h2>
+                            <p class="xax-success-text">The member data has been saved as a draft. You can return to it
+                                later.</p>
+                            <div class="cuttin-quick-actions">
+                                <button class="cuttin-btn cuttin-btn-secondary"
+                                    onclick="window.location.href='../index.html'">Back to Dashboard</button>
+                                <button class="cuttin-btn cuttin-btn-primary" onclick="addAnother()">Continue
+                                    Editing</button>
+                            </div>
+                        </div>
+                        <!-- Congratulation Message -->
+                        <div class="cuttin-success-message" id="congratulationMessage" style="display: none;">
+                            <div class="xax-success-icon">🎉</div>
+                            <h2 class="cuttin-success-title">Congratulations!</h2>
+                            <p class="xax-success-text">The new member has been successfully added to the ChurchFlow Management System. Welcome
+                                them to the community!</p>
+                            <div class="cuttin-quick-actions">
+                                <button class="cuttin-btn cuttin-btn-secondary" onclick="viewMember()">View Member Profile</button>
+                                <button class="cuttin-btn cuttin-btn-primary" onclick="addAnother()">Add Another Member</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+            const totalSteps = 5;
+            let selectedMinistryValue = '';
+            let photoDataUrl = ''; // Store photo data URL for review
+
+            function toggleSidebar() {
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('open');
+            }
+
+            document.addEventListener('click', function (event) {
+                const sidebar = document.querySelector('.sidebar');
+                const toggle = document.querySelector('.mobile-menu-toggle');
+                if (window.innerWidth <= 768 &&
+                    !sidebar.contains(event.target) &&
+                    !toggle.contains(event.target) &&
+                    sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                }
+            });
+
+            function nextStep() {
+                if (validateStep(currentStep)) {
+                    if (currentStep < totalSteps) {
+                        document.getElementById('step' + currentStep).classList.remove('active');
+                        document.querySelector(`.xax-step[data-step="${currentStep}"]`).classList.add('completed');
+                        document.querySelector(`.xax-step[data-step="${currentStep}"]`).classList.remove('active');
+                        currentStep++;
+                        document.getElementById('step' + currentStep).classList.add('active');
+                        document.querySelector(`.xax-step[data-step="${currentStep}"]`).classList.add('active');
+                        const progress = (currentStep / totalSteps) * 100;
+                        document.getElementById('progressFill').style.width = progress + '%';
+                        if (currentStep === 5) {
+                            updateSummary();
+                        }
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }
+            }
+
+            function previousStep() {
+                if (currentStep > 1) {
+                    document.getElementById('step' + currentStep).classList.remove('active');
+                    document.querySelector(`.xax-step[data-step="${currentStep}"]`).classList.remove('active');
+                    currentStep--;
+                    document.getElementById('step' + currentStep).classList.add('active');
+                    document.querySelector(`.xax-step[data-step="${currentStep}"]`).classList.add('active');
+                    document.querySelector(`.xax-step[data-step="${currentStep}"]`).classList.remove('completed');
+                    const progress = (currentStep / totalSteps) * 100;
+                    document.getElementById('progressFill').style.width = progress + '%';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+
+            function validateStep(step) {
+                let isValid = true;
+
+                if (step === 1) {
+                    const firstName = document.getElementById('firstName');
+                    const lastName = document.getElementById('lastName');
+                    if (!firstName.value.trim()) {
+                        showError('firstName', 'firstNameError');
+                        isValid = false;
+                    } else {
+                        hideError('firstName', 'firstNameError');
+                    }
+                    if (!lastName.value.trim()) {
+                        showError('lastName', 'lastNameError');
+                        isValid = false;
+                    } else {
+                        hideError('lastName', 'lastNameError');
+                    }
+                }
+
+                if (step === 2) {
+                    const phone = document.getElementById('phone');
+                    const email = document.getElementById('email');
+                    if (!phone.value.trim()) {
+                        showError('phone', 'phoneError');
+                        isValid = false;
+                    } else {
+                        hideError('phone', 'phoneError');
+                    }
+                    if (!email.value.trim() || !email.value.includes('@')) {
+                        showError('email', 'emailError');
+                        isValid = false;
+                    } else {
+                        hideError('email', 'emailError');
+                    }
+                }
+
+                if (step === 3) {
+                    // Check case-insensitive
+                    const validGroups = ['dunamis', 'kabod', 'judah', 'karis'];
+                    const selectedGroup = selectedMinistryValue ? selectedMinistryValue.toLowerCase() : '';
+
+                    console.log('Step 3 validation - selectedMinistryValue:', selectedMinistryValue);
+                    console.log('Step 3 validation - selectedGroup:', selectedGroup);
+
+                    if (!selectedMinistryValue || !validGroups.includes(selectedGroup)) {
+                        document.getElementById('ministryError').classList.add('show');
+                        isValid = false;
+                        console.log('Church group validation FAILED');
+                    } else {
+                        document.getElementById('ministryError').classList.remove('show');
+                        console.log('Church group validation PASSED');
+                    }
+                }
+
+                if (step === 4) {
+                    const spiritualGrowth = document.getElementById('spiritualGrowth');
+                    // Check case-insensitive - allow "New believer", "Growing", "Committed", "Leader"
+                    const validGrowth = ['new believer', 'growing', 'committed', 'leader'];
+                    const selectedGrowth = spiritualGrowth.value ? spiritualGrowth.value.toLowerCase() : '';
+
+                    if (spiritualGrowth.value && !validGrowth.includes(selectedGrowth)) {
+                        showError('spiritualGrowth', 'spiritualGrowthError');
+                        isValid = false;
+                        console.log('Spiritual growth validation FAILED:', spiritualGrowth.value);
+                    } else {
+                        hideError('spiritualGrowth', 'spiritualGrowthError');
+                        console.log('Spiritual growth validation PASSED:', spiritualGrowth.value);
+                    }
+                }
+
+                return isValid;
+            }
+
+            function showError(inputId, errorId) {
+                document.getElementById(inputId).classList.add('error');
+                document.getElementById(errorId).classList.add('show');
+            }
+
+            function hideError(inputId, errorId) {
+                document.getElementById(inputId).classList.remove('error');
+                document.getElementById(errorId).classList.remove('show');
+            }
+
+            function selectMinistry(card, ministry) {
+                document.querySelectorAll('.xax-ministry-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedMinistryValue = ministry;
+                document.getElementById('selectedMinistry').value = ministry;
+
+                // Hide error message when selection is made
+                document.getElementById('ministryError').classList.remove('show');
+
+                // Debug log
+                console.log('Church group selected:', ministry);
+                console.log('selectedMinistryValue:', selectedMinistryValue);
+            }
+
+            function handlePhotoUpload(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        photoDataUrl = e.target.result; // Store data URL for review
+                        document.getElementById('photoPreview').innerHTML = `<img src="${e.target.result}" alt="Profile" style="max-width: 100%; max-height: 100%;">`;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+            function handleDepartmentSelection(id) {
+                const noneCheckbox = document.getElementById('None');
+                const otherCheckboxes = ['Usher', 'Choir', 'Media', 'Instrumentalist'];
+                if (id === 'None' && noneCheckbox.checked) {
+                    otherCheckboxes.forEach(depId => {
+                        document.getElementById(depId).checked = false;
+                    });
+                } else if (id !== 'None' && document.getElementById(id).checked) {
+                    noneCheckbox.checked = false;
+                }
+            }
+
+            function updateSummary() {
+                // Profile Photo
+                const summaryPhoto = document.getElementById('summaryPhoto');
+                summaryPhoto.innerHTML = photoDataUrl
+                    ? `<img src="${photoDataUrl}" alt="Profile" class="xax-summary-photo">`
+                    : `<div class="xax-summary-photo-placeholder">👤</div>`;
+
+                // Personal Information
+                document.getElementById('summaryName').textContent =
+                    `${document.getElementById('firstName').value} ${document.getElementById('lastName').value}`.trim() || 'Not provided';
+                document.getElementById('summaryDOB').textContent =
+                    document.getElementById('dateOfBirth').value || 'Not provided';
+                document.getElementById('summaryGender').textContent =
+                    document.getElementById('gender').value || 'Not provided';
+                document.getElementById('summaryMarital').textContent =
+                    document.getElementById('maritalStatus').value || 'Not provided';
+                document.getElementById('summaryOccupation').textContent =
+                    document.getElementById('occupation').value || 'Not provided';
+
+                // Contact Information
+                document.getElementById('summaryPhone').textContent =
+                    document.getElementById('phone').value || 'Not provided';
+                document.getElementById('summaryEmail').textContent =
+                    document.getElementById('email').value || 'Not provided';
+                document.getElementById('summaryAddress').textContent =
+                    document.getElementById('address').value || 'Not provided';
+                document.getElementById('summaryCity').textContent =
+                    document.getElementById('city').value || 'Not provided';
+                document.getElementById('summaryRegion').textContent =
+                    document.getElementById('region').value || 'Not provided';
+                document.getElementById('summaryEmergency').textContent =
+                    `${document.getElementById('emergencyName').value || 'Not provided'} (${document.getElementById('emergencyRelation').value || 'Not provided'}, ${document.getElementById('emergencyPhone').value || 'Not provided'})`;
+
+                // Ministry & Groups
+                document.getElementById('summaryStatus').textContent =
+                    document.querySelector('input[name="status"]:checked').value || 'Not provided';
+
+                const groupNames = {
+                    'Dunamis': 'DUNAMIS',
+                    'Kabod': 'Kabod',
+                    'Judah': 'Judah',
+                    'Karis': 'Karis'
+                };
+                document.getElementById('summaryMinistry').textContent =
+                    groupNames[selectedMinistryValue] || 'Not selected';
+
+                const departments = [];
+                const departmentIds = ['None', 'Usher', 'Choir', 'Media', 'Instrumentalist'];
+                departmentIds.forEach(id => {
+                    if (document.getElementById(id).checked) {
+                        const label = document.querySelector(`label[for="${id}"]`).textContent;
+                        departments.push(label.charAt(0).toUpperCase() + label.slice(1));
+                    }
+                });
+                document.getElementById('summaryDepartments').textContent =
+                    departments.length > 0 ? departments.join(', ') : 'None';
+
+                const leadershipRole = document.querySelector('input[name="leadership"]:checked').value;
+                document.getElementById('summaryLeadership').textContent =
+                    leadershipRole === 'none' ? 'None' : leadershipRole.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase());
+
+                const ministries = [];
+                ['childrenMinistry', 'womenMinistry', 'menMinistry', 'youthMinistry'].forEach(id => {
+                    if (document.getElementById(id).checked) {
+                        ministries.push(document.querySelector(`label[for="${id}"]`).textContent);
+                    }
+                });
+                document.getElementById('summaryMinistries').textContent =
+                    ministries.length > 0 ? ministries.join(', ') : 'None';
+
+                // Spiritual & Membership Information
+                document.getElementById('summaryBaptism').textContent =
+                    document.getElementById('baptismStatus').value.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase()) || 'Not provided';
+                document.getElementById('summarySpiritualGrowth').textContent =
+                    document.getElementById('spiritualGrowth').value.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase()) || 'Not provided';
+                document.getElementById('summaryMembershipType').textContent =
+                    document.getElementById('membershipType').value.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase()) || 'Not provided';
+                document.getElementById('summaryNotes').textContent =
+                    document.getElementById('notes').value || 'Not provided';
+            }
+
+            function submitForm() {
+                if (validateStep(currentStep)) {
+                    const form = document.getElementById('memberForm');
+                    const formData = new FormData(form);
+                    // Log FormData for debugging
+                    for (let [key, value] of formData.entries()) {
+                        console.log(`FormData: ${key} = ${value}`);
+                    }
+                    fetch('submit_member.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => {
+                            console.log('Submit Response Status:', response.status);
+                            console.log('Submit Response Headers:', response.headers.get('content-type'));
+                            return response.text();
+                        })
+                        .then(text => {
+                            console.log('Submit Raw Response:', text);
+                            try {
+                                const data = JSON.parse(text);
+                                if (data.success && data.redirect) {
+                                    window.location.href = data.redirect;
+                                } else if (data.success) {
+                                    document.querySelector('.xax-form-container').style.display = 'none';
+                                    document.getElementById('congratulationMessage').style.display = 'block';
+                                } else {
+                                    alert('Error: ' + data.message);
+                                }
+                            } catch (e) {
+                                console.error('Submit JSON Parse Error:', e);
+                                alert('Submission failed: Server returned invalid JSON');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Submit Fetch Error:', error);
+                            alert('Submission failed: ' + error.message);
+                        });
+                }
+            }
+
+            function saveDraft() {
+                const form = document.getElementById('memberForm');
+                const formData = new FormData(form);
+                fetch('save_draft.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => {
+                        console.log('Draft Response Status:', response.status);
+                        console.log('Draft Response Headers:', response.headers.get('content-type'));
+                        return response.text();
+                    })
+                    .then(text => {
+                        console.log('Draft Raw Response:', text);
+                        try {
+                            const data = JSON.parse(text);
+                            if (data.success) {
+                                document.querySelector('.xax-form-container').style.display = 'none';
+                                document.getElementById('draftMessage').style.display = 'block';
+                            } else {
+                                alert('Error saving draft: ' + data.message);
+                            }
+                        } catch (e) {
+                            console.error('Draft JSON Parse Error:', e);
+                            alert('Failed to save draft: Server returned invalid JSON');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Draft Fetch Error:', error);
+                        alert('Failed to save draft: ' + error.message);
+                    });
+            }
+
+            function cancelForm() {
+                if (confirm('Are you sure you want to cancel? All unsaved changes will be lost.')) {
+                    document.getElementById('memberForm').reset();
+                    document.getElementById('photoPreview').innerHTML = '<div class="cuttin-photo-placeholder">👤</div>';
+                    photoDataUrl = ''; // Reset photo data
+                    selectedMinistryValue = '';
+                    document.querySelectorAll('.xax-ministry-card').forEach(c => c.classList.remove('selected'));
+                    document.getElementById('selectedMinistry').value = '';
+                    window.location.href = '../index.html';
+                }
+            }
+
+            function viewMember() {
+                alert('View member profile functionality to be implemented.');
+                window.location.href = 'members.html';
+            }
+
+            function addAnother() {
+                document.getElementById('successMessage').classList.remove('show');
+                document.getElementById('draftMessage').style.display = 'none';
+                document.getElementById('congratulationMessage').style.display = 'none';
+                document.getElementById('memberForm').reset();
+                document.getElementById('photoPreview').innerHTML = '<div class="cuttin-photo-placeholder">👤</div>';
+                photoDataUrl = ''; // Reset photo data
+                selectedMinistryValue = '';
+                document.querySelectorAll('.xax-ministry-card').forEach(c => c.classList.remove('selected'));
+                document.getElementById('selectedMinistry').value = '';
+                currentStep = 1;
+                document.querySelectorAll('.cuttin-form-section').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.xax-step').forEach(s => {
+                    s.classList.remove('active', 'completed');
+                    if (s.dataset.step == '1') s.classList.add('active');
+                });
+                document.getElementById('step1').classList.add('active');
+                document.getElementById('progressFill').style.width = '20%';
+                document.querySelector('.xax-form-container').style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+    </script>
+</body>
+
+</html>

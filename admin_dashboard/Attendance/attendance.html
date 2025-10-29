@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Attendance</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="table-styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        #serviceSelect,
+        #otherService {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        #serviceSelect:focus,
+        #otherService:focus {
+            border-color: #2563eb;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <svg class="church-logo" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 9h4" />
+                    <path d="M12 7v5" />
+                    <path d="M14 22v-4a2 2 0 0 0-4 0v4" />
+                    <path
+                        d="M18 22V5.618a1 1 0 0 0-.553-.894l-4.553-2.277a2 2 0 0 0-1.788 0L6.553 4.724A1 1 0 0 0 6 5.618V22" />
+                    <path
+                        d="m18 7 3.447 1.724a1 1 0 0 1 .553.894V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.618a1 1 0 0 1 .553-.894L6 7" />
+                </svg>
+                <div class="logo-text">
+                    <h3>Church</h3>
+                    <p>Management System</p>
+                </div>
+                <button class="sidebar-close" onclick="toggleSidebar()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="sidebar-content">
+                <div class="menu-section">
+                    <div class="menu-label">Main Menu</div>
+                    <a href="../index.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-layout-dashboard h-5 w-5">
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg></span>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="../Members/members.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-users h-5 w-5">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg></span>
+                        <span>Members</span>
+                    </a>
+                    <a href="../Members/visitors_management.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-user-check h-5 w-5">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <polyline points="16 11 18 13 22 9"></polyline>
+                            </svg>
+                        </span>
+                        <span>Visitors</span>
+                    </a>
+                    <a href="../Events/events.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-calendar h-5 w-5">
+                                <path d="M8 2v4"></path>
+                                <path d="M16 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                            </svg></span>
+                        <span>Events</span>
+                    </a>
+                    <a href="../Finance/finance.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-dollar-sign h-5 w-5">
+                                <line x1="12" x2="12" y1="2" y2="22"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg></span>
+                        <span>Finances</span>
+                    </a>
+                    <a href="../Communication/communication.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-message-square h-5 w-5">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg></span>
+                        <span>Communications</span>
+                    </a>
+                    <a href="#" class="menu-item active">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-user-check h-5 w-5">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <polyline points="16 11 18 13 22 9"></polyline>
+                            </svg></span>
+                        <span>Attendance</span>
+                    </a>
+                    <a href="../Report/report.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-chart-column h-5 w-5">
+                                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                <path d="M18 17V9"></path>
+                                <path d="M13 17V5"></path>
+                                <path d="M8 17v-3"></path>
+                            </svg></span>
+                        <span>Reports</span>
+                    </a>
+                </div>
+                <div class="menu-section">
+                    <div class="menu-label">AI Features</div>
+                    <a href="../AI/ai_insight.html" class="menu-item has-badge">
+                        <span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L13.5 7.5H19L14.5 11L16 16.5L12 13L8 16.5L9.5 11L5 7.5H10.5L12 2Z"
+                                    fill="currentColor" opacity="0.2" />
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" />
+                                <path d="M12 5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M12 16V19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M5 12H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M16 12H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M7.5 7.5L9.5 9.5" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <path d="M14.5 14.5L16.5 16.5" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <path d="M7.5 16.5L9.5 14.5" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <path d="M14.5 9.5L16.5 7.5" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <circle cx="12" cy="5" r="1.5" fill="currentColor" />
+                                <circle cx="19" cy="12" r="1.5" fill="currentColor" />
+                                <circle cx="12" cy="19" r="1.5" fill="currentColor" />
+                                <circle cx="5" cy="12" r="1.5" fill="currentColor" />
+                            </svg>
+                        </span>
+                        <span>AI Insights</span>
+                        <span class="badge">New</span>
+                    </a>
+                    <a href="../AI/members_analytics.html" class="menu-item has-badge">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-chart-column h-5 w-5">
+                                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                <path d="M18 17V9"></path>
+                                <path d="M13 17V5"></path>
+                                <path d="M8 17v-3"></path>
+                            </svg></span>
+                        <span>Member Analytics</span>
+                        <span class="badge">New</span>
+                    </a>
+                    <a href="../AI/ai_smart_report.html" class="menu-item has-badge">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-file-text h-5 w-5">
+                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                <path d="M10 9H8"></path>
+                                <path d="M16 13H8"></path>
+                                <path d="M16 17H8"></path>
+                            </svg></span>
+                        <span>Smart Reports</span>
+                        <span class="badge">New</span>
+                    </a>
+                </div>
+                <div class="menu-section">
+                    <div class="menu-label">Quick Actions</div>
+                    <a href="../Add_Members/enroll_members.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-user-plus h-5 w-5">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <line x1="19" x2="19" y1="8" y2="14"></line>
+                                <line x1="22" x2="16" y1="11" y2="11"></line>
+                            </svg></span>
+                        <span>Add Member</span>
+                    </a>
+                    <a href="../Add_Event/New_Event.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-calendar h-5 w-5">
+                                <path d="M8 2v4"></path>
+                                <path d="M16 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                            </svg></span>
+                        <span>New Event</span>
+                    </a>
+                    <a href="../Record_Donations/record_donations.html" class="menu-item">
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 10C20 6.5 17 4 14 4C12.5 4 11.2 4.6 10.3 5.6C9.9 5.2 9.4 5 8.8 5C7.3 5 6 6.3 6 7.8C6 8.4 6.2 8.9 6.5 9.3C4.5 10.2 3 12.2 3 14.5C3 17.5 5.5 20 8.5 20H16.5C19 20 21 18 21 15.5C21 13.2 19.5 11.3 17.5 10.5C18.4 10.8 19 11.7 19 12.7"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M12 20C11.4 20 9.5 19.5 8.5 19" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <circle cx="12" cy="8" r="1" fill="currentColor" />
+                                <path d="M12 11V15M10 13H14" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <path
+                                    d="M8.5 4C9.5 3 11 3 12 4C13 3 14.5 3 15.5 4C16 4.5 16 5.5 16 6C16 7 15 8 12 10C9 8 8 7 8 6C8 5.5 8 4.5 8.5 4Z"
+                                    fill="currentColor" opacity="0.2" />
+                                <path
+                                    d="M12 5.5C10.5 4 9 4 8 5C7 6 7 7.5 7 8.5C7 10 8.5 11.5 12 14C15.5 11.5 17 10 17 8.5C17 7.5 17 6 16 5C15 4 13.5 4 12 5.5Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <span>Record Donation</span>
+                    </a>
+                    <a href="../Send_Message/send_message.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-bell h-5 w-5">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                            </svg></span>
+                        <span>Send Message</span>
+                    </a>
+                </div>
+                <div class="menu-section">
+                    <div class="menu-label"></div>
+                    <a href="../Settings/settings.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-settings h-5 w-5">
+                                <path
+                                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+                                </path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg></span>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search members, events, or anything...">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+                </div>
+                <div class="header-right">
+                    <div class="notification-icon">
+                        <span style="font-size: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell h-5 w-5">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                            </svg></span>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <span style="font-size: 14px; font-weight: 500;">Pastor Lawrence</span>
+                        <span style="font-size: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-5 w-5">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg></span>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-content">
+                <div class="rap-header">
+                    <div class="head-core">
+                        <h1>Attendance Records</h1>
+                        <p>Real-time tracking and member management</p>
+                    </div>
+                    <div class="head-tools">
+                        <div class="date-picker-wrapper">
+                           
+                            <input type="date" id="headerDateFilter" onchange="loadDateData()">
+                        </div>
+                        <button class="vox-btn vox-btn-main" onclick="exportQRCode('pdf')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7,10 12,15 17,10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Export PDF
+                        </button>
+                       
+                    </div>
+                </div>
+                <div class="dash-grid">
+                    <div class="dash-box">
+                        <div class="dash-top">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                            <span class="dash-label">Members</span>
+                        </div>
+                        <div class="dash-num" id="membersPresent">0</div>
+                        <div class="dash-shift">Registered Members</div>
+                    </div>
+                    <div class="dash-box">
+                        <div class="dash-top">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg>
+                            <span class="dash-label">Present Today</span>
+                        </div>
+                        <div class="dash-num" id="totalPresent">0</div>
+                        <div class="dash-shift" id="totalChange">Today</div>
+                    </div>
+                    <div class="dash-box">
+                        <div class="dash-top">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="15" y1="9" x2="9" y2="15" />
+                                <line x1="9" y1="9" x2="15" y2="15" />
+                            </svg>
+                            <span class="dash-label">Absent</span>
+                        </div>
+                        <div class="dash-num" id="absentCount">0</div>
+                        <div class="dash-shift">Today</div>
+                    </div>
+                    <div class="dash-box">
+                        <div class="dash-top">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                                <path d="M12 14v7" />
+                                <path d="M9 17l3-3 3 3" />
+                            </svg>
+                            <span class="dash-label">Visitors</span>
+                        </div>
+                        <div class="dash-num" id="visitorsCount">0</div>
+                        <div class="dash-shift">First-time Today</div>
+                    </div>
+                    <div class="dash-box">
+                        <div class="dash-top">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            <span class="dash-label">Avg Arrival</span>
+                        </div>
+                        <div class="dash-num" id="avgArrival">N/A</div>
+                        <div class="dash-shift">Real-time average</div>
+                    </div>
+                    <div class="dash-box">
+                        <div class="dash-top">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="8" r="5" />
+                                <path d="M20 21a8 8 0 1 0-16 0" />
+                                <path d="M12 13v-2" />
+                            </svg>
+                            <span class="dash-label">Males</span>
+                        </div>
+                        <div class="dash-num" id="malesCount">0</div>
+                        <div class="dash-shift">Present Today</div>
+                    </div>
+                    <div class="dash-box">
+                        <div class="dash-top">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="8" r="5" />
+                                <path d="M20 21a8 8 0 1 0-16 0" />
+                                <circle cx="12" cy="8" r="2" />
+                            </svg>
+                            <span class="dash-label">Females</span>
+                        </div>
+                        <div class="dash-num" id="femalesCount">0</div>
+                        <div class="dash-shift">Present Today</div>
+                    </div>
+                    <div class="dash-box">
+                        <div class="dash-top">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M12 2a3 3 0 0 0-3 3c0 1.3.8 2.4 2 2.8V9H8v2h3v2H8v2h3v5a1 1 0 0 0 2 0v-5h3v-2h-3v-2h3V9h-3V7.8c1.2-.4 2-1.5 2-2.8a3 3 0 0 0-3-3z" />
+                            </svg>
+                            <span class="dash-label">Children</span>
+                        </div>
+                        <div class="dash-num" id="childrenCount">0</div>
+                        <div class="dash-shift">Present Today</div>
+                    </div>
+                </div>
+                <div class="main-layout">
+                    <div class="track-section">
+                        <div class="nav-tabs">
+                            <button class="nav-tab current" onclick="switchTab('qr')">QR Check-In</button>
+                            <button class="nav-tab" onclick="switchTab('live')">Live Attendance</button>
+                            <button class="nav-tab" onclick="switchTab('visitors')">Visitors</button>
+                            <button class="nav-tab" onclick="switchTab('absent')">Absent</button>
+                        </div>
+                        <div id="qr-content" class="tab-panel current">
+                            <div class="qr-recent-grid">
+                                <div class="qr-section">
+                                    <div class="vax-head">
+                                        <h2>QR Check-In</h2>
+                                        <p>Service-specific code for instant verification</p>
+                                    </div>
+                                    <div class="form-block">
+                                        <label>Select Service</label>
+                                        <select id="serviceSelect" onchange="handleServiceChange()">
+                                            <option value="sunday-morning">Sunday Morning - 8:00 AM</option>
+                                            <option value="sunday-evening">Music and Communion - 5:30 PM</option>
+                                            <option value="others">Others</option>
+                                        </select>
+                                        <input type="text" id="otherService" placeholder="Enter custom service name"
+                                            style="display: none; margin-top: 10px;">
+                                    </div>
+                                    <div class="vax-frame" id="qrcode"></div>
+                                    <div class="vax-info">
+                                        <h3>About QR Check-In</h3>
+                                        <p>
+                                            1. Generate unique QR codes for each service <br>
+                                            2. Export QR code as image or PDF <br>
+                                            3. Open Camera app to scan, no app needed <br>
+                                            4. Members choose member or visitor option <br>
+                                            5. Members enter phone number or email to check-in <br>
+                                            6. Visitors enter name and phone number for verification
+                                        </p>
+                                    </div>
+                                    <div class="btn-row">
+                                        <button class="vox-btn vox-btn-main" onclick="generateNewQRCode()">⟳ Generate QR
+                                            Code</button>
+                                        <button class="vox-btn" onclick="exportQRCode('pdf')">Export PDF</button>
+                                        <button class="vox-btn" onclick="exportQRCode('png')">Export PNG</button>
+                                    </div>
+                                </div>
+                                <div class="recent-checkins">
+                                    <h3>Recent Check-Ins</h3>
+                                    <div class="table-wrap">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Check-In Time</th>
+                                                    <th>Phone Number</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="recentCheckinsTableBody"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="live-content" class="tab-panel">
+                            <div class="track-head">
+                                <div class="track-title">
+                                    <h2>Live Attendance</h2>
+                                    <p>Real-time updates</p>
+                                </div>
+                                <div class="find-filter">
+                                    
+                                    
+                                    <input type="text" class="find-input" placeholder="Search..." id="searchInput"
+                                        oninput="filterTable()">
+                                    <select class="filter-choice" id="statusFilter" onchange="filterTable()">
+                                        <option value="">All Status</option>
+                                        <option value="present">Present</option>
+                                        <option value="visitor">Visitor</option>
+                                    </select>
+                                    <select class="filter-choice" id="ministryFilter" onchange="filterTable()">
+                                        <option value="">All Ministries</option>
+                                        <option value="Worship Team">Worship</option>
+                                        <option value="Youth Ministry">Youth</option>
+                                        <option value="Children's Ministry">Children</option>
+                                        <option value="Prayer Team">Prayer</option>
+                                        <option value="Men's Group">Men</option>
+                                        <option value="Women's Ministry">Women</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Member</th>
+                                            <th>Phone</th>
+                                            <th>Check-In Time</th>
+                                            <th>Status</th>
+                                            <th>Church Group</th>
+                                            <th>Ministry</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="attendanceTableBody"></tbody>
+                                </table>
+                            </div>
+                            <div class="page-nav" id="livePagination"></div>
+                        </div>
+                        <div id="visitors-content" class="tab-panel">
+                            <div class="track-head">
+                                <div class="track-title">
+                                    <h2>Visitor Management</h2>
+                                    <p>Track and engage first-time guests</p>
+                                </div>
+                                <div class="find-filter">
+                                    <input type="text" class="find-input" placeholder="Search visitors..."
+                                        id="visitorSearch" oninput="filterVisitors()">
+                                   
+                                </div>
+                            </div>
+                            <div class="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Phone Number</th>
+                                            <th>Email</th>
+                                            <th>Check-In Time</th>
+                                            <th>Source</th>
+                                            <th>Visitors Purpose</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="visitorsTableBody"></tbody>
+                                </table>
+                            </div>
+                            <div class="page-nav" id="visitorPagination"></div>
+                        </div>
+                        <div id="absent-content" class="tab-panel">
+                            <div class="track-head">
+                                <div class="track-title">
+                                    <h2>Absent Members</h2>
+                                    <p>Track members who haven't checked in</p>
+                                </div>
+                                <div class="find-filter">
+                                    <input type="text" class="find-input" placeholder="Search absent members..."
+                                        id="absentSearch" oninput="filterAbsent()">
+                                </div>
+                            </div>
+                            <div class="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Status</th>
+                                            <th>Church Group</th>
+                                            <th>Ministry</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="absentTableBody"></tbody>
+                                </table>
+                            </div>
+                            <div class="page-nav" id="absentPagination"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pop-overlay" id="checkInModal">
+                    <div class="pop-content">
+                        <div class="pop-head">
+                            <h2>Member Verification</h2>
+                            <p>Enter phone number or email to check in</p>
+                        </div>
+                        <div class="pop-body">
+                            <div class="form-block">
+                                <label class="form-tag">Phone Number or Email</label>
+                                <input type="text" class="form-entry" id="memberIdentifier"
+                                    placeholder="e.g., 0551234567 or john@church.com">
+                            </div>
+                            <div id="verificationResult"></div>
+                        </div>
+                        <div class="pop-footer">
+                            <button class="vox-btn" onclick="closeModal('checkInModal')">Cancel</button>
+                            <button class="vox-btn vox-btn-main" onclick="verifyAndCheckIn()">Verify & Check In</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pop-overlay" id="newVisitorModal">
+                    <div class="pop-content">
+                        <div class="pop-head">
+                            <h2>Welcome New Guest</h2>
+                            <p>Please share your information</p>
+                        </div>
+                        <div class="pop-body">
+                            <div class="form-block">
+                                <label class="form-tag">Full Name *</label>
+                                <input type="text" class="form-entry" id="visitorName" required>
+                            </div>
+                            <div class="form-block">
+                                <label class="form-tag">Phone Number *</label>
+                                <input type="tel" class="form-entry" id="visitorPhone" required>
+                            </div>
+                            <div class="form-block">
+                                <label class="form-tag">Email (Optional)</label>
+                                <input type="email" class="form-entry" id="visitorEmail">
+                            </div>
+                            <div class="form-block">
+                                <label class="form-tag">How did you hear about us?</label>
+                                <select class="form-choice" id="visitorSource">
+                                    <option value="friend">Friend/Family</option>
+                                    <option value="social">Social Media</option>
+                                    <option value="online">Online Search</option>
+                                    <option value="event">Community Event</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-block">
+                                <label class="form-tag">Interests</label>
+                                <input type="text" class="form-entry" id="visitorInterests"
+                                    placeholder="e.g., Youth Group, Music Ministry">
+                            </div>
+                        </div>
+                        <div class="pop-footer">
+                            <button class="vox-btn" onclick="closeModal('newVisitorModal')">Cancel</button>
+                            <button class="vox-btn vox-btn-main" onclick="registerVisitor()">Register & Check
+                                In</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const { jsPDF } = window.jspdf;
+        let attendanceData = [];
+        let visitorsData = [];
+        let absentData = [];
+        let memberDatabase = [];
+        let currentPage = { live: 1, visitors: 1, absent: 1 };
+        let rowsPerPage = 10;
+        let currentDate = new Date().toISOString().split('T')[0];
+        
+        // Get or create persistent service_id for today
+        function getOrCreateServiceId() {
+            const today = new Date().toISOString().split('T')[0];
+            const storedData = localStorage.getItem('currentService');
+            
+            if (storedData) {
+                const parsed = JSON.parse(storedData);
+                // If stored service is for today, use it
+                if (parsed.date === today) {
+                    return parsed.serviceId;
+                }
+            }
+            
+            // Create new service_id for today
+            const newServiceId = generateUUID();
+            localStorage.setItem('currentService', JSON.stringify({
+                serviceId: newServiceId,
+                date: today
+            }));
+            return newServiceId;
+        }
+        
+        let currentServiceId = getOrCreateServiceId();
+
+        // Generate UUID for service_id
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        // Toggle sidebar for mobile
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        // Close sidebar on outside click (mobile)
+        document.addEventListener('click', function (event) {
+            const sidebar = document.querySelector('.sidebar');
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            if (window.innerWidth <= 768 && !sidebar.contains(event.target) && !toggle.contains(event.target) && sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+            }
+        });
+
+        // Handle service selection change
+        function handleServiceChange() {
+            const select = document.getElementById('serviceSelect');
+            const otherInput = document.getElementById('otherService');
+            if (select.value === 'others') {
+                otherInput.style.display = 'block';
+                otherInput.focus();
+            } else {
+                otherInput.style.display = 'none';
+            }
+            generateQRCode();
+        }
+
+        // Generate QR code with secure token
+        async function generateQRCode() {
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = '<div style="text-align:center;padding:20px;">Generating secure QR code...</div>';
+            
+            const service = document.getElementById('serviceSelect').value;
+            const serviceName = service === 'others' ? document.getElementById('otherService').value || 'Custom Service' : service;
+            
+            try {
+                // Generate secure token
+                const response = await fetch('secure_token.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        service_id: currentServiceId,
+                        date: currentDate,
+                        service: serviceName
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    qrContainer.innerHTML = '';
+                    const qrData = `http://172.20.10.2/Church_Management_System/admin_dashboard/Attendance/Check_in_attendance.html?token=${result.token}`;
+                    new QRCode(qrContainer, {
+                        text: qrData,
+                        width: 240,
+                        height: 240,
+                        colorDark: '#111827',
+                        colorLight: '#ffffff',
+                        correctLevel: QRCode.CorrectLevel.H
+                    });
+                    console.log('✅ Secure QR Code generated for:', serviceName, 'Date:', currentDate);
+                } else {
+                    qrContainer.innerHTML = '<div style="color:red;padding:20px;">Error generating QR code</div>';
+                }
+            } catch (error) {
+                console.error('Error generating QR code:', error);
+                qrContainer.innerHTML = '<div style="color:red;padding:20px;">Error: ' + error.message + '</div>';
+            }
+        }
+
+        // Generate new QR code
+        function generateNewQRCode() {
+            generateQRCode();
+            showNotification('New QR code generated');
+        }
+
+        // Export comprehensive attendance report as PDF or PNG
+        async function exportQRCode(format) {
+            if (format === 'pdf') {
+                await exportAttendanceReportPDF();
+            } else if (format === 'png') {
+                await exportAttendanceReportPNG();
+            }
+        }
+        
+        // Export attendance report as PDF
+        async function exportAttendanceReportPDF() {
+            const doc = new jsPDF();
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+            let yPosition = 15;
+            
+            // Helper function to load and convert image to base64
+            async function getImageBase64(url) {
+                try {
+                    const response = await fetch(url);
+                    const blob = await response.blob();
+                    return new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => resolve(reader.result);
+                        reader.onerror = reject;
+                        reader.readAsDataURL(blob);
+                    });
+                } catch (error) {
+                    return null;
+                }
+            }
+            
+            // Header with colored banner
+            doc.setFillColor(30, 41, 59); // Dark blue
+            doc.rect(0, 0, pageWidth, 35, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(24);
+            doc.setFont('helvetica', 'bold');
+            doc.text('ATTENDANCE REPORT', pageWidth / 2, 15, { align: 'center' });
+            
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'normal');
+            const formattedDate = new Date(currentDate).toLocaleDateString('en-US', { 
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+            });
+            doc.text(formattedDate, pageWidth / 2, 25, { align: 'center' });
+            
+            yPosition = 45;
+            doc.setTextColor(0, 0, 0);
+            
+            // Statistics Summary with boxes
+            doc.setFontSize(16);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(30, 41, 59);
+            doc.text('Summary Statistics', 15, yPosition);
+            yPosition += 10;
+            
+            const stats = [
+                { label: 'Registered Members', value: document.getElementById('membersPresent').textContent, color: [59, 130, 246] },
+                { label: 'Present Today', value: document.getElementById('totalPresent').textContent, color: [16, 185, 129] },
+                { label: 'Absent', value: document.getElementById('absentCount').textContent, color: [239, 68, 68] },
+                { label: 'Visitors', value: document.getElementById('visitorsCount').textContent, color: [139, 92, 246] },
+                { label: 'Males', value: document.getElementById('malesCount').textContent, color: [59, 130, 246] },
+                { label: 'Females', value: document.getElementById('femalesCount').textContent, color: [236, 72, 153] },
+                { label: 'Children', value: document.getElementById('childrenCount').textContent, color: [245, 158, 11] },
+                { label: 'Avg Arrival', value: document.getElementById('avgArrival').textContent, color: [100, 116, 139] }
+            ];
+            
+            const boxWidth = 43;
+            const boxHeight = 22;
+            const gap = 4;
+            
+            for (let i = 0; i < stats.length; i++) {
+                const col = i % 4;
+                const row = Math.floor(i / 4);
+                const x = 15 + (col * (boxWidth + gap));
+                const y = yPosition + (row * (boxHeight + gap));
+                
+                // Box background
+                doc.setFillColor(248, 250, 252);
+                doc.roundedRect(x, y, boxWidth, boxHeight, 2, 2, 'F');
+                
+                // Border
+                doc.setDrawColor(226, 232, 240);
+                doc.setLineWidth(0.3);
+                doc.roundedRect(x, y, boxWidth, boxHeight, 2, 2, 'S');
+                
+                // Label
+                doc.setFontSize(8);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(100, 116, 139);
+                doc.text(stats[i].label, x + boxWidth / 2, y + 7, { align: 'center' });
+                
+                // Value
+                doc.setFontSize(18);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(stats[i].color[0], stats[i].color[1], stats[i].color[2]);
+                doc.text(stats[i].value.toString(), x + boxWidth / 2, y + 16, { align: 'center' });
+            }
+            
+            yPosition += (Math.ceil(stats.length / 4) * (boxHeight + gap)) + 12;
+            
+            // Live Attendance Section (Members only - exclude visitors)
+            const membersOnly = attendanceData.filter(member => 
+                member.status !== 'visitor' && 
+                member.ministry && 
+                member.ministry.toLowerCase() !== 'visitor'
+            );
+            
+            if (membersOnly.length > 0) {
+                if (yPosition > pageHeight - 60) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+                
+                doc.setFontSize(16);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(30, 41, 59);
+                doc.text(`Live Attendance - Members (${membersOnly.length})`, 15, yPosition);
+                yPosition += 8;
+                
+                // Table header background
+                doc.setFillColor(30, 41, 59);
+                doc.rect(15, yPosition - 5, pageWidth - 30, 8, 'F');
+                
+                // Table headers
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(255, 255, 255);
+                doc.text('Name', 18, yPosition);
+                doc.text('Phone Number', 70, yPosition);
+                doc.text('Email', 105, yPosition);
+                doc.text('Check-In', 145, yPosition);
+                doc.text('Ministry', 170, yPosition);
+                yPosition += 8;
+                
+                // Table rows
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(0, 0, 0);
+                
+                let rowCounter = 0;
+                for (let i = 0; i < membersOnly.length; i++) {
+                    if (yPosition > pageHeight - 25) {
+                        doc.addPage();
+                        yPosition = 20;
+                    }
+                    
+                    const member = membersOnly[i];
+                    const rowY = yPosition - 5;
+                    
+                    // Alternating row colors
+                    if (rowCounter % 2 === 0) {
+                        doc.setFillColor(248, 250, 252);
+                        doc.rect(15, rowY, pageWidth - 30, 10, 'F');
+                    }
+                    rowCounter++;
+                    
+                    // Profile picture using correct field name 'photo'
+                    let photoPath = null;
+                    if (member.photo) {
+                        photoPath = member.photo.replace('./', '../Add_Members/');
+                    }
+                    
+                    if (photoPath) {
+                        try {
+                            const imgData = await getImageBase64(photoPath);
+                            if (imgData) {
+                                // Draw circular profile picture
+                                doc.saveGraphicsState();
+                                // Create clipping circle
+                                doc.circle(19, yPosition, 3, 'S');
+                                doc.addImage(imgData, 'JPEG', 16, yPosition - 3, 6, 6, undefined, 'FAST');
+                                doc.restoreGraphicsState();
+                                // Border
+                                doc.setDrawColor(226, 232, 240);
+                                doc.setLineWidth(0.3);
+                                doc.circle(19, yPosition, 3, 'S');
+                            } else {
+                                // Fallback to initial
+                                doc.setFillColor(102, 126, 234);
+                                doc.circle(19, yPosition, 3, 'F');
+                                doc.setTextColor(255, 255, 255);
+                                doc.setFontSize(7);
+                                doc.setFont('helvetica', 'bold');
+                                doc.text((member.name || '?').charAt(0).toUpperCase(), 19, yPosition + 1, { align: 'center' });
+                            }
+                        } catch (e) {
+                            // Fallback to initial on error
+                            doc.setFillColor(102, 126, 234);
+                            doc.circle(19, yPosition, 3, 'F');
+                            doc.setTextColor(255, 255, 255);
+                            doc.setFontSize(7);
+                            doc.setFont('helvetica', 'bold');
+                            doc.text((member.name || '?').charAt(0).toUpperCase(), 19, yPosition + 1, { align: 'center' });
+                        }
+                    } else {
+                        // No photo - draw initial circle
+                        doc.setFillColor(102, 126, 234);
+                        doc.circle(19, yPosition, 3, 'F');
+                        doc.setTextColor(255, 255, 255);
+                        doc.setFontSize(7);
+                        doc.setFont('helvetica', 'bold');
+                        doc.text((member.name || '?').charAt(0).toUpperCase(), 19, yPosition + 1, { align: 'center' });
+                    }
+                    
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(9);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text(member.name || 'Unknown', 25, yPosition);
+                    
+                    doc.setFont('helvetica', 'normal');
+                    doc.text(member.phone || '-', 70, yPosition);
+                    doc.text(member.email || '-', 105, yPosition);
+                    doc.text(member.check_in_time || '-', 145, yPosition);
+                    doc.text(member.ministry || '-', 170, yPosition);
+                    
+                    yPosition += 10;
+                }
+                
+                yPosition += 5;
+            }
+            
+            // Visitors Section
+            if (visitorsData.length > 0) {
+                if (yPosition > pageHeight - 60) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+                
+                doc.setFontSize(16);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(139, 92, 246);
+                doc.text(`Visitors (${visitorsData.length})`, 15, yPosition);
+                yPosition += 8;
+                
+                // Table header background
+                doc.setFillColor(139, 92, 246);
+                doc.rect(15, yPosition - 5, pageWidth - 30, 8, 'F');
+                
+                // Table headers
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(255, 255, 255);
+                doc.text('Name', 18, yPosition);
+                doc.text('Phone Number', 65, yPosition);
+                doc.text('Email', 105, yPosition);
+                doc.text('Check-In', 145, yPosition);
+                doc.text('Source', 170, yPosition);
+                yPosition += 8;
+                
+                // Table rows
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(0, 0, 0);
+                
+                for (let i = 0; i < visitorsData.length; i++) {
+                    if (yPosition > pageHeight - 25) {
+                        doc.addPage();
+                        yPosition = 20;
+                    }
+                    
+                    const visitor = visitorsData[i];
+                    const rowY = yPosition - 5;
+                    
+                    // Alternating row colors
+                    if (i % 2 === 0) {
+                        doc.setFillColor(248, 250, 252);
+                        doc.rect(15, rowY, pageWidth - 30, 10, 'F');
+                    }
+                    
+                    // Visitor initial circle
+                    doc.setFillColor(139, 92, 246);
+                    doc.circle(19, yPosition, 3, 'F');
+                    doc.setTextColor(255, 255, 255);
+                    doc.setFontSize(7);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text((visitor.name || 'V').charAt(0), 19, yPosition + 1, { align: 'center' });
+                    
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(9);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text(visitor.name || 'Unknown', 25, yPosition);
+                    
+                    doc.setFont('helvetica', 'normal');
+                    doc.text(visitor.phone || '-', 65, yPosition);
+                    doc.text(visitor.email || '-', 105, yPosition);
+                    doc.text(visitor.check_in_time || '-', 145, yPosition);
+                    doc.text(visitor.source || '-', 170, yPosition);
+                    
+                    yPosition += 10;
+                }
+                
+                yPosition += 5;
+            }
+            
+            // Absent Members Section
+            if (absentData.length > 0) {
+                if (yPosition > pageHeight - 60) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+                
+                doc.setFontSize(16);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(239, 68, 68);
+                doc.text(`Absent Members (${absentData.length})`, 15, yPosition);
+                yPosition += 8;
+                
+                // Table header background
+                doc.setFillColor(239, 68, 68);
+                doc.rect(15, yPosition - 5, pageWidth - 30, 8, 'F');
+                
+                // Table headers
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(255, 255, 255);
+                doc.text('Name', 18, yPosition);
+                doc.text('Phone Number', 70, yPosition);
+                doc.text('Email', 120, yPosition);
+                doc.text('Ministry', 170, yPosition);
+                yPosition += 8;
+                
+                // Table rows
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(0, 0, 0);
+                
+                for (let i = 0; i < absentData.length; i++) {
+                    if (yPosition > pageHeight - 25) {
+                        doc.addPage();
+                        yPosition = 20;
+                    }
+                    
+                    const absent = absentData[i];
+                    const rowY = yPosition - 5;
+                    
+                    // Alternating row colors
+                    if (i % 2 === 0) {
+                        doc.setFillColor(248, 250, 252);
+                        doc.rect(15, rowY, pageWidth - 30, 10, 'F');
+                    }
+                    
+                    // Profile picture using correct field name 'photo_path'
+                    let photoPath = null;
+                    if (absent.photo_path) {
+                        photoPath = absent.photo_path.replace('./', '../Add_Members/');
+                    }
+                    
+                    if (photoPath) {
+                        try {
+                            const imgData = await getImageBase64(photoPath);
+                            if (imgData) {
+                                // Draw circular profile picture
+                                doc.saveGraphicsState();
+                                doc.circle(19, yPosition, 3, 'S');
+                                doc.addImage(imgData, 'JPEG', 16, yPosition - 3, 6, 6, undefined, 'FAST');
+                                doc.restoreGraphicsState();
+                                // Border
+                                doc.setDrawColor(226, 232, 240);
+                                doc.setLineWidth(0.3);
+                                doc.circle(19, yPosition, 3, 'S');
+                            } else {
+                                // Fallback to initial
+                                doc.setFillColor(203, 213, 225);
+                                doc.circle(19, yPosition, 3, 'F');
+                                doc.setTextColor(71, 85, 105);
+                                doc.setFontSize(7);
+                                doc.setFont('helvetica', 'bold');
+                                doc.text((absent.name || '?').charAt(0).toUpperCase(), 19, yPosition + 1, { align: 'center' });
+                            }
+                        } catch (e) {
+                            // Fallback to initial on error
+                            doc.setFillColor(203, 213, 225);
+                            doc.circle(19, yPosition, 3, 'F');
+                            doc.setTextColor(71, 85, 105);
+                            doc.setFontSize(7);
+                            doc.setFont('helvetica', 'bold');
+                            doc.text((absent.name || '?').charAt(0).toUpperCase(), 19, yPosition + 1, { align: 'center' });
+                        }
+                    } else {
+                        // No photo - draw initial circle
+                        doc.setFillColor(203, 213, 225);
+                        doc.circle(19, yPosition, 3, 'F');
+                        doc.setTextColor(71, 85, 105);
+                        doc.setFontSize(7);
+                        doc.setFont('helvetica', 'bold');
+                        doc.text((absent.name || '?').charAt(0).toUpperCase(), 19, yPosition + 1, { align: 'center' });
+                    }
+                    
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(9);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text(absent.name || 'Unknown', 25, yPosition);
+                    
+                    doc.setFont('helvetica', 'normal');
+                    doc.text(absent.phone || '-', 70, yPosition);
+                    doc.text(absent.email || '-', 120, yPosition);
+                    doc.text(absent.ministry || '-', 170, yPosition);
+                    
+                    yPosition += 10;
+                }
+            }
+            
+            // Footer on all pages
+            const totalPages = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= totalPages; i++) {
+                doc.setPage(i);
+                
+                // Footer line
+                doc.setDrawColor(226, 232, 240);
+                doc.setLineWidth(0.5);
+                doc.line(15, pageHeight - 15, pageWidth - 15, pageHeight - 15);
+                
+                // Footer text
+                doc.setFontSize(8);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(100, 116, 139);
+                doc.text('Church Management System', 15, pageHeight - 10);
+                doc.text(`Page ${i} of ${totalPages}`, pageWidth / 2, pageHeight - 10, { align: 'center' });
+                doc.text(new Date().toLocaleDateString(), pageWidth - 15, pageHeight - 10, { align: 'right' });
+            }
+            
+            // Save PDF
+            doc.save(`Attendance_Report_${currentDate}.pdf`);
+            showNotification('PDF report exported successfully!', 'success');
+        }
+        
+        // Export attendance report as PNG
+        async function exportAttendanceReportPNG() {
+            // Create a temporary container with all the data
+            const container = document.createElement('div');
+            container.style.cssText = 'position:absolute;left:-9999px;width:1200px;padding:30px;background:white;font-family:Arial,sans-serif;';
+            
+            container.innerHTML = `
+                <div style="text-align:center;margin-bottom:30px;">
+                    <h1 style="font-size:32px;margin:0 0 10px 0;color:#1e293b;">Attendance Report</h1>
+                    <p style="font-size:18px;color:#64748b;margin:0;">Date: ${currentDate}</p>
+                </div>
+                
+                <div style="margin-bottom:30px;">
+                    <h2 style="font-size:24px;color:#1e293b;margin-bottom:15px;">Summary Statistics</h2>
+                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+                        <div style="padding:15px;background:#f8fafc;border-radius:8px;">
+                            <div style="font-size:14px;color:#64748b;margin-bottom:5px;">Registered Members</div>
+                            <div style="font-size:28px;font-weight:bold;color:#1e293b;">${document.getElementById('membersPresent').textContent}</div>
+                        </div>
+                        <div style="padding:15px;background:#f8fafc;border-radius:8px;">
+                            <div style="font-size:14px;color:#64748b;margin-bottom:5px;">Present Today</div>
+                            <div style="font-size:28px;font-weight:bold;color:#10b981;">${document.getElementById('totalPresent').textContent}</div>
+                        </div>
+                        <div style="padding:15px;background:#f8fafc;border-radius:8px;">
+                            <div style="font-size:14px;color:#64748b;margin-bottom:5px;">Absent</div>
+                            <div style="font-size:28px;font-weight:bold;color:#ef4444;">${document.getElementById('absentCount').textContent}</div>
+                        </div>
+                        <div style="padding:15px;background:#f8fafc;border-radius:8px;">
+                            <div style="font-size:14px;color:#64748b;margin-bottom:5px;">Visitors</div>
+                            <div style="font-size:28px;font-weight:bold;color:#8b5cf6;">${document.getElementById('visitorsCount').textContent}</div>
+                        </div>
+                        <div style="padding:15px;background:#f8fafc;border-radius:8px;">
+                            <div style="font-size:14px;color:#64748b;margin-bottom:5px;">Males</div>
+                            <div style="font-size:28px;font-weight:bold;color:#3b82f6;">${document.getElementById('malesCount').textContent}</div>
+                        </div>
+                        <div style="padding:15px;background:#f8fafc;border-radius:8px;">
+                            <div style="font-size:14px;color:#64748b;margin-bottom:5px;">Females</div>
+                            <div style="font-size:28px;font-weight:bold;color:#ec4899;">${document.getElementById('femalesCount').textContent}</div>
+                        </div>
+                        <div style="padding:15px;background:#f8fafc;border-radius:8px;">
+                            <div style="font-size:14px;color:#64748b;margin-bottom:5px;">Children</div>
+                            <div style="font-size:28px;font-weight:bold;color:#f59e0b;">${document.getElementById('childrenCount').textContent}</div>
+                        </div>
+                        <div style="padding:15px;background:#f8fafc;border-radius:8px;">
+                            <div style="font-size:14px;color:#64748b;margin-bottom:5px;">Avg Arrival</div>
+                            <div style="font-size:28px;font-weight:bold;color:#1e293b;">${document.getElementById('avgArrival').textContent}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                ${attendanceData.length > 0 ? `
+                    <div style="margin-bottom:30px;">
+                        <h2 style="font-size:24px;color:#1e293b;margin-bottom:15px;">Live Attendance (${attendanceData.length})</h2>
+                        <table style="width:100%;border-collapse:collapse;">
+                            <thead>
+                                <tr style="background:#1e293b;color:white;">
+                                    <th style="padding:12px;text-align:left;font-size:14px;">Member</th>
+                                    <th style="padding:12px;text-align:left;font-size:14px;">Phone</th>
+                                    <th style="padding:12px;text-align:left;font-size:14px;">Check-In</th>
+                                    <th style="padding:12px;text-align:left;font-size:14px;">Status</th>
+                                    <th style="padding:12px;text-align:left;font-size:14px;">Ministry</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${attendanceData.map((member, i) => `
+                                    <tr style="background:${i % 2 === 0 ? '#f8fafc' : 'white'};">
+                                        <td style="padding:12px;display:flex;align-items:center;gap:10px;">
+                                            ${member.profile_picture ? 
+                                                `<img src="${member.profile_picture}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />` : 
+                                                `<div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:16px;">${member.name ? member.name.charAt(0) : '?'}</div>`
+                                            }
+                                            <span style="font-weight:600;font-size:14px;">${member.name || 'N/A'}</span>
+                                        </td>
+                                        <td style="padding:12px;font-size:14px;">${member.phone_number || 'N/A'}</td>
+                                        <td style="padding:12px;font-size:14px;">${member.check_in_time || 'N/A'}</td>
+                                        <td style="padding:12px;"><span style="padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;background:#d1fae5;color:#065f46;">Present</span></td>
+                                        <td style="padding:12px;font-size:14px;">${member.ministry || 'N/A'}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                ` : ''}
+                
+                ${visitorsData.length > 0 ? `
+                    <div style="margin-bottom:30px;">
+                        <h2 style="font-size:24px;color:#1e293b;margin-bottom:15px;">Visitors (${visitorsData.length})</h2>
+                        <table style="width:100%;border-collapse:collapse;">
+                            <thead>
+                                <tr style="background:#8b5cf6;color:white;">
+                                    <th style="padding:12px;text-align:left;font-size:14px;">Name</th>
+                                    <th style="padding:12px;text-align:left;font-size:14px;">Phone</th>
+                                    <th style="padding:12px;text-align:left;font-size:14px;">Email</th>
+                                    <th style="padding:12px;text-align:left;font-size:14px;">Check-In</th>
+                                    <th style="padding:12px;text-align:left;font-size:14px;">Source</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${visitorsData.map((visitor, i) => `
+                                    <tr style="background:${i % 2 === 0 ? '#f8fafc' : 'white'};">
+                                        <td style="padding:12px;display:flex;align-items:center;gap:10px;">
+                                            <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:16px;">${visitor.name ? visitor.name.charAt(0) : 'V'}</div>
+                                            <span style="font-weight:600;font-size:14px;">${visitor.name || 'N/A'}</span>
+                                        </td>
+                                        <td style="padding:12px;font-size:14px;">${visitor.phone_number || 'N/A'}</td>
+                                        <td style="padding:12px;font-size:14px;">${visitor.email || 'N/A'}</td>
+                                        <td style="padding:12px;font-size:14px;">${visitor.check_in_time || 'N/A'}</td>
+                                        <td style="padding:12px;font-size:14px;">${visitor.source || 'N/A'}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                ` : ''}
+                
+                ${absentData.length > 0 ? `
+                    <div>
+                        <h2 style="font-size:24px;color:#1e293b;margin-bottom:15px;">Absent Members (${absentData.length})</h2>
+                        <table style="width:100%;border-collapse:collapse;">
+                            <thead>
+                                <tr style="background:#ef4444;color:white;">
+                                    <th style="padding:12px;text-align:left;font-size:14px;">Member</th>
+                                    <th style="padding:12px;text-align:left;font-size:14px;">Phone</th>
+                                    <th style="padding:12px;text-align:left;font-size:14px;">Email</th>
+                                    <th style="padding:12px;text-align:left;font-size:14px;">Ministry</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${absentData.slice(0, 50).map((absent, i) => `
+                                    <tr style="background:${i % 2 === 0 ? '#f8fafc' : 'white'};">
+                                        <td style="padding:12px;display:flex;align-items:center;gap:10px;">
+                                            ${absent.profile_picture ? 
+                                                `<img src="${absent.profile_picture}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />` : 
+                                                `<div style="width:40px;height:40px;border-radius:50%;background:#cbd5e1;color:#475569;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:16px;">${absent.name ? absent.name.charAt(0) : '?'}</div>`
+                                            }
+                                            <span style="font-weight:600;font-size:14px;">${absent.name || 'N/A'}</span>
+                                        </td>
+                                        <td style="padding:12px;font-size:14px;">${absent.phone_number || 'N/A'}</td>
+                                        <td style="padding:12px;font-size:14px;">${absent.email || 'N/A'}</td>
+                                        <td style="padding:12px;font-size:14px;">${absent.ministry || 'N/A'}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                ` : ''}
+                
+                <div style="margin-top:30px;padding-top:20px;border-top:2px solid #e2e8f0;text-align:center;color:#64748b;font-size:12px;">
+                    <p>Generated: ${new Date().toLocaleString()}</p>
+                </div>
+            `;
+            
+            document.body.appendChild(container);
+            
+            try {
+                const canvas = await html2canvas(container, {
+                    scale: 2,
+                    backgroundColor: '#ffffff',
+                    logging: false
+                });
+                
+                const link = document.createElement('a');
+                link.download = `Attendance_Report_${currentDate}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+                showNotification('PNG report exported successfully!');
+            } catch (error) {
+                showNotification('Error exporting PNG: ' + error.message, 'error');
+            } finally {
+                document.body.removeChild(container);
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        // Close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+        }
+
+        // Fetch all members for total count
+        async function fetchMembers() {
+            try {
+                const response = await fetch('absent.php?service_id=0&check_in_date=1970-01-01');
+                const result = await response.json();
+                if (result.success) {
+                    memberDatabase = result.data;
+                    document.getElementById('totalMembers').textContent = memberDatabase.length;
+                } else {
+                    showNotification('Failed to load members: ' + result.message, 'error');
+                }
+            } catch (error) {
+                showNotification('Error fetching members: ' + error.message, 'error');
+            }
+        }
+
+        // Verify and check in member
+        async function verifyAndCheckIn() {
+            const identifier = document.getElementById('memberIdentifier').value.trim();
+            const resultDiv = document.getElementById('verificationResult');
+            if (!identifier) {
+                showNotification('Please enter a valid identifier', 'error');
+                return;
+            }
+            try {
+                const response = await fetch('verify_member.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        phone: identifier.includes('@') ? '' : identifier,
+                        email: identifier.includes('@') ? identifier : '',
+                        service_id: currentServiceId,
+                        check_in_date: currentDate
+                    })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    resultDiv.innerHTML = `
+                        <div class="check-success">
+                            <h3>Welcome back, ${result.member.name}!</h3>
+                            <p>Checked in at ${result.member.check_in_time || 'now'}</p>
+                        </div>
+                    `;
+                    showNotification(result.message);
+                    setTimeout(() => {
+                        closeModal('checkInModal');
+                        document.getElementById('memberIdentifier').value = '';
+                        resultDiv.innerHTML = '';
+                        loadDateData();
+                    }, 2000);
+                } else {
+                    resultDiv.innerHTML = `
+                        <div style="padding: 14px; background: #fef3c7; border-radius: 6px; border: 1px solid #fde68a;">
+                            <h3 style="font-size: 14px; font-weight: 600; color: #92400e; margin-bottom: 3px;">${result.message}</h3>
+                        </div>
+                    `;
+                    setTimeout(() => {
+                        closeModal('checkInModal');
+                        document.getElementById('newVisitorModal').classList.add('show');
+                    }, 2000);
+                }
+            } catch (error) {
+                showNotification('Error: ' + error.message, 'error');
+            }
+        }
+
+        // Register new visitor
+        async function registerVisitor() {
+            const name = document.getElementById('visitorName').value.trim();
+            const phone = document.getElementById('visitorPhone').value.trim();
+            const email = document.getElementById('visitorEmail').value.trim();
+            const source = document.getElementById('visitorSource').value;
+            const interests = document.getElementById('visitorInterests').value.trim();
+            if (!name || !phone) {
+                showNotification('Name and phone are required', 'error');
+                return;
+            }
+            try {
+                const response = await fetch('register_visitor.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name,
+                        phone,
+                        email,
+                        source,
+                        interests,
+                        service_id: currentServiceId,
+                        check_in_date: currentDate
+                    })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    showNotification(result.message);
+                    closeModal('newVisitorModal');
+                    ['visitorName', 'visitorPhone', 'visitorEmail', 'visitorInterests'].forEach(id => document.getElementById(id).value = '');
+                    document.getElementById('visitorSource').value = 'friend';
+                    loadDateData();
+                } else {
+                    showNotification(result.message, 'error');
+                }
+            } catch (error) {
+                showNotification('Error: ' + error.message, 'error');
+            }
+        }
+
+        // Fetch attendance data
+        async function fetchAttendanceData() {
+            try {
+                const response = await fetch(`attendance.php?service_id=${currentServiceId}&check_in_date=${currentDate}`);
+                const result = await response.json();
+                if (result.success) {
+                    attendanceData = result.data;
+                    updateRecentCheckins();
+                    renderAttendanceTable();
+                } else {
+                    showNotification('Failed to load attendance: ' + result.message, 'error');
+                }
+            } catch (error) {
+                showNotification('Error fetching attendance: ' + error.message, 'error');
+            }
+        }
+
+        // Fetch statistics from database
+        async function fetchStats() {
+            try {
+                const url = `get_stats.php?service_id=${currentServiceId}&check_in_date=${currentDate}`;
+                console.log('📊 Fetching stats from:', url);
+                console.log('   Service ID:', currentServiceId);
+                console.log('   Date:', currentDate);
+                
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                console.log('📈 Stats response:', result);
+                if (result.success) {
+                    const stats = result.data;
+                    // Update all dashboard metrics
+                    // Members card shows total registered members
+                    document.getElementById('membersPresent').textContent = stats.total_members;
+                    
+                    // Present Today shows total checked in (members + visitors)
+                    document.getElementById('totalPresent').textContent = stats.total_present;
+                    
+                    // Absent shows total members - checked in members
+                    console.log('Setting absent count to:', stats.absent_count);
+                    document.getElementById('absentCount').textContent = stats.absent_count;
+                    
+                    // Visitors shows visitor count
+                    document.getElementById('visitorsCount').textContent = stats.visitors_count;
+                    
+                    // Gender and children (only those who checked in)
+                    document.getElementById('malesCount').textContent = stats.males_count;
+                    document.getElementById('femalesCount').textContent = stats.females_count;
+                    document.getElementById('childrenCount').textContent = stats.children_count;
+                    
+                    // Average arrival time
+                    document.getElementById('avgArrival').textContent = stats.avg_arrival;
+                    
+                    console.log('✅ Stats updated successfully', stats);
+                } else {
+                    console.error('Stats fetch failed:', result.message);
+                    showNotification('Failed to load statistics: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error fetching statistics:', error);
+                showNotification('Error fetching statistics: ' + error.message, 'error');
+            }
+        }
+
+        // Fetch visitor data
+        async function fetchVisitorsData() {
+            try {
+                const response = await fetch(`visitors.php?service_id=${currentServiceId}&check_in_date=${currentDate}`);
+                const result = await response.json();
+                if (result.success) {
+                    visitorsData = result.data;
+                    renderVisitorsTable();
+                } else {
+                    showNotification('Failed to load visitors: ' + result.message, 'error');
+                }
+            } catch (error) {
+                showNotification('Error fetching visitors: ' + error.message, 'error');
+            }
+        }
+
+        // Fetch absent members
+        async function fetchAbsentData() {
+            try {
+                const response = await fetch(`absent.php?service_id=${currentServiceId}&check_in_date=${currentDate}`);
+                const result = await response.json();
+                if (result.success) {
+                    absentData = result.data;
+                    renderAbsentTable();
+                } else {
+                    showNotification('Failed to load absent members: ' + result.message, 'error');
+                }
+            } catch (error) {
+                showNotification('Error fetching absent members: ' + error.message, 'error');
+            }
+        }
+
+
+        // Update recent check-ins table
+        function updateRecentCheckins() {
+            const tbody = document.getElementById('recentCheckinsTableBody');
+            tbody.innerHTML = '';
+            const recent = attendanceData.slice(-5).reverse();
+            recent.forEach(item => {
+                const row = document.createElement('tr');
+                let photoPath = '../Add_Members/Uploads/default-avatar.png';
+                if (item.photo) {
+                    photoPath = item.photo.replace('./', '../Add_Members/');
+                }
+                row.innerHTML = `
+                    <td>
+                        <div class="member-cell">
+                            <img src="${photoPath}" alt="${item.name}" class="member-avatar"
+                                 onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2740%27 height=%2740%27 viewBox=%270 0 40 40%27%3E%3Ccircle cx=%2720%27 cy=%2720%27 r=%2720%27 fill=%27%23e5e7eb%27/%3E%3Cpath d=%27M20 20a6 6 0 100-12 6 6 0 000 12zM8 32a12 12 0 0124 0%27 fill=%27%23fff%27/%3E%3C/svg%3E'">
+                            <div class="member-info">
+                                <span class="member-name">${item.name}</span>
+                                <span class="member-role">${item.email || 'No email'}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="time-badge">${item.check_in_time || 'N/A'}</span></td>
+                    <td>${item.phone || 'N/A'}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Render attendance table with pagination
+        function renderAttendanceTable() {
+            const tbody = document.getElementById('attendanceTableBody');
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const status = document.getElementById('statusFilter').value;
+            const ministry = document.getElementById('ministryFilter').value;
+            const filteredData = attendanceData.filter(item =>
+                item.status !== 'visitor' && // Exclude visitors from Live Attendance
+                (!search || item.name.toLowerCase().includes(search)) &&
+                (!status || item.status === status) &&
+                (!ministry || item.ministry === ministry)
+            );
+            const start = (currentPage.live - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            tbody.innerHTML = '';
+            filteredData.slice(start, end).forEach(item => {
+                const row = document.createElement('tr');
+                let photoPath = '../Add_Members/Uploads/default-avatar.png';
+                if (item.photo) {
+                    photoPath = item.photo.replace('./', '../Add_Members/');
+                }
+                row.innerHTML = `
+                    <td>
+                        <div class="member-cell">
+                            <img src="${photoPath}" alt="${item.name}" class="member-avatar"
+                                 onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2740%27 height=%2740%27 viewBox=%270 0 40 40%27%3E%3Ccircle cx=%2720%27 cy=%2720%27 r=%2720%27 fill=%27%23e5e7eb%27/%3E%3Cpath d=%27M20 20a6 6 0 100-12 6 6 0 000 12zM8 32a12 12 0 0124 0%27 fill=%27%23fff%27/%3E%3C/svg%3E'">
+                            <div class="member-info">
+                                <span class="member-name">${item.name}</span>
+                                <span class="member-role">${item.email || 'No email'}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${item.phone || 'N/A'}</td>
+                    <td><span class="time-badge">${item.check_in_time || 'N/A'}</span></td>
+                    <td><span class="status-pill ${item.status}">${item.status.charAt(0).toUpperCase() + item.status.slice(1)}</span></td>
+                    <td><span class="ministry-badge">${item.ministry || 'General'}</span></td>
+                    <td><span class="ministry-badge">${item.ministries || 'None'}</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+            renderPagination('livePagination', filteredData.length, 'live');
+        }
+
+        // Render visitors table with pagination
+        function renderVisitorsTable() {
+            const tbody = document.getElementById('visitorsTableBody');
+            const search = document.getElementById('visitorSearch').value.toLowerCase();
+            const filteredData = visitorsData.filter(item =>
+                (!search || item.name.toLowerCase().includes(search))
+            );
+            const start = (currentPage.visitors - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            tbody.innerHTML = '';
+            filteredData.slice(start, end).forEach(item => {
+                const row = document.createElement('tr');
+                const initials = item.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                row.innerHTML = `
+                    <td>
+                        <div class="member-cell">
+                            <div class="visitor-avatar">${initials}</div>
+                            <div class="member-info">
+                                <span class="member-name">${item.name}</span>
+                                <span class="member-role">Visitor</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="phone-text">${item.phone || 'N/A'}</span></td>
+                    <td><span class="email-text">${item.email || 'N/A'}</span></td>
+                    <td><span class="time-badge">${item.check_in_time || 'N/A'}</span></td>
+                    <td><span class="source-badge">${item.source ? item.source.charAt(0).toUpperCase() + item.source.slice(1) : 'N/A'}</span></td>
+                    <td><span class="ministry-badge">${item.visitors_purpose || 'N/A'}</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+            renderPagination('visitorPagination', filteredData.length, 'visitors');
+        }
+
+        // Render absent members table with pagination
+        function renderAbsentTable() {
+            const tbody = document.getElementById('absentTableBody');
+            const search = document.getElementById('absentSearch').value.toLowerCase();
+            const filteredData = absentData.filter(item => !search || item.name.toLowerCase().includes(search));
+            const start = (currentPage.absent - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            tbody.innerHTML = '';
+            filteredData.slice(start, end).forEach(item => {
+                const row = document.createElement('tr');
+                // Fix photo path - convert relative path to absolute path
+                let photoPath = '../Add_Members/Uploads/default-avatar.png';
+                if (item.photo_path) {
+                    // Remove ./ from the beginning if present
+                    photoPath = item.photo_path.replace('./', '../Add_Members/');
+                }
+                const statusClass = (item.status || '').toLowerCase() === 'active' ? 'status-active' : 'status-inactive';
+                const statusText = item.status || 'Unknown';
+
+                row.innerHTML = `
+                    <td>
+                        <div class="member-cell">
+                            <img src="${photoPath}" alt="${item.name}" class="member-avatar"
+                                 onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2740%27 height=%2740%27 viewBox=%270 0 40 40%27%3E%3Ccircle cx=%2720%27 cy=%2720%27 r=%2720%27 fill=%27%23e5e7eb%27/%3E%3Cpath d=%27M20 20a6 6 0 100-12 6 6 0 000 12zM8 32a12 12 0 0224 0%27 fill=%27%23fff%27/%3E%3C/svg%3E'">
+                            <div class="member-info">
+                                <span class="member-name">${item.name}</span>
+                                <span class="member-role">${item.ministry || 'General'}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="email-text">${item.email || 'N/A'}</span></td>
+                    <td><span class="phone-text">${item.phone || 'N/A'}</span></td>
+                    <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                    <td><span class="ministry-badge">${item.ministry || 'General'}</span></td>
+                    <td><span class="ministry-badge">${item.ministries || 'None'}</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+            renderPagination('absentPagination', filteredData.length, 'absent');
+        }
+
+        // Render pagination controls
+        function renderPagination(containerId, totalItems, type) {
+            const container = document.getElementById(containerId);
+            const totalPages = Math.ceil(totalItems / rowsPerPage);
+            container.innerHTML = '';
+            if (totalPages <= 1) return;
+            const prevButton = document.createElement('button');
+            prevButton.textContent = 'Previous';
+            prevButton.disabled = currentPage[type] === 1;
+            prevButton.onclick = () => {
+                if (currentPage[type] > 1) {
+                    currentPage[type]--;
+                    if (type === 'live') renderAttendanceTable();
+                    else if (type === 'visitors') renderVisitorsTable();
+                    else renderAbsentTable();
+                }
+            };
+            container.appendChild(prevButton);
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement('button');
+                button.textContent = i;
+                button.className = currentPage[type] === i ? 'active' : '';
+                button.onclick = () => {
+                    currentPage[type] = i;
+                    if (type === 'live') renderAttendanceTable();
+                    else if (type === 'visitors') renderVisitorsTable();
+                    else renderAbsentTable();
+                };
+                container.appendChild(button);
+            }
+            const nextButton = document.createElement('button');
+            nextButton.textContent = 'Next';
+            nextButton.disabled = currentPage[type] === totalPages;
+            nextButton.onclick = () => {
+                if (currentPage[type] < totalPages) {
+                    currentPage[type]++;
+                    if (type === 'live') renderAttendanceTable();
+                    else if (type === 'visitors') renderVisitorsTable();
+                    else renderAbsentTable();
+                }
+            };
+            container.appendChild(nextButton);
+        }
+
+        // Send follow-up for visitor
+        async function sendFollowUp(visitorId) {
+            try {
+                const response = await fetch('send_followup.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ visitor_id: visitorId })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    showNotification(result.message);
+                    fetchVisitorsData();
+                } else {
+                    showNotification(result.message, 'error');
+                }
+            } catch (error) {
+                showNotification('Error: ' + error.message, 'error');
+            }
+        }
+
+        // Filter attendance table
+        function filterTable() {
+            renderAttendanceTable();
+        }
+
+        // Filter visitors table
+        function filterVisitors() {
+            renderVisitorsTable();
+        }
+
+        // Filter absent table
+        function filterAbsent() {
+            renderAbsentTable();
+        }
+
+        // Switch between tabs
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('current'));
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('current'));
+            document.querySelector(`[onclick="switchTab('${tab}')"]`).classList.add('current');
+            document.getElementById(`${tab}-content`).classList.add('current');
+            if (tab === 'live') renderAttendanceTable();
+            else if (tab === 'visitors') renderVisitorsTable();
+            else if (tab === 'absent') renderAbsentTable();
+        }
+
+        // Load data for selected date
+        async function loadDateData() {
+            const dateFilter = document.getElementById('headerDateFilter').value || currentDate;
+            currentDate = dateFilter;
+            
+            // Update live date filter if it exists
+            const liveDateFilterEl = document.getElementById('liveDateFilter');
+            if (liveDateFilterEl) {
+                liveDateFilterEl.value = currentDate;
+            }
+            
+            console.log('📅 Loading data for date:', currentDate);
+            
+            // Get service_id for the selected date (not just today)
+            const selectedDateService = localStorage.getItem('currentService');
+            if (selectedDateService) {
+                const parsed = JSON.parse(selectedDateService);
+                // If the selected date matches the stored date, use that service_id
+                if (parsed.date === currentDate) {
+                    currentServiceId = parsed.serviceId;
+                } else {
+                    // For historical dates, we need to fetch data without creating new service_id
+                    // Use a special query that gets all service_ids for that date
+                    currentServiceId = '0'; // Use placeholder for historical queries
+                }
+            }
+            
+            console.log('Service ID for date:', currentServiceId);
+            
+            await fetchStats();
+            await fetchAttendanceData();
+            await fetchVisitorsData();
+            await fetchAbsentData();
+            generateQRCode();
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('🚀 Page loaded, initializing...');
+            console.log('Service ID:', currentServiceId);
+            console.log('Current Date:', currentDate);
+            
+            document.getElementById('headerDateFilter').value = currentDate;
+            if (document.getElementById('liveDateFilter')) {
+                document.getElementById('liveDateFilter').value = currentDate;
+            }
+            
+            // Load all data
+            try {
+                console.log('📊 Loading stats and data...');
+                await loadDateData();
+                console.log('✅ Page initialization complete');
+                
+                // Auto-refresh stats every 1 second for instant real-time updates
+                setInterval(async () => {
+                    await fetchStats();
+                    await fetchAttendanceData();
+                    await fetchVisitorsData();
+                    await fetchAbsentData();
+                }, 1000); // 1 second - instant updates
+                
+            } catch (error) {
+                console.error('❌ Error during initialization:', error);
+                showNotification('Error loading attendance data: ' + error.message, 'error');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Event - Church Management System</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+       /* ---------- General Page Layout ---------- */
+.cf-add-event-container {
+    padding: 32px;
+    background: #f9fafb;
+    font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------- Header ---------- */
+.cf-add-event-header {
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.cf-add-event-header h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.cf-add-event-header p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+/* ---------- Form Card ---------- */
+.cf-form-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 36px 40px;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+    border: 1px solid #f1f5f9;
+    margin-bottom: 28px;
+    transition: box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.cf-form-card:hover {
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.1);
+    transform: translateY(-1px);
+}
+
+/* ---------- Section Titles ---------- */
+.cf-form-section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 24px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+/* ---------- Form Layout ---------- */
+.cf-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+    margin-bottom: 20px;
+}
+
+.cf-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.cf-form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* ---------- Labels ---------- */
+.cf-form-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 8px;
+}
+
+.cf-form-label.required::after {
+    content: " *";
+    color: #ef4444;
+}
+
+/* ---------- Inputs ---------- */
+.cf-form-input,
+.cf-form-select,
+.cf-form-textarea {
+    padding: 12px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1e293b;
+    background: #f8fafc;
+    transition: all 0.25s ease;
+}
+
+.cf-form-input:focus,
+.cf-form-select:focus,
+.cf-form-textarea:focus {
+    background: #ffffff;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    outline: none;
+}
+
+.cf-form-textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+}
+
+.cf-form-hint {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 6px;
+}
+
+/* ---------- Checkbox Group ---------- */
+.cf-checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.cf-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: #3b82f6;
+    cursor: pointer;
+}
+
+.cf-checkbox-label {
+    font-size: 14px;
+    color: #334155;
+    cursor: pointer;
+}
+
+/* ---------- Volunteers ---------- */
+.cf-volunteers-section {
+    background: #f1f5f9;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.cf-volunteer-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.cf-volunteer-item:last-child {
+    margin-bottom: 0;
+}
+
+.cf-volunteer-item input {
+    flex: 1;
+}
+
+/* ---------- Add Role Button ---------- */
+.cf-add-volunteer-btn {
+    margin-top: 12px;
+    padding: 8px 16px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #3b82f6;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.cf-add-volunteer-btn:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+}
+
+/* ---------- Image Upload ---------- */
+.cf-image-upload {
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    background: #f8fafc;
+    transition: all 0.25s ease;
+}
+
+.cf-image-upload:hover {
+    border-color: #3b82f6;
+    background: #eff6ff;
+    transform: scale(1.02);
+}
+
+.cf-upload-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 14px;
+    color: #94a3b8;
+}
+
+.cf-upload-text {
+    font-size: 15px;
+    color: #475569;
+    font-weight: 500;
+}
+
+.cf-upload-subtext {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 6px;
+}
+
+/* ---------- Tags Input ---------- */
+.cf-tag-input-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #f8fafc;
+    min-height: 45px;
+}
+
+.cf-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: #e2e8f0;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #1e293b;
+    font-weight: 500;
+}
+
+.cf-tag-remove {
+    cursor: pointer;
+    color: #64748b;
+    font-weight: bold;
+}
+
+.cf-tag-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+    min-width: 120px;
+}
+
+/* ---------- Buttons ---------- */
+.cf-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.cf-btn {
+    padding: 12px 26px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: none;
+}
+
+.cf-btn-cancel {
+    background: #ffffff;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+.cf-btn-cancel:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.cf-btn-draft {
+    background: #f1f5f9;
+    color: #334155;
+}
+
+.cf-btn-draft:hover {
+    background: #e2e8f0;
+}
+
+.cf-btn-primary {
+    background: #3b82f6;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+.cf-btn-primary:hover {
+    background: #2563eb;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
+}
+
+/* ---------- Responsive Design ---------- */
+@media (max-width: 768px) {
+    .cf-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cf-form-actions {
+        flex-direction: column;
+    }
+
+    .cf-btn {
+        width: 100%;
+    }
+
+    .cf-form-card {
+        padding: 24px;
+    }
+
+    .cf-add-event-header h1 {
+        font-size: 26px;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+            
+                <svg class="church-logo" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 9h4" />
+                    <path d="M12 7v5" />
+                    <path d="M14 22v-4a2 2 0 0 0-4 0v4" />
+                    <path d="M18 22V5.618a1 1 0 0 0-.553-.894l-4.553-2.277a2 2 0 0 0-1.788 0L6.553 4.724A1 1 0 0 0 6 5.618V22" />
+                    <path d="m18 7 3.447 1.724a1 1 0 0 1 .553.894V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.618a1 1 0 0 1 .553-.894L6 7" />
+                </svg>
+            
+            
+                <div class="logo-text">
+                    <h3>Church</h3>
+                    <p>Management System</p>
+                </div>
+            
+                <!-- Close button for mobile -->
+                <button class="sidebar-close" onclick="toggleSidebar()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="sidebar-content">
+                <div class="menu-section">
+                    <div class="menu-label">Main Menu</div>
+                    <a href="../index.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg></span>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="../Members/members.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </span>
+                        <span>Members</span>
+                    </a>
+                    <a href="../Events/events.html" class="menu-item ">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M8 2v4"></path>
+                                <path d="M16 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                            </svg>
+                        </span>
+                        <span>Events</span>
+                    </a>
+                    <a href="../Finance/finance.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <line x1="12" x2="12" y1="2" y2="22"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </span>
+                        <span>Finances</span>
+                    </a>
+                    <a href="../Communication/communication.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </span>
+                        <span>Communications</span>
+                    </a>
+                    <a href="../Attendance/attendance.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <polyline points="16 11 18 13 22 9"></polyline>
+                            </svg>
+                        </span>
+                        <span>Attendance</span>
+                    </a>
+                    <a href="../Report/report.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                <path d="M18 17V9"></path>
+                                <path d="M13 17V5"></path>
+                                <path d="M8 17v-3"></path>
+                            </svg>
+                        </span>
+                        <span>Reports</span>
+                    </a>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">AI Features</div>
+                    <a href="../AI/ai_insight.html" class="menu-item has-badge">
+                        <span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L13.5 7.5H19L14.5 11L16 16.5L12 13L8 16.5L9.5 11L5 7.5H10.5L12 2Z" fill="currentColor"
+                                    opacity="0.2" />
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" />
+                                <path d="M12 5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M12 16V19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M5 12H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M16 12H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M7.5 7.5L9.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M14.5 14.5L16.5 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M7.5 16.5L9.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M14.5 9.5L16.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <circle cx="12" cy="5" r="1.5" fill="currentColor" />
+                                <circle cx="19" cy="12" r="1.5" fill="currentColor" />
+                                <circle cx="12" cy="19" r="1.5" fill="currentColor" />
+                                <circle cx="5" cy="12" r="1.5" fill="currentColor" />
+                            </svg>
+                    
+                        </span>
+                        <span>AI Insights</span>
+                        <span class="badge">New</span>
+                    </a>
+                    <a href="#" class="menu-item has-badge">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                <path d="M18 17V9"></path>
+                                <path d="M13 17V5"></path>
+                                <path d="M8 17v-3"></path>
+                            </svg></span>
+                        <span>Member Analytics</span>
+                        <span class="badge">New</span>
+                    </a>
+                    <a href="../AI/ai_smart_report.html" class="menu-item has-badge">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                <path d="M10 9H8"></path>
+                                <path d="M16 13H8"></path>
+                                <path d="M16 17H8"></path>
+                            </svg></span>
+                        <span>Smart Reports</span>
+                        <span class="badge">New</span>
+                    </a>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">Quick Actions</div>
+                    <a href="../Add_Members/enroll_members.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <line x1="19" x2="19" y1="8" y2="14"></line>
+                                <line x1="22" x2="16" y1="11" y2="11"></line>
+                            </svg></span>
+                        <span>Add Member</span>
+                    </a>
+                    <a href="../Add_Event/New_Event.html" class="menu-item active">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M8 2v4"></path>
+                                <path d="M16 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                            </svg></span>
+                        <span>New Event</span>
+                    </a>
+                    <a href="../Record_Donations/record_donations.html" class="menu-item">
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 10C20 6.5 17 4 14 4C12.5 4 11.2 4.6 10.3 5.6C9.9 5.2 9.4 5 8.8 5C7.3 5 6 6.3 6 7.8C6 8.4 6.2 8.9 6.5 9.3C4.5 10.2 3 12.2 3 14.5C3 17.5 5.5 20 8.5 20H16.5C19 20 21 18 21 15.5C21 13.2 19.5 11.3 17.5 10.5C18.4 10.8 19 11.7 19 12.7"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M12 20C11.4 20 9.5 19.5 8.5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <circle cx="12" cy="8" r="1" fill="currentColor" />
+                                <path d="M12 11V15M10 13H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path
+                                    d="M8.5 4C9.5 3 11 3 12 4C13 3 14.5 3 15.5 4C16 4.5 16 5.5 16 6C16 7 15 8 12 10C9 8 8 7 8 6C8 5.5 8 4.5 8.5 4Z"
+                                    fill="currentColor" opacity="0.2" />
+                                <path
+                                    d="M12 5.5C10.5 4 9 4 8 5C7 6 7 7.5 7 8.5C7 10 8.5 11.5 12 14C15.5 11.5 17 10 17 8.5C17 7.5 17 6 16 5C15 4 13.5 4 12 5.5Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <span>Record Donation</span>
+                    </a>
+                    <a href="#" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                            </svg></span>
+                        <span>Send Message</span>
+                    </a>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label"></div>
+                    <a href="../Settings/settings.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+                                </path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg></span>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search members, events, or anything...">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+                </div>
+                <div class="header-right">
+                    <div class="notification-icon">
+                        <span style="font-size: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                            </svg>
+                        </span>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <span style="font-size: 14px; font-weight: 500;">Pastor Lawrence</span>
+                        <span style="font-size: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function toggleSidebar() {
+                    const sidebar = document.querySelector('.sidebar');
+                    sidebar.classList.toggle('open');
+                }
+
+                // Close sidebar when clicking outside on mobile
+                document.addEventListener('click', function (event) {
+                    const sidebar = document.querySelector('.sidebar');
+                    const toggle = document.querySelector('.mobile-menu-toggle');
+
+                    if (window.innerWidth <= 768 &&
+                        !sidebar.contains(event.target) &&
+                        !toggle.contains(event.target) &&
+                        sidebar.classList.contains('open')) {
+                        sidebar.classList.remove('open');
+                    }
+                });
+            </script>
+
+            <!-- Add Event Form -->
+            <div class="dashboard-content">
+                <div class="cf-add-event-header">
+                    <h1>Edit Event</h1>
+                    <p>Update the event details below</p>
+                </div>
+
+                <form id="addEventForm" enctype="multipart/form-data">
+                    <!-- Basic Information -->
+                    <div class="cf-form-card">
+                        <h3 class="cf-form-section-title">Basic Information</h3>
+                        <div class="cf-form-grid">
+                            <!-- Event Name -->
+                            <div class="cf-form-group full-width">
+                                <label class="cf-form-label required">Event Name</label>
+                                <input type="text" class="cf-form-input" id="eventName" placeholder="e.g., Sunday Morning Service" required>
+                                <span class="cf-form-hint">Enter a clear and descriptive name for your event</span>
+                            </div>
+                        
+                            <!-- Event Type -->
+                            <div class="cf-form-group">
+                                <label class="cf-form-label required">Event Type</label>
+                                <select class="cf-form-select" id="eventType" required>
+                                    <option value="">Select event type</option>
+                                    <option value="service">Worship / Church Service</option>
+                                    <option value="bible-study">Bible Study / Teaching</option>
+                                    <option value="prayer">Prayer Meeting</option>
+                                    <option value="conference">Conference / Convention</option>
+                                    <option value="retreat">Retreat / Camp</option>
+                                    <option value="outreach">Evangelism / Community Outreach</option>
+                                    <option value="training">Training / Workshop</option>
+                                    <option value="fundraiser">Fundraising Event</option>
+                                    <option value="celebration">Special Celebration</option>
+                                    <option value="meeting">Leaders / Departmental Meeting</option>
+                                    <option value="social">Social Gathering / Fellowship</option>
+                                    <option value="other">Other</option>
+                                </select>
+                        
+                                <!-- Hidden textarea for "Other" -->
+                                <textarea id="eventTypeOther" class="cf-form-textarea" placeholder="Please specify event type..."
+                                    style="display:none; margin-top:8px;"></textarea>
+                            </div>
+                        
+                            <!-- Event Category -->
+                            <div class="cf-form-group">
+                                <label class="cf-form-label required">Event Category</label>
+                                <select class="cf-form-select" id="eventCategory" required>
+                                    <option value="">Select category</option>
+                                    <option value="worship">Worship & Prayer Ministry</option>
+                                    <option value="youth">Youth & Children Ministry</option>
+                                    <option value="women">Women’s Ministry</option>
+                                    <option value="men">Men’s Ministry</option>
+                                    <option value="education">Christian Education / Bible School</option>
+                                    <option value="missions">Evangelism & Missions</option>
+                                    <option value="choir">Choir / Music Department</option>
+                                    <option value="fellowship">General Fellowship</option>
+                                    <option value="admin">Church Administration / Leadership</option>
+                                    <option value="media">Media & Technical Team</option>
+                                    <option value="community">Community Development / Outreach</option>
+                                    <option value="other">Other</option>
+                                </select>
+                        
+                                <!-- Hidden textarea for "Other" -->
+                                <textarea id="eventCategoryOther" class="cf-form-textarea" placeholder="Please specify category..."
+                                    style="display:none; margin-top:8px;"></textarea>
+                            </div>
+                        
+                            <!-- Event Description -->
+                            <div class="cf-form-group full-width">
+                                <label class="cf-form-label required">Event Description</label>
+                                <textarea class="cf-form-textarea" id="eventDescription"
+                                    placeholder="Provide a detailed description of the event, including purpose, activities, and what attendees can expect..."
+                                    required></textarea>
+                                <span class="cf-form-hint">Minimum 50 characters recommended</span>
+                            </div>
+                        </div>
+                        
+                        <script>
+                            const eventType = document.getElementById("eventType");
+                            const eventTypeOther = document.getElementById("eventTypeOther");
+                            const eventCategory = document.getElementById("eventCategory");
+                            const eventCategoryOther = document.getElementById("eventCategoryOther");
+
+                            // Show textarea if "Other" is selected (Event Type)
+                            eventType.addEventListener("change", () => {
+                                if (eventType.value === "other") {
+                                    eventTypeOther.style.display = "block";
+                                    eventTypeOther.required = true;
+                                } else {
+                                    eventTypeOther.style.display = "none";
+                                    eventTypeOther.required = false;
+                                    eventTypeOther.value = "";
+                                }
+                            });
+
+                            // Show textarea if "Other" is selected (Event Category)
+                            eventCategory.addEventListener("change", () => {
+                                if (eventCategory.value === "other") {
+                                    eventCategoryOther.style.display = "block";
+                                    eventCategoryOther.required = true;
+                                } else {
+                                    eventCategoryOther.style.display = "none";
+                                    eventCategoryOther.required = false;
+                                    eventCategoryOther.value = "";
+                                }
+                            });
+                        </script>
+
+
+                    </div>
+
+                    <!-- Date & Time Information -->
+                    <div class="cf-form-card">
+                        <h3 class="cf-form-section-title">Date & Time Information</h3>
+                        <div class="cf-form-grid">
+                            <div class="cf-form-group">
+                                <label class="cf-form-label required">Start Date</label>
+                                <input type="date" class="cf-form-input" id="startDate" required>
+                            </div>
+
+                            <div class="cf-form-group">
+                                <label class="cf-form-label required">Start Time</label>
+                                <input type="time" class="cf-form-input" id="startTime" required>
+                            </div>
+
+                            <div class="cf-form-group">
+                                <label class="cf-form-label required">End Date</label>
+                                <input type="date" class="cf-form-input" id="endDate" required>
+                            </div>
+
+                            <div class="cf-form-group">
+                                <label class="cf-form-label required">End Time</label>
+                                <input type="time" class="cf-form-input" id="endTime" required>
+                            </div>
+
+                            <div class="cf-form-group full-width">
+                                <div class="cf-checkbox-group">
+                                    <input type="checkbox" class="cf-checkbox" id="recurringEvent">
+                                    <label class="cf-checkbox-label" for="recurringEvent">This is a recurring
+                                        event</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location Information -->
+                    <div class="cf-form-card">
+                        <h3 class="cf-form-section-title">Location Information</h3>
+                        <div class="cf-form-grid">
+                            <div class="cf-form-group">
+                                <label class="cf-form-label required">Event Location</label>
+                                <select class="cf-form-select" id="eventLocation" required>
+                                    <option value="">Select location</option>
+                                    <option value="main-sanctuary">Main Sanctuary</option>
+                                    <option value="fellowship-hall">Fellowship Hall</option>
+                                    <option value="youth-room">Youth Room</option>
+                                    <option value="prayer-room">Prayer Room</option>
+                                    <option value="outdoor">Outdoor Area</option>
+                                    <option value="offsite">Off-Site Location</option>
+                                </select>
+                            </div>
+
+                            <div class="cf-form-group">
+                                <label class="cf-form-label">Room/Building</label>
+                                <input type="text" class="cf-form-input" id="roomBuilding"
+                                    placeholder="e.g., Building A, Room 101">
+                            </div>
+
+                            <div class="cf-form-group full-width">
+                                <label class="cf-form-label">Full Address (if off-site)</label>
+                                <input type="text" class="cf-form-input" id="fullAddress"
+                                    placeholder="Enter complete address for off-site events">
+                            </div>
+
+                            <div class="cf-form-group full-width">
+                                <div class="cf-checkbox-group">
+                                    <input type="checkbox" class="cf-checkbox" id="virtualEvent">
+                                    <label class="cf-checkbox-label" for="virtualEvent">This event will be available
+                                        virtually</label>
+                                </div>
+                            </div>
+
+                            <div class="cf-form-group full-width" id="virtualLinkGroup" style="display: none;">
+                                <label class="cf-form-label">Virtual Meeting Link</label>
+                                <input type="url" class="cf-form-input" id="virtualLink"
+                                    placeholder="https://zoom.us/j/123456789">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Capacity & Registration -->
+                    <div class="cf-form-card">
+                        <h3 class="cf-form-section-title">Capacity & Registration</h3>
+                        <div class="cf-form-grid">
+                            <div class="cf-form-group">
+                                <label class="cf-form-label required">Maximum Capacity</label>
+                                <input type="number" class="cf-form-input" id="maxCapacity" min="1" value="50" required>
+                                <span class="cf-form-hint">Total number of attendees allowed</span>
+                            </div>
+
+                            <div class="cf-form-group">
+                                <label class="cf-form-label">Registration Deadline</label>
+                                <input type="date" class="cf-form-input" id="registrationDeadline">
+                            </div>
+
+                            <div class="cf-form-group full-width">
+                                <div class="cf-checkbox-group">
+                                    <input type="checkbox" class="cf-checkbox" id="requireRegistration">
+                                    <label class="cf-checkbox-label" for="requireRegistration">Require pre-registration
+                                        for this event</label>
+                                </div>
+                            </div>
+
+                            <div class="cf-form-group full-width">
+                                <div class="cf-checkbox-group">
+                                    <input type="checkbox" class="cf-checkbox" id="openToPublic">
+                                    <label class="cf-checkbox-label" for="openToPublic">Open to the public (non-members
+                                        can attend)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Volunteer Management -->
+                    <div class="cf-form-card">
+                        <h3 class="cf-form-section-title">Volunteer Requirements</h3>
+                        <div class="cf-form-grid">
+                            <div class="cf-form-group">
+                                <label class="cf-form-label">Volunteers Needed</label>
+                                <input type="number" class="cf-form-input" id="volunteersNeeded" min="0" value="0">
+                            </div>
+
+                            <div class="cf-form-group full-width">
+                                <label class="cf-form-label">Volunteer Roles</label>
+                                <div class="cf-volunteers-section" id="volunteerRoles">
+                                    <div class="cf-volunteer-item">
+                                        <input type="text" class="cf-form-input"
+                                            placeholder="Role name (e.g., Usher, Greeter)">
+                                        <input type="number" class="cf-form-input" placeholder="Qty" min="1"
+                                            style="max-width: 100px;">
+                                    </div>
+                                </div>
+                                <button type="button" class="cf-add-volunteer-btn" onclick="addVolunteerRole()">+ Add
+                                    Another Role</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Details -->
+                    <div class="cf-form-card">
+                        <h3 class="cf-form-section-title">Additional Details</h3>
+                        <div class="cf-form-grid">
+                            <div class="cf-form-group">
+                                <label class="cf-form-label">Contact Person</label>
+                                <input type="text" class="cf-form-input" id="contactPerson"
+                                    placeholder="Name of event coordinator">
+                            </div>
+
+                            <div class="cf-form-group">
+                                <label class="cf-form-label">Contact Email</label>
+                                <input type="email" class="cf-form-input" id="contactEmail"
+                                    placeholder="coordinator@church.com">
+                            </div>
+
+                            <div class="cf-form-group">
+                                <label class="cf-form-label">Contact Phone</label>
+                                <input type="tel" class="cf-form-input" id="contactPhone"
+                                    placeholder="+1 (555) 123-4567">
+                            </div>
+
+                            <div class="cf-form-group">
+                                <label class="cf-form-label">Age Group</label>
+                                <select class="cf-form-select" id="ageGroup">
+                                    <option value="all">All Ages</option>
+                                    <option value="children">Children (0-12)</option>
+                                    <option value="youth">Youth (13-18)</option>
+                                    <option value="young-adults">Young Adults (19-30)</option>
+                                    <option value="adults">Adults (31+)</option>
+                                    <option value="seniors">Seniors (65+)</option>
+                                </select>
+                            </div>
+
+                            <div class="cf-form-group full-width">
+                                <label class="cf-form-label">Event Tags</label>
+                                <div class="cf-tag-input-wrapper" id="tagInputWrapper">
+                                    <input type="text" class="cf-tag-input" id="tagInput"
+                                        placeholder="Type and press Enter to add tags">
+                                </div>
+                                <span class="cf-form-hint">Add tags to help members find this event (e.g., worship,
+                                    family, prayer)</span>
+                            </div>
+
+                            <div class="cf-form-group full-width">
+                                <label class="cf-form-label">Special Notes/Instructions</label>
+                                <textarea class="cf-form-textarea" id="specialNotes"
+                                    placeholder="Any special instructions for attendees (dress code, what to bring, parking info, etc.)"
+                                    style="min-height: 80px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Image -->
+                    <div class="cf-form-card">
+                        <h3 class="cf-form-section-title">Event Image</h3>
+                        <div class="cf-image-upload" onclick="document.getElementById('imageUpload').click()">
+                            <div class="cf-upload-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                    <circle cx="8.5" cy="8.5" r="1.5" />
+                                    <polyline points="21 15 16 10 5 21" />
+                                </svg>
+                            </div>
+                            <div class="cf-upload-text">Click to upload event image or drag and drop</div>
+                            <div class="cf-upload-subtext">PNG, JPG or JPEG (max. 5MB)</div>
+                        </div>
+                        <input type="file" id="imageUpload" name="eventImage" accept="image/*" style="display: none;">
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="cf-form-actions">
+                        <button type="button" class="cf-btn cf-btn-cancel" onclick="cancelEvent()">Cancel</button>
+                        <button type="button" class="cf-btn cf-btn-draft" onclick="saveDraft()">Save as Draft</button>
+                        <button type="submit" class="cf-btn cf-btn-primary">Update Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get event ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventId = urlParams.get('id');
+
+        if (!eventId) {
+            alert('No event ID provided. Redirecting to events page...');
+            window.location.href = '../Events/events.html';
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function (event) {
+            const sidebar = document.querySelector('.sidebar');
+            const toggle = document.querySelector('.mobile-menu-toggle');
+
+            if (window.innerWidth <= 768 &&
+                !sidebar.contains(event.target) &&
+                !toggle.contains(event.target) &&
+                sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+            }
+        });
+
+        // Show/hide virtual link input
+        document.getElementById('virtualEvent').addEventListener('change', function () {
+            const virtualLinkGroup = document.getElementById('virtualLinkGroup');
+            virtualLinkGroup.style.display = this.checked ? 'block' : 'none';
+        });
+
+        // Add volunteer role
+        function addVolunteerRole() {
+            const container = document.getElementById('volunteerRoles');
+            const newRole = document.createElement('div');
+            newRole.className = 'cf-volunteer-item';
+            newRole.innerHTML = `
+                <input type="text" class="cf-form-input" placeholder="Role name (e.g., Usher, Greeter)">
+                <input type="number" class="cf-form-input" placeholder="Qty" min="1" style="max-width: 100px;">
+            `;
+            container.appendChild(newRole);
+        }
+
+        // Tag input functionality
+        const tagInput = document.getElementById('tagInput');
+        const tagWrapper = document.getElementById('tagInputWrapper');
+        const tags = [];
+
+        tagInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const value = this.value.trim();
+                if (value && !tags.includes(value)) {
+                    tags.push(value);
+                    addTag(value);
+                    this.value = '';
+                }
+            }
+        });
+
+        function addTag(text) {
+            const tag = document.createElement('span');
+            tag.className = 'cf-tag';
+            tag.innerHTML = `
+                ${text}
+                <span class="cf-tag-remove" onclick="removeTag(this, '${text}')">×</span>
+            `;
+            tagWrapper.insertBefore(tag, tagInput);
+        }
+
+        function removeTag(element, text) {
+            const index = tags.indexOf(text);
+            if (index > -1) {
+                tags.splice(index, 1);
+            }
+            element.parentElement.remove();
+        }
+
+        // Load event data from server
+        async function loadEventData() {
+            try {
+                const response = await fetch(`../Events/fetch_single_event.php?id=${eventId}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    populateForm(data.data);
+                } else {
+                    alert('Error loading event: ' + data.message);
+                    window.location.href = '../Events/events.html';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while loading the event. Please try again.');
+                window.location.href = '../Events/events.html';
+            }
+        }
+
+        // Populate form with event data
+        function populateForm(event) {
+            // Basic Information
+            document.getElementById('eventName').value = event.name || '';
+            document.getElementById('eventType').value = event.type ? event.type.toLowerCase().replace(/ /g, '-') : '';
+            document.getElementById('eventTypeOther').value = event.type_other || '';
+            if (event.type === 'Other') {
+                document.getElementById('eventTypeOther').style.display = 'block';
+                document.getElementById('eventTypeOther').required = true;
+            }
+
+            document.getElementById('eventCategory').value = event.category ? event.category.toLowerCase().replace(/ /g, '-') : '';
+            document.getElementById('eventCategoryOther').value = event.category_other || '';
+            if (event.category === 'Other') {
+                document.getElementById('eventCategoryOther').style.display = 'block';
+                document.getElementById('eventCategoryOther').required = true;
+            }
+
+            document.getElementById('eventDescription').value = event.description || '';
+
+            // Date & Time
+            document.getElementById('startDate').value = event.start_date || '';
+            document.getElementById('startTime').value = event.start_time || '';
+            document.getElementById('endDate').value = event.end_date || '';
+            document.getElementById('endTime').value = event.end_time || '';
+            document.getElementById('recurringEvent').checked = event.is_recurring === 1;
+
+            // Location
+            document.getElementById('eventLocation').value = event.location ? event.location.toLowerCase().replace(/ /g, '-') : '';
+            document.getElementById('roomBuilding').value = event.room_building || '';
+            document.getElementById('fullAddress').value = event.full_address || '';
+            document.getElementById('virtualEvent').checked = event.is_virtual === 1;
+            document.getElementById('virtualLink').value = event.virtual_link || '';
+            if (event.is_virtual === 1) {
+                document.getElementById('virtualLinkGroup').style.display = 'block';
+            }
+
+            // Capacity & Registration
+            document.getElementById('maxCapacity').value = event.max_capacity || 50;
+            document.getElementById('registrationDeadline').value = event.registration_deadline || '';
+            document.getElementById('requireRegistration').checked = event.require_registration === 1;
+            document.getElementById('openToPublic').checked = event.open_to_public === 1;
+
+            // Volunteers
+            document.getElementById('volunteersNeeded').value = event.volunteers_needed || 0;
+
+            // Load volunteer roles
+            if (event.volunteer_roles && event.volunteer_roles.length > 0) {
+                const container = document.getElementById('volunteerRoles');
+                container.innerHTML = ''; // Clear existing
+                event.volunteer_roles.forEach((role, index) => {
+                    const roleDiv = document.createElement('div');
+                    roleDiv.className = 'cf-volunteer-item';
+                    roleDiv.innerHTML = `
+                        <input type="text" class="cf-form-input" placeholder="Role name (e.g., Usher, Greeter)" value="${role.name}">
+                        <input type="number" class="cf-form-input" placeholder="Qty" min="1" style="max-width: 100px;" value="${role.quantity}">
+                    `;
+                    container.appendChild(roleDiv);
+                });
+            }
+
+            // Additional Details
+            document.getElementById('contactPerson').value = event.contact_person || '';
+            document.getElementById('contactEmail').value = event.contact_email || '';
+            document.getElementById('contactPhone').value = event.contact_phone || '';
+            document.getElementById('ageGroup').value = event.age_group ? event.age_group.toLowerCase().replace(/ /g, '-') : 'all';
+            document.getElementById('specialNotes').value = event.special_notes || '';
+
+            // Load tags
+            if (event.tags && event.tags.length > 0) {
+                event.tags.forEach(tag => {
+                    if (tag && !tags.includes(tag)) {
+                        tags.push(tag);
+                        addTag(tag);
+                    }
+                });
+            }
+
+            // Display existing image
+            if (event.image_path) {
+                const uploadArea = document.querySelector('.cf-image-upload');
+                uploadArea.innerHTML = `
+                    <img src="${event.image_path}" alt="Event Image" style="max-width: 100%; max-height: 300px; border-radius: 8px;">
+                    <div class="cf-upload-text" style="margin-top: 10px;">Current event image</div>
+                    <div class="cf-upload-subtext">Click to change image</div>
+                `;
+            }
+        }
+
+        // Load event data on page load
+        window.addEventListener('DOMContentLoaded', loadEventData);
+
+        // Collect form data into FormData object
+        function collectFormData() {
+            const formData = new FormData();
+
+            // Basic Information
+            formData.append('eventName', document.getElementById('eventName').value);
+            formData.append('eventType', document.getElementById('eventType').value);
+            formData.append('eventTypeOther', document.getElementById('eventTypeOther').value);
+            formData.append('eventCategory', document.getElementById('eventCategory').value);
+            formData.append('eventCategoryOther', document.getElementById('eventCategoryOther').value);
+            formData.append('eventDescription', document.getElementById('eventDescription').value);
+
+            // Date & Time
+            formData.append('startDate', document.getElementById('startDate').value);
+            formData.append('startTime', document.getElementById('startTime').value);
+            formData.append('endDate', document.getElementById('endDate').value);
+            formData.append('endTime', document.getElementById('endTime').value);
+            if (document.getElementById('recurringEvent').checked) {
+                formData.append('recurringEvent', '1');
+            }
+
+            // Location
+            formData.append('eventLocation', document.getElementById('eventLocation').value);
+            formData.append('roomBuilding', document.getElementById('roomBuilding').value);
+            formData.append('fullAddress', document.getElementById('fullAddress').value);
+            if (document.getElementById('virtualEvent').checked) {
+                formData.append('virtualEvent', '1');
+                formData.append('virtualLink', document.getElementById('virtualLink').value);
+            }
+
+            // Capacity & Registration
+            formData.append('maxCapacity', document.getElementById('maxCapacity').value);
+            formData.append('registrationDeadline', document.getElementById('registrationDeadline').value);
+            if (document.getElementById('requireRegistration').checked) {
+                formData.append('requireRegistration', '1');
+            }
+            if (document.getElementById('openToPublic').checked) {
+                formData.append('openToPublic', '1');
+            }
+
+            // Volunteers
+            formData.append('volunteersNeeded', document.getElementById('volunteersNeeded').value);
+
+            // Collect volunteer roles
+            const volunteerItems = document.querySelectorAll('.cf-volunteer-item');
+            const volunteerRoles = [];
+            volunteerItems.forEach((item, index) => {
+                const inputs = item.querySelectorAll('input');
+                if (inputs.length >= 2 && inputs[0].value && inputs[1].value) {
+                    volunteerRoles.push({
+                        name: inputs[0].value,
+                        quantity: inputs[1].value
+                    });
+                }
+            });
+            formData.append('volunteerRoles', JSON.stringify(volunteerRoles));
+
+            // Additional Details
+            formData.append('contactPerson', document.getElementById('contactPerson').value);
+            formData.append('contactEmail', document.getElementById('contactEmail').value);
+            formData.append('contactPhone', document.getElementById('contactPhone').value);
+            formData.append('ageGroup', document.getElementById('ageGroup').value);
+            formData.append('specialNotes', document.getElementById('specialNotes').value);
+
+            // Tags
+            formData.append('eventTags', JSON.stringify(tags));
+
+            // Image
+            const imageFile = document.getElementById('imageUpload').files[0];
+            if (imageFile) {
+                formData.append('eventImage', imageFile);
+            }
+
+            return formData;
+        }
+
+        // Form submission - Update Event
+        document.getElementById('addEventForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = collectFormData();
+            // Add event ID and status to form data
+            formData.append('event_id', eventId);
+            formData.append('status', 'Published');
+
+            const submitBtn = this.querySelector('.cf-btn-primary');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Updating Event...';
+
+            fetch('../Events/update_event.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Event updated successfully!');
+                    window.location.href = '../Events/events.html';
+                } else {
+                    alert('Error: ' + data.message);
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Update Event';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while updating the event. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Update Event';
+            });
+        });
+
+        // Save as Draft
+        function saveDraft() {
+            const formData = collectFormData();
+            // Add event ID and status
+            formData.append('event_id', eventId);
+            formData.append('status', 'Draft');
+
+            const draftBtn = document.querySelector('.cf-btn-draft');
+            draftBtn.disabled = true;
+            draftBtn.textContent = 'Saving Draft...';
+
+            fetch('../Events/update_event.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Event saved as draft successfully!');
+                    window.location.href = '../Events/events.html';
+                } else {
+                    alert('Error: ' + data.message);
+                    draftBtn.disabled = false;
+                    draftBtn.textContent = 'Save as Draft';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while saving the draft. Please try again.');
+                draftBtn.disabled = false;
+                draftBtn.textContent = 'Save as Draft';
+            });
+        }
+
+        // Cancel Event
+        function cancelEvent() {
+            if (confirm('Are you sure you want to cancel? All unsaved changes will be lost.')) {
+                window.location.href = '../Events/events.html';
+            }
+        }
+
+        // Image upload preview
+        document.getElementById('imageUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const uploadArea = document.querySelector('.cf-image-upload');
+                    uploadArea.innerHTML = `
+                        <img src="${event.target.result}" alt="Preview" style="max-width: 100%; max-height: 300px; border-radius: 8px;">
+                        <div class="cf-upload-text" style="margin-top: 10px;">Image selected: ${file.name}</div>
+                        <div class="cf-upload-subtext">Click to change image</div>
+                    `;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+
+</html>

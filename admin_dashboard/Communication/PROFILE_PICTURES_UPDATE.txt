@@ -1,0 +1,312 @@
+================================================================================
+           PROFILE PICTURES ADDED TO AUTOCOMPLETE! 
+================================================================================
+
+✅ WHAT HAS BEEN ADDED
+================================================================================
+
+Your member search autocomplete now displays profile pictures, exactly like 
+in finance.html!
+
+Features:
+✅ Shows member profile pictures in autocomplete dropdown
+✅ Falls back to colored initials if no photo
+✅ Auto-fallback if image fails to load
+✅ Same styling and behavior as finance.html
+✅ Works for all selected members
+✅ Professional, polished appearance
+
+================================================================================
+📸 HOW IT WORKS
+================================================================================
+
+WHEN MEMBER HAS A PHOTO:
+------------------------
+→ Displays actual profile picture (36px circle)
+→ Loads from: ../Add_Members/[photo_path]
+→ If image fails to load → Falls back to initials
+
+WHEN MEMBER HAS NO PHOTO:
+-------------------------
+→ Shows colored circle with initials
+→ Blue background (#3b82f6)
+→ White text
+→ Initials: First letter of first name + first letter of last name
+→ Example: "John Doe" → "JD"
+
+IMAGE ERROR HANDLING:
+--------------------
+→ If photo_path exists but file is missing
+→ Automatically falls back to initials
+→ No broken image icons
+→ Smooth user experience
+
+================================================================================
+🔧 FILES UPDATED
+================================================================================
+
+1. get_recipients.php (BACKEND)
+   ✅ Added photo_path to SQL SELECT
+   ✅ Now returns: member_id, name, email, phone, church_group, photo_path
+   ✅ Updated in getMembers() function
+   ✅ Updated in searchMembers() function
+
+2. communication.html (FRONTEND)
+   ✅ Updated searchMembersForMessage() function
+   ✅ Added profile picture display logic
+   ✅ Same code as finance.html
+   ✅ Includes error handling
+
+3. test_member_search.html (TEST PAGE)
+   ✅ Updated to show profile pictures
+   ✅ Consistent with main implementation
+
+================================================================================
+💻 CODE IMPLEMENTATION
+================================================================================
+
+BACKEND (get_recipients.php):
+-----------------------------
+SELECT member_id, 
+       CONCAT(first_name, ' ', last_name) as name, 
+       email, 
+       phone, 
+       church_group, 
+       photo_path    ← ADDED THIS
+FROM members 
+WHERE LOWER(status) = 'active'
+
+
+FRONTEND (communication.html):
+------------------------------
+// Display profile picture if available, otherwise show initials
+let avatarHTML;
+if (member.photo_path && member.photo_path !== 'NULL' && member.photo_path.trim() !== '') {
+    avatarHTML = `<img src="../Add_Members/${member.photo_path}" 
+                       alt="${member.name}" 
+                       style="width: 36px; height: 36px; border-radius: 50%; 
+                              object-fit: cover; border: 2px solid #e5e7eb;" 
+                       onerror="this.style.display='none'; 
+                                this.parentElement.innerHTML='<div>INITIALS</div>';">`;
+} else {
+    avatarHTML = `<div style="width: 36px; height: 36px; 
+                              background: #3b82f6; border-radius: 50%; 
+                              display: flex; align-items: center; 
+                              justify-content: center; color: white; 
+                              font-weight: 600; font-size: 13px;">
+                      ${initials}
+                  </div>`;
+}
+
+================================================================================
+🎨 VISUAL APPEARANCE
+================================================================================
+
+AUTOCOMPLETE DROPDOWN NOW SHOWS:
+--------------------------------
+┌────────────────────────────────────────┐
+│  [PHOTO] John Doe                  ✓  │  ← Selected
+│          john@email.com                │
+├────────────────────────────────────────┤
+│  [PHOTO] Jane Smith                    │  ← Has photo
+│          jane@email.com                │
+├────────────────────────────────────────┤
+│   [JD]   James Davis                   │  ← No photo (initials)
+│          0241234567                    │
+├────────────────────────────────────────┤
+│  [PHOTO] Mary Johnson                  │  ← Has photo
+│          mary@email.com                │
+└────────────────────────────────────────┘
+
+FEATURES:
+→ 36px circular avatars
+→ Profile photos with 2px border
+→ Initials in blue circles
+→ Member name in bold
+→ Email/phone below name
+→ Hover effect (light gray background)
+→ Checkmark (✓) if already selected
+→ Grayed out if already selected
+
+================================================================================
+📂 PHOTO PATH STRUCTURE
+================================================================================
+
+Database stores photo path as:
+→ photo_path: "uploads/john_doe.jpg"
+
+Frontend looks for image at:
+→ ../Add_Members/uploads/john_doe.jpg
+
+From Communication folder, this resolves to:
+→ /Church_Management_System/admin_dashboard/Add_Members/uploads/john_doe.jpg
+
+SUPPORTED FORMATS:
+→ JPG, JPEG, PNG, GIF, BMP, WEBP
+→ Any format supported by <img> tag
+
+================================================================================
+🧪 TESTING
+================================================================================
+
+TEST 1: Member with Photo
+-------------------------
+1. Add a member with profile photo in Add_Members system
+2. Search for that member in Communication
+3. ✅ Photo should appear in dropdown
+
+TEST 2: Member without Photo
+----------------------------
+1. Search for member without photo_path
+2. ✅ Initials should appear in blue circle
+
+TEST 3: Member with Invalid Photo
+---------------------------------
+1. Member has photo_path but file is missing/deleted
+2. ✅ Should automatically fall back to initials
+3. ✅ No broken image icon
+
+TEST 4: Multiple Members
+-----------------------
+1. Search shows multiple results
+2. ✅ Mix of photos and initials
+3. ✅ All display correctly
+
+TEST 5: Already Selected Members
+--------------------------------
+1. Select a member (appears as badge)
+2. Search for them again
+3. ✅ Shows in dropdown with checkmark
+4. ✅ Grayed out
+5. ✅ Can't select again
+
+================================================================================
+🎯 EXAMPLE MEMBERS
+================================================================================
+
+MEMBER WITH PHOTO:
+-----------------
+{
+    "member_id": 1,
+    "name": "John Mensah",
+    "email": "john.mensah@example.com",
+    "phone": "0241234567",
+    "church_group": "Judah",
+    "photo_path": "uploads/john_mensah.jpg"  ← Has photo
+}
+
+DROPDOWN SHOWS: [PHOTO] John Mensah
+
+
+MEMBER WITHOUT PHOTO:
+--------------------
+{
+    "member_id": 7,
+    "name": "Lawrence Egyin",
+    "email": "lawrence@example.com",
+    "phone": "0241234567",
+    "church_group": "Dunamis",
+    "photo_path": null  ← No photo
+}
+
+DROPDOWN SHOWS: [LE] Lawrence Egyin
+
+
+MEMBER WITH INVALID PHOTO:
+-------------------------
+{
+    "member_id": 5,
+    "name": "Peter Boateng",
+    "email": "peter@example.com",
+    "phone": "0241234567",
+    "church_group": "Dunamis",
+    "photo_path": "missing_file.jpg"  ← File doesn't exist
+}
+
+DROPDOWN SHOWS: [PB] Peter Boateng  ← Auto-fallback to initials
+
+================================================================================
+🔍 DEBUGGING
+================================================================================
+
+CHECK IF PHOTO_PATH IS RETURNED:
+-------------------------------
+1. Open browser console (F12)
+2. Go to Network tab
+3. Search for a member
+4. Find: get_recipients.php?action=members
+5. Check Response
+6. Each member should have photo_path field
+
+Example:
+{
+  "success": true,
+  "members": [
+    {
+      "member_id": "1",
+      "name": "John Doe",
+      "email": "john@email.com",
+      "phone": "0241234567",
+      "church_group": "Judah",
+      "photo_path": "uploads/john_doe.jpg"  ← Should be here
+    }
+  ]
+}
+
+
+CHECK IF IMAGE LOADS:
+--------------------
+1. Open browser console (F12)
+2. Check Console tab for errors
+3. Look for 404 errors on images
+4. Verify path: ../Add_Members/[photo_path]
+
+If 404 error:
+→ Photo file doesn't exist at that path
+→ Should auto-fallback to initials
+→ No broken image will show
+
+
+CHECK INITIALS FALLBACK:
+-----------------------
+1. If image fails to load
+2. Browser console should NOT show errors
+3. Dropdown should show initials instead
+4. No visible broken image
+
+================================================================================
+✨ COMPARISON WITH FINANCE.HTML
+================================================================================
+
+SIMILARITIES:
+------------
+✅ Same visual appearance
+✅ Same 36px circular avatars
+✅ Same initials fallback
+✅ Same error handling
+✅ Same profile photo display
+✅ Same styling and colors
+
+DIFFERENCES:
+-----------
+→ Finance: Single selection only
+→ Communication: Multiple selection with badges
+→ Communication: Shows checkmark for selected
+→ Communication: Prevents duplicate selection
+
+================================================================================
+🎉 YOU'RE ALL SET!
+================================================================================
+
+Your communication system now has beautiful profile pictures in the 
+autocomplete dropdown, exactly like in finance.html!
+
+Test it:
+1. Open: communication.html
+2. Select: "Others (Search Member)"
+3. Type a member name
+4. See: Profile pictures or initials!
+
+Enjoy the enhanced user experience! 📸✨
+
+================================================================================

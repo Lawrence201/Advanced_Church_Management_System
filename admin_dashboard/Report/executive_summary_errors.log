@@ -1,0 +1,108 @@
+[27-Oct-2025 17:17:15 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:17:15 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(77): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:17:40 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:17:40 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(77): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:17:43 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:17:43 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(77): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:18:02 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:18:02 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(77): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:18:11 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:18:11 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(77): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:18:36 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:18:36 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(77): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:18:41 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:18:41 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(77): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:18:54 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:18:54 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(77): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:19:11 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:19:11 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(77): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:19:13 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:19:13 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(77): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:19:41 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:19:41 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(77): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:19:46 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:19:46 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(77): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:20:11 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:20:11 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(77): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:20:41 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:20:41 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(77): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:21:11 Europe/Berlin] Executive Summary Error: Unknown column 'amount' in 'field list'
+[27-Oct-2025 17:21:11 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(92): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:21:47 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:21:47 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:22:47 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:22:47 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:23:00 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:23:00 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:23:11 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:23:11 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:23:22 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:23:22 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:23:35 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:23:35 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:23:38 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:23:38 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:23:42 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:23:42 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:24:07 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:24:07 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:24:09 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:24:09 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:24:35 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:24:35 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:24:39 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:24:39 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:24:50 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:24:50 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:25:06 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:25:06 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:25:09 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:25:09 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:25:36 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:25:36 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:25:39 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:25:39 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:26:06 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:26:06 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:26:09 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:26:09 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:26:36 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:26:36 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}
+[27-Oct-2025 17:26:39 Europe/Berlin] Executive Summary Error: Unknown column 'attendance_count' in 'field list'
+[27-Oct-2025 17:26:39 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\Church_Management_System\admin_dashboard\Report\get_executive_summary.php(119): mysqli->query('SELECT \n       ...')
+#1 {main}

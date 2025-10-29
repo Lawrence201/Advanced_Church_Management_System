@@ -1,0 +1,82 @@
+<!-- This file contains ONLY the clean script section to replace in ai_insight.html -->
+<!-- Replace lines 793-1104 with this content -->
+
+                    <script>
+                        // ===================================================================
+                        // Real-time AI system is handled by ai_insights_realtime.js
+                        // All data loading, chart rendering, and auto-refresh functionality
+                        // is managed externally for better maintainability
+                        // ===================================================================
+                        
+                        // Chat functionality for AI Assistant
+                        function sendMessage() {
+                            const input = document.getElementById('chatInput');
+                            const message = input.value.trim();
+                            if (!message) return;
+
+                            addUserMessage(message);
+                            input.value = '';
+
+                            setTimeout(() => {
+                                addAIResponse(message);
+                            }, 1000);
+                        }
+
+                        function askAI(question) {
+                            addUserMessage(question);
+                            setTimeout(() => {
+                                addAIResponse(question);
+                            }, 1000);
+                        }
+
+                        function addUserMessage(text) {
+                            const container = document.getElementById('chatContainer');
+                            const messageDiv = document.createElement('div');
+                            messageDiv.className = 'chatz-message';
+                            messageDiv.innerHTML = `
+                                    <div class="chatz-avatar" style="background: #3b82f6;">U</div>
+                                    <div class="chatz-bubble">
+                                        <div class="chatz-text">${text}</div>
+                                        <div class="chatz-time">Just now</div>
+                                    </div>
+                                `;
+                            container.appendChild(messageDiv);
+                            container.scrollTop = container.scrollHeight;
+                        }
+
+                        function addAIResponse(question) {
+                            const container = document.getElementById('chatContainer');
+                            const messageDiv = document.createElement('div');
+                            messageDiv.className = 'chatz-message ai';
+
+                            let response = 'I found some insights related to your question. ';
+                            if (question.toLowerCase().includes('retention')) {
+                                response += '23 members are at risk of disengagement. I recommend sending personalized follow-up messages within the next 7 days.';
+                            } else if (question.toLowerCase().includes('growth')) {
+                                response += 'Your youth ministry shows the highest growth potential with 95% above-average engagement. Consider expanding capacity.';
+                            } else if (question.toLowerCase().includes('attendance')) {
+                                response += 'I predict 378 attendees next week with 94% confidence, which is a 6.2% increase from current levels.';
+                            } else {
+                                response += 'I can help you analyze member engagement, predict trends, and optimize your church operations. What would you like to know more about?';
+                            }
+
+                            messageDiv.innerHTML = `
+                                    <div class="chatz-avatar">AI</div>
+                                    <div class="chatz-bubble">
+                                        <div class="chatz-text">${response}</div>
+                                        <div class="chatz-time">Just now</div>
+                                    </div>
+                                `;
+                            container.appendChild(messageDiv);
+                            container.scrollTop = container.scrollHeight;
+                        }
+
+                        // Allow Enter key to send message
+                        if (document.getElementById('chatInput')) {
+                            document.getElementById('chatInput').addEventListener('keypress', function (e) {
+                                if (e.key === 'Enter') {
+                                    sendMessage();
+                                }
+                            });
+                        }
+                    </script>

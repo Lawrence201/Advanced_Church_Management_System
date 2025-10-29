@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solution Arena Ministry – Check-in</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: "Poppins", sans-serif;
+        background-color: #000;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow: hidden;
+    }
+
+    .container {
+        display: flex;
+        width: 100%;
+        max-width: 1200px;
+        height: 100vh;
+    }
+
+    .left {
+        width: 50%;
+        padding: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-wrapper {
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .center-container {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .church-logo {
+        width: 60px;
+        height: auto;
+        margin-bottom: 10px;
+        stroke: white;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    p {
+        color: #aaa;
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
+    button {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 999px;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .btn-primary {
+        background-color: white;
+        color: black;
+    }
+
+    .btn-primary:hover {
+        background-color: #ddd;
+    }
+
+    .btn-secondary {
+        background-color: #111;
+        color: white;
+        border: 0.5px solid #444;
+    }
+
+    .btn-secondary:hover {
+        background-color: #222;
+    }
+
+    .form-container {
+        display: none;
+        animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #ccc;
+        font-size: 14px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #333;
+        background-color: #0a0a0a;
+        color: white;
+        border-radius: 10px;
+        font-size: 15px;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #4d9ef8;
+        box-shadow: 0 0 6px rgba(77, 158, 248, 0.3);
+    }
+
+    .submit-btn {
+        background-color: white;
+        color: black;
+        border: none;
+        font-weight: 600;
+    }
+
+    .submit-btn:hover {
+        background-color: #ddd;
+    }
+
+    .submit-btn:disabled {
+        background-color: #666;
+        cursor: not-allowed;
+    }
+
+    .back-btn {
+        background: none;
+        border: none;
+        color: #aaa;
+        font-size: 14px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0;
+        width: auto;
+    }
+
+    .back-btn:hover {
+        color: #4d9ef8;
+    }
+
+    .success-message,
+    .error-message {
+        display: none;
+        text-align: center;
+        padding: 25px;
+        border-radius: 12px;
+        margin-top: 20px;
+    }
+
+    .success-message {
+        background-color: rgba(77, 158, 248, 0.1);
+        color: #4d9ef8;
+    }
+
+    .error-message {
+        background-color: rgba(220, 38, 38, 0.1);
+        color: #dc2626;
+    }
+
+    .success-message i,
+    .error-message i {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+
+    .small-text {
+        font-size: 13px;
+        text-align: center;
+        margin-top: 25px;
+        color: #aaa;
+    }
+
+    .right {
+        position: relative;
+        width: 50%;
+        height: 100vh;
+        overflow: hidden;
+        background: radial-gradient(circle at center, #0f172a 0%, #000 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+    }
+
+    .welcome-text h2 {
+        font-size: 34px;
+        font-weight: 600;
+        color: #cbd5e1;
+        margin-bottom: 16px;
+        letter-spacing: 2px;
+    }
+
+    .welcome-text h1 {
+        font-size: 90px;
+        font-weight: 900;
+        color: #f8fafc;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+
+    /* === Updated Success Card === */
+    .success-card {
+        display: none;
+        background: #0a0a0a;
+        border: 1px solid #222;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        animation: slideIn 0.5s ease;
+        color: #fff;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .success-card .check-icon {
+        width: 90px;
+        height: 90px;
+        background: linear-gradient(135deg, #16a34a, #22c55e);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 25px;
+        box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+    }
+
+    .success-card .check-icon i {
+        font-size: 45px;
+        color: white;
+    }
+
+    .success-card .member-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #16a34a;
+        margin: 20px auto;
+        box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+    }
+
+    .success-card h2 {
+        font-size: 26px;
+        font-weight: 700;
+        color: #f1f5f9;
+        margin-bottom: 8px;
+    }
+
+    .success-card .member-email {
+        font-size: 14px;
+        color: #94a3b8;
+        margin-bottom: 25px;
+    }
+
+    .success-card .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin: 25px 0;
+        text-align: left;
+    }
+
+    .success-card .info-item {
+        background: #111827;
+        padding: 16px;
+        border-radius: 12px;
+        border-left: 3px solid #3b82f6;
+    }
+
+    .success-card .info-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #94a3b8;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+    }
+
+    .success-card .info-value {
+        font-size: 16px;
+        font-weight: 600;
+        color: #e2e8f0;
+    }
+
+    .success-card .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        background: rgba(34, 197, 94, 0.1);
+        color: #22c55e;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 14px;
+        margin-top: 10px;
+        border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .success-card .done-btn {
+        width: 100%;
+        padding: 16px;
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        color: white;
+        border: none;
+        border-radius: 999px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 25px;
+        transition: all 0.3s ease;
+    }
+
+    .success-card .done-btn:hover {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
+    }
+
+    .success-card p {
+        color: #94a3b8;
+        font-size: 14px;
+        margin-top: 20px;
+    }
+
+    /* === Responsive Design === */
+    @media (max-width: 900px) {
+        .right {
+            display: none;
+        }
+
+        .left {
+            width: 100%;
+            padding: 40px 20px;
+            justify-content: center;
+        }
+
+        .form-wrapper {
+            max-width: 100%;
+        }
+
+        .success-card .info-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 480px),
+    (max-width: 412px),
+    (max-width: 320px) {
+        body {
+            overflow: hidden;
+        }
+
+        .container {
+            flex-direction: column;
+            align-items: center;
+            height: auto;
+        }
+
+        .left {
+            width: 100%;
+            padding: 30px 15px;
+        }
+
+        .form-wrapper {
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .success-card {
+            padding: 25px;
+        }
+
+        .success-card h2 {
+            font-size: 22px;
+        }
+
+        .success-card .info-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="form-wrapper">
+                <div class="center-container">
+                    <svg class="church-logo" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 9h4" />
+                        <path d="M12 7v5" />
+                        <path d="M14 22v-4a2 2 0 0 0-4 0v4" />
+                        <path d="M18 22V5.618a1 1 0 0 0-.553-.894l-4.553-2.277a2 2 0 0 0-1.788 0L6.553 4.724A1 1 0 0 0 6 5.618V22" />
+                        <path d="m18 7 3.447 1.724a1 1 0 0 1 .553.894V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.618a1 1 0 0 1 .553-.894L6 7" />
+                    </svg>
+                    <h1>Solution Arena Ministry</h1>
+                    <p id="serviceInfo">Check-in attendance for today's service</p>
+                </div>
+
+                <div id="selection-screen">
+                    <button class="btn-primary" id="member-btn">
+                        <i class="fas fa-user-check"></i>Check in as Member
+                    </button>
+                    <button class="btn-secondary" id="visitor-btn">
+                        <i class="fas fa-user-plus"></i>Check in as Visitor
+                    </button>
+                </div>
+
+                <div id="member-form" class="form-container">
+                    <button class="back-btn" id="back-member">
+                        <i class="fas fa-arrow-left"></i>Back
+                    </button>
+                    <div class="form-group">
+                        <label>Email Address *</label>
+                        <input type="email" id="memberEmail" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number * (10 digits)</label>
+                        <input type="tel" id="memberPhone" class="form-control" placeholder="0XXXXXXXXX" maxlength="10" required>
+                    </div>
+                    <button class="submit-btn" id="memberSubmit">Check In</button>
+                    <div class="error-message" id="member-error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p id="member-error-message"></p>
+                    </div>
+                </div>
+
+                <div id="member-success-card" class="success-card">
+                    <div class="check-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <img id="successMemberPhoto" class="member-photo" src="" alt="Member Photo">
+                    <h2 id="successMemberName"></h2>
+                    <p class="member-email" id="successMemberEmail"></p>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Phone</div>
+                            <div class="info-value" id="successMemberPhone"></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Check-in Time</div>
+                            <div class="info-value" id="successCheckInTime"></div>
+                        </div>
+                    </div>
+                    <div class="status-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Check-in Successful</span>
+                    </div>
+                    <p style="margin-top: 20px; color: #64748b; font-size: 14px;">Show this screen to an usher</p>
+                    <button class="done-btn" onclick="resetToSelection()">Done</button>
+                </div>
+
+                <div id="visitor-form" class="form-container">
+                    <button class="back-btn" id="back-visitor">
+                        <i class="fas fa-arrow-left"></i>Back
+                    </button>
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="visitorName" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="visitorEmail" class="form-control" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="visitorPhone" class="form-control" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label>How did you hear about us?</label>
+                        <select id="visitorSource" class="form-control">
+                            <option value="">Select an option</option>
+                            <option value="friend">Friend</option>
+                            <option value="social">Social Media</option>
+                            <option value="online">Online Search</option>
+                            <option value="event">Event</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>What did you come here for?</label>
+                        <select id="visitorPurpose" class="form-control">
+                            <option value="">Select an option</option>
+                            <option value="worship">To Worship With Us</option>
+                            <option value="visit">To Visit</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <button class="submit-btn" id="visitorSubmit">Check In</button>
+                    <div class="success-message" id="visitor-success">
+                        <i class="fas fa-check-circle"></i>
+                        <p id="visitor-success-message"></p>
+                    </div>
+                    <div class="error-message" id="visitor-error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p id="visitor-error-message"></p>
+                    </div>
+                </div>
+
+                <div class="small-text">
+                    Solution Arena Ministry &copy; 2025 | Church Attendance System
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="welcome-text">
+                <h2>Welcome to</h2>
+                <h1>Attendance Check-In</h1>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        let serviceId = null;
+        let date = null;
+        let service = null;
+        let tokenValid = false;
+
+        async function validateToken() {
+            if (!token) {
+                showTokenError('Invalid or missing check-in link. Please scan the QR code again.');
+                return false;
+            }
+            try {
+                const response = await fetch('secure_token.php?action=validate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: token })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    serviceId = result.data.service_id;
+                    date = result.data.date;
+                    service = result.data.service_name;
+                    tokenValid = true;
+                    document.getElementById('serviceInfo').textContent = `Check-in for ${service} on ${new Date(date).toLocaleDateString()}`;
+                    return true;
+                } else {
+                    showTokenError(result.message || 'This check-in link has expired or is invalid.');
+                    return false;
+                }
+            } catch (error) {
+                showTokenError('Unable to verify check-in link. Error: ' + error.message);
+                return false;
+            }
+        }
+
+        function showTokenError(message) {
+            document.querySelector('.form-wrapper').innerHTML = `<div class="center-container"><svg class="church-logo" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 9h4"/><path d="M12 7v5"/><path d="M14 22v-4a2 2 0 0 0-4 0v4"/><path d="M18 22V5.618a1 1 0 0 0-.553-.894l-4.553-2.277a2 2 0 0 0-1.788 0L6.553 4.724A1 1 0 0 0 6 5.618V22"/><path d="m18 7 3.447 1.724a1 1 0 0 1 .553.894V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.618a1 1 0 0 1 .553-.894L6 7"/></svg><h1>Solution Arena Ministry</h1></div><div class="error-message" style="display:block;"><i class="fas fa-exclamation-triangle"></i><p style="margin-top:15px;">${message}</p><p style="margin-top:10px;font-size:14px;">Please contact the administrator or scan a new QR code.</p></div>`;
+        }
+
+        validateToken();
+
+        function resetToSelection() {
+            document.getElementById('member-success-card').style.display = 'none';
+            document.getElementById('member-form').style.display = 'none';
+            document.getElementById('visitor-form').style.display = 'none';
+            document.getElementById('selection-screen').style.display = 'block';
+            document.getElementById('memberEmail').value = '';
+            document.getElementById('memberPhone').value = '';
+        }
+
+        document.getElementById("member-btn").onclick = () => {
+            document.getElementById('selection-screen').style.display = "none";
+            document.getElementById('member-form').style.display = "block";
+            document.getElementById('member-error').style.display = "none";
+        };
+
+        document.getElementById("visitor-btn").onclick = () => {
+            document.getElementById('selection-screen').style.display = "none";
+            document.getElementById('visitor-form').style.display = "block";
+            document.getElementById('visitor-success').style.display = "none";
+            document.getElementById('visitor-error').style.display = "none";
+        };
+
+        document.getElementById("back-member").onclick = () => {
+            document.getElementById('member-form').style.display = "none";
+            document.getElementById('selection-screen').style.display = "block";
+            document.getElementById('member-error').style.display = "none";
+        };
+
+        document.getElementById("back-visitor").onclick = () => {
+            document.getElementById('visitor-form').style.display = "none";
+            document.getElementById('selection-screen').style.display = "block";
+            document.getElementById('visitor-success').style.display = "none";
+            document.getElementById('visitor-error').style.display = "none";
+        };
+
+        document.getElementById("memberSubmit").onclick = async () => {
+            if (!tokenValid) {
+                document.getElementById('member-error-message').textContent = 'Invalid check-in session. Please scan the QR code again.';
+                document.getElementById('member-error').style.display = 'block';
+                return;
+            }
+            const email = document.getElementById('memberEmail').value.trim();
+            const phone = document.getElementById('memberPhone').value.trim();
+            if (!email || !phone) {
+                document.getElementById('member-error-message').textContent = 'Please enter both email and phone number.';
+                document.getElementById('member-error').style.display = 'block';
+                return;
+            }
+            if (!/^\d{10}$/.test(phone)) {
+                document.getElementById('member-error-message').textContent = 'Phone number must be exactly 10 digits.';
+                document.getElementById('member-error').style.display = 'block';
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById('member-error-message').textContent = 'Please enter a valid email address.';
+                document.getElementById('member-error').style.display = 'block';
+                return;
+            }
+            document.getElementById("memberSubmit").disabled = true;
+            document.getElementById("memberSubmit").textContent = 'Checking in...';
+            try {
+                const response = await fetch('verify_member.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, phone, service_id: serviceId, check_in_date: date })
+                });
+                const result = await response.json();
+                if (result.success && result.member) {
+                    document.getElementById('member-form').style.display = 'none';
+                    document.getElementById('member-error').style.display = 'none';
+                    const member = result.member;
+                    const photoPath = member.photo ? '../Add_Members/' + member.photo.replace('./', '') : '../../assets/Logo.png';
+                    document.getElementById('successMemberPhoto').src = photoPath;
+                    document.getElementById('successMemberPhoto').onerror = function() {
+                        this.src = 'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27120%27 height=%27120%27 viewBox=%270 0 120 120%27%3E%3Ccircle cx=%2760%27 cy=%2760%27 r=%2760%27 fill=%27%23e5e7eb%27/%3E%3Cpath d=%27M60 60a18 18 0 100-36 18 18 0 000 36zM24 96a36 36 0 0172 0%27 fill=%27%23fff%27/%3E%3C/svg%3E';
+                    };
+                    document.getElementById('successMemberName').textContent = member.name;
+                    document.getElementById('successMemberEmail').textContent = member.email || 'No email';
+                    document.getElementById('successMemberPhone').textContent = member.phone || 'N/A';
+                    document.getElementById('successCheckInTime').textContent = member.check_in_time || 'Just now';
+                    
+                    // Change message if already checked in
+                    const statusBadge = document.querySelector('.status-badge span');
+                    const instructionText = document.querySelector('#member-success-card p[style*="margin-top: 20px"]');
+                    if (result.already_checked_in) {
+                        statusBadge.textContent = 'Already Checked In';
+                        instructionText.textContent = result.message;
+                        instructionText.style.color = '#f59e0b';
+                        instructionText.style.fontWeight = '600';
+                    } else {
+                        statusBadge.textContent = 'Check-in Successful';
+                        instructionText.textContent = 'Show this screen to an usher';
+                        instructionText.style.color = '#64748b';
+                        instructionText.style.fontWeight = '400';
+                    }
+                    
+                    document.getElementById('member-success-card').style.display = 'block';
+                } else {
+                    document.getElementById('member-error-message').textContent = result.message || 'Check-in failed. Please verify your details.';
+                    document.getElementById('member-error').style.display = 'block';
+                    // DO NOT redirect to visitor form - keep them on member check-in to fix their credentials
+                }
+            } catch (error) {
+                document.getElementById('member-error-message').textContent = 'Error: ' + error.message;
+                document.getElementById('member-error').style.display = 'block';
+            } finally {
+                document.getElementById("memberSubmit").disabled = false;
+                document.getElementById("memberSubmit").innerHTML = '<i class="fas fa-check"></i> Check In';
+            }
+        };
+
+        document.getElementById("visitorSubmit").onclick = async () => {
+            if (!tokenValid) {
+                document.getElementById('visitor-error-message').textContent = 'Invalid check-in session. Please scan the QR code again.';
+                document.getElementById('visitor-error').style.display = 'block';
+                document.getElementById('visitor-success').style.display = 'none';
+                return;
+            }
+            const name = document.getElementById('visitorName').value.trim();
+            const phone = document.getElementById('visitorPhone').value.trim();
+            const email = document.getElementById('visitorEmail').value.trim();
+            const source = document.getElementById('visitorSource').value;
+            const visitors_purpose = document.getElementById('visitorPurpose').value;
+            if (!name || !phone) {
+                document.getElementById('visitor-error-message').textContent = 'Name and phone number are required.';
+                document.getElementById('visitor-error').style.display = 'block';
+                document.getElementById('visitor-success').style.display = 'none';
+                return;
+            }
+            document.getElementById("visitorSubmit").disabled = true;
+            document.getElementById("visitorSubmit").textContent = 'Checking in...';
+            try {
+                const response = await fetch('register_visitor.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone, email, source, visitors_purpose, service_id: serviceId, check_in_date: date })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    document.getElementById('visitor-success-message').textContent = result.message;
+                    document.getElementById('visitor-success').style.display = 'block';
+                    document.getElementById('visitor-error').style.display = 'none';
+                    document.getElementById('visitorName').value = '';
+                    document.getElementById('visitorPhone').value = '';
+                    document.getElementById('visitorEmail').value = '';
+                    document.getElementById('visitorSource').value = '';
+                    document.getElementById('visitorPurpose').value = '';
+                    setTimeout(() => {
+                        document.getElementById('visitor-form').style.display = 'none';
+                        document.getElementById('selection-screen').style.display = 'block';
+                        document.getElementById('visitor-success').style.display = 'none';
+                    }, 3000);
+                } else {
+                    document.getElementById('visitor-error-message').textContent = result.message;
+                    document.getElementById('visitor-error').style.display = 'block';
+                    document.getElementById('visitor-success').style.display = 'none';
+                }
+            } catch (error) {
+                document.getElementById('visitor-error-message').textContent = 'Error: ' + error.message;
+                document.getElementById('visitor-error').style.display = 'block';
+                document.getElementById('visitor-success').style.display = 'none';
+            } finally {
+                document.getElementById("visitorSubmit").disabled = false;
+                document.getElementById("visitorSubmit").innerHTML = '<i class="fas fa-check"></i> Check In';
+            }
+        };
+    </script>
+</body>
+</html>

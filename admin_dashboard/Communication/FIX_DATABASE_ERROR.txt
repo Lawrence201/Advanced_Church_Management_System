@@ -1,0 +1,117 @@
+═══════════════════════════════════════════════════════════════
+  FIX: Database Error - Wrong Database Name
+═══════════════════════════════════════════════════════════════
+
+✅ FIXED! Your database is actually called:
+   'church_management_system' (not 'church_management')
+
+   All files have been updated to use the correct name.
+
+✅ SOLUTION - Use the Complete Setup File
+═══════════════════════════════════════════════════════════════
+
+Instead of using social_media_setup.sql, use:
+>>> setup_complete.sql <<<
+
+This file creates the database first, then the tables.
+
+
+📋 STEP-BY-STEP INSTRUCTIONS
+═══════════════════════════════════════════════════════════════
+
+1. Make sure XAMPP MySQL is running
+   ✓ Open XAMPP Control Panel
+   ✓ Click "Start" on MySQL (should turn green)
+
+2. Open phpMyAdmin
+   ✓ Go to: http://localhost/phpmyadmin
+
+3. Run the complete setup
+   ✓ Click "SQL" tab at the top
+   ✓ Open file: setup_complete.sql (in this folder)
+   ✓ Copy ENTIRE contents
+   ✓ Paste into the SQL tab
+   ✓ Click "Go" button at bottom right
+
+4. Verify success
+   ✓ Look for "church_management_system" in left sidebar
+   ✓ Click on it to expand
+   ✓ You should see 5 tables:
+      - messages
+      - social_media_accounts
+      - social_media_analytics
+      - social_media_posts
+      - social_posts
+
+5. Test it works
+   ✓ Refresh: test_social_api.php
+   ✓ All status indicators should be GREEN ✓
+   ✓ Click "Test Get Accounts" - should show 4 platforms
+
+
+🔍 WHAT WAS THE PROBLEM?
+═══════════════════════════════════════════════════════════════
+
+The original SQL file assumed the database already existed.
+The new setup_complete.sql file:
+1. Creates the database if needed
+2. Selects/uses that database
+3. Creates all tables
+4. Inserts sample data
+
+
+✨ FILES TO USE
+═══════════════════════════════════════════════════════════════
+
+✅ USE THIS:  setup_complete.sql  (creates everything)
+❌ NOT THIS:  social_media_setup.sql  (missing DB creation)
+
+
+📍 QUICK FIX COMMANDS
+═══════════════════════════════════════════════════════════════
+
+If you prefer using MySQL command line:
+
+Option A - Through phpMyAdmin:
+Just paste setup_complete.sql content and click GO
+
+Option B - Through MySQL command line:
+mysql -u root -p < setup_complete.sql
+
+
+🎯 NEXT STEPS AFTER SETUP
+═══════════════════════════════════════════════════════════════
+
+1. ✅ Refresh test_social_api.php
+2. ✅ Check all green indicators
+3. ✅ Click "Populate Sample Data"
+4. ✅ Open communication.html
+5. ✅ Click "Social Media" tab
+6. ✅ See your metrics!
+
+
+💡 STILL HAVING ISSUES?
+═══════════════════════════════════════════════════════════════
+
+Problem: MySQL won't start in XAMPP
+Solution: 
+  - Check if port 3306 is in use
+  - Kill any existing MySQL processes
+  - Restart XAMPP as Administrator
+
+Problem: "Access denied for user 'root'"
+Solution:
+  - Check db_connect.php
+  - Default XAMPP: username=root, password=(empty)
+  - Update if you changed MySQL password
+
+Problem: SQL error during import
+Solution:
+  - Make sure you copied ALL of setup_complete.sql
+  - Check for any missing characters
+  - Try running it in sections
+
+
+═══════════════════════════════════════════════════════════════
+  After running setup_complete.sql, everything should work! ✅
+═══════════════════════════════════════════════════════════════

@@ -1,0 +1,127 @@
+═══════════════════════════════════════════════════════════════
+  YOUTUBE REAL-TIME STATS - QUICK START
+  Channel: @LawrenceBlaze-vv7fd
+═══════════════════════════════════════════════════════════════
+
+🎯 GOAL
+───────────────────────────────────────────────────────────────
+Display your YouTube subscribers, views, and video count
+in REAL-TIME on your communication dashboard!
+
+
+🚀 SETUP (3 STEPS - 10 MINUTES)
+═══════════════════════════════════════════════════════════════
+
+STEP 1: Get YouTube API Key
+───────────────────────────────────────────────────────────────
+1. Go to: https://console.cloud.google.com/
+2. Create a new project (or select existing)
+3. Enable "YouTube Data API v3"
+4. Create Credentials → API Key
+5. Copy the key (looks like: AIzaSy...)
+
+📖 Detailed instructions: See YOUTUBE_SETUP.md
+
+
+STEP 2: Configure the Key
+───────────────────────────────────────────────────────────────
+1. Open file: youtube_sync.php
+2. Find line 11:
+   define('YOUTUBE_API_KEY', 'YOUR_API_KEY_HERE');
+   
+3. Replace YOUR_API_KEY_HERE with your actual key:
+   define('YOUTUBE_API_KEY', 'AIzaSyB123456...');
+
+4. Save the file
+
+
+STEP 3: Test It!
+───────────────────────────────────────────────────────────────
+1. Test connection:
+   http://localhost/.../youtube_sync.php?action=test
+
+2. Sync your channel:
+   http://localhost/.../youtube_sync.php?action=sync
+
+3. View in dashboard:
+   Open communication.html → Social Media tab
+   Click "Sync Now" button on YouTube card
+
+
+✅ THAT'S IT!
+═══════════════════════════════════════════════════════════════
+
+
+📊 WHAT YOU GET
+───────────────────────────────────────────────────────────────
+✓ Real-time subscriber count
+✓ Total channel views
+✓ Number of videos
+✓ Last updated timestamp
+✓ One-click sync button
+
+
+🎮 HOW TO USE
+───────────────────────────────────────────────────────────────
+1. Go to Communication → Social Media tab
+2. Find YouTube card
+3. Click "Sync Now" button (red button)
+4. See updated stats instantly!
+
+
+⚙️ AUTO-SYNC (OPTIONAL)
+───────────────────────────────────────────────────────────────
+Want stats to update automatically?
+
+Option 1: On page load
+- Stats sync every time you open the page
+
+Option 2: Every hour
+- Set up Windows Task Scheduler
+- Run: php youtube_sync.php?action=sync
+
+See YOUTUBE_SETUP.md for details
+
+
+💰 COST
+───────────────────────────────────────────────────────────────
+✓ FREE! (YouTube API is free)
+✓ 10,000 API calls per day
+✓ More than enough for church use
+
+
+🐛 TROUBLESHOOTING
+───────────────────────────────────────────────────────────────
+
+Problem: "API key not configured"
+Solution: Add your API key to youtube_sync.php
+
+Problem: "Channel not found"
+Solution: Your channel is set to @LawrenceBlaze-vv7fd
+         System will auto-detect the ID
+
+Problem: "allow_url_fopen disabled"
+Solution: Edit php.ini → allow_url_fopen = On
+          Restart XAMPP
+
+
+📁 FILES
+───────────────────────────────────────────────────────────────
+✅ youtube_sync.php       - API integration
+✅ communication.html     - Has "Sync Now" button
+✅ YOUTUBE_SETUP.md       - Full documentation
+✅ YOUTUBE_QUICKSTART.txt - This file
+
+
+🎯 NEXT STEPS
+───────────────────────────────────────────────────────────────
+1. ✅ Get API key from Google Cloud Console
+2. ✅ Add key to youtube_sync.php
+3. ✅ Test: youtube_sync.php?action=test
+4. ✅ Sync: Click "Sync Now" in dashboard
+5. ✅ See your real stats!
+
+
+═══════════════════════════════════════════════════════════════
+  After setup, your YouTube stats will be LIVE! 🎉
+═══════════════════════════════════════════════════════════════

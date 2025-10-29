@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Events</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+            
+                <svg class="church-logo" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 9h4" />
+                    <path d="M12 7v5" />
+                    <path d="M14 22v-4a2 2 0 0 0-4 0v4" />
+                    <path d="M18 22V5.618a1 1 0 0 0-.553-.894l-4.553-2.277a2 2 0 0 0-1.788 0L6.553 4.724A1 1 0 0 0 6 5.618V22" />
+                    <path d="m18 7 3.447 1.724a1 1 0 0 1 .553.894V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.618a1 1 0 0 1 .553-.894L6 7" />
+                </svg>
+            
+            
+                <div class="logo-text">
+                    <h3>Church</h3>
+                    <p>Management System</p>
+                </div>
+            
+                <!-- Close button for mobile -->
+                <button class="sidebar-close" onclick="toggleSidebar()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+           
+            <div class="sidebar-content">
+                <div class="menu-section">
+                    <div class="menu-label">Main Menu</div>
+                    <a href="../index.html" class="menu-item ">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-layout-dashboard h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:110:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="110"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg></span>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="../Members/members.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-users h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:110:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="110"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </span>
+                        <span>Members</span>
+                    </a>
+                    <a href="../Members/visitors_management.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-user-check h-5 w-5">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <polyline points="16 11 18 13 22 9"></polyline>
+                            </svg>
+                        </span>
+                        <span>Visitors</span>
+                    </a>
+                    <a href="Events/events.html" class="menu-item active">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-calendar h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:110:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="110"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M8 2v4"></path>
+                                <path d="M16 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                            </svg>
+                        </span>
+                        <span>Events</span>
+                    </a>
+                    <a href="../Finance/finance.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-dollar-sign h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:110:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="110"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <line x1="12" x2="12" y1="2" y2="22"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </span>
+                        <span>Finances</span>
+                    </a>
+                    <a href="../Communication/communication.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-message-square h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:110:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="110"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </span>
+                        <span>Communications</span>
+                    </a>
+                    <a href="../Attendance/attendance.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-user-check h-5 w-5" data-lov-id="src/components/AppSidebar.tsx:112:22"
+                                data-lov-name="item.icon" data-component-path="src/components/AppSidebar.tsx" data-component-line="112"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <polyline points="16 11 18 13 22 9"></polyline>
+                            </svg>
+                        </span>
+                        <span>Attendance</span>
+                    </a>
+                    <a href="../Report/report.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-chart-column h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:110:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="110"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                <path d="M18 17V9"></path>
+                                <path d="M13 17V5"></path>
+                                <path d="M8 17v-3"></path>
+                            </svg>
+                        </span>
+                        <span>Reports</span>
+                    </a>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">AI Features</div>
+                    <a href="../AI/ai_insight.html" class="menu-item has-badge">
+                        <span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L13.5 7.5H19L14.5 11L16 16.5L12 13L8 16.5L9.5 11L5 7.5H10.5L12 2Z" fill="currentColor"
+                                    opacity="0.2" />
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" />
+                                <path d="M12 5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M12 16V19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M5 12H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M16 12H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M7.5 7.5L9.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M14.5 14.5L16.5 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M7.5 16.5L9.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M14.5 9.5L16.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <circle cx="12" cy="5" r="1.5" fill="currentColor" />
+                                <circle cx="19" cy="12" r="1.5" fill="currentColor" />
+                                <circle cx="12" cy="19" r="1.5" fill="currentColor" />
+                                <circle cx="5" cy="12" r="1.5" fill="currentColor" />
+                            </svg>
+                    
+                        </span>
+                        <span>AI Insights</span>
+                        <span class="badge">New</span>
+                    </a>
+                    <a href="../AI/members_analytics.html" class="menu-item has-badge">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-chart-column h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:131:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="131"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                <path d="M18 17V9"></path>
+                                <path d="M13 17V5"></path>
+                                <path d="M8 17v-3"></path>
+                            </svg></span>
+                        <span>Member Analytics</span>
+                        <span class="badge">New</span>
+                    </a>
+                    <a href="../AI/ai_smart_report.html" class="menu-item has-badge">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-file-text h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:131:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="131"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                <path d="M10 9H8"></path>
+                                <path d="M16 13H8"></path>
+                                <path d="M16 17H8"></path>
+                            </svg></span>
+                        <span>Smart Reports</span>
+                        <span class="badge">New</span>
+                    </a>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">Quick Actions</div>
+                    <a href="../Add_Members/enroll_members.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-user-plus h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:151:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="151"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <line x1="19" x2="19" y1="8" y2="14"></line>
+                                <line x1="22" x2="16" y1="11" y2="11"></line>
+                            </svg></span>
+                        <span>Add Member</span>
+                    </a>
+                    <a href="../Add_Event/New_Event.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-calendar h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:151:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="151"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M8 2v4"></path>
+                                <path d="M16 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                            </svg></span>
+                        <span>New Event</span>
+                    </a>
+                    <a href="../Record_Donations/record_donations.html" class="menu-item">
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 10C20 6.5 17 4 14 4C12.5 4 11.2 4.6 10.3 5.6C9.9 5.2 9.4 5 8.8 5C7.3 5 6 6.3 6 7.8C6 8.4 6.2 8.9 6.5 9.3C4.5 10.2 3 12.2 3 14.5C3 17.5 5.5 20 8.5 20H16.5C19 20 21 18 21 15.5C21 13.2 19.5 11.3 17.5 10.5C18.4 10.8 19 11.7 19 12.7"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M12 20C11.4 20 9.5 19.5 8.5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <circle cx="12" cy="8" r="1" fill="currentColor" />
+                                <path d="M12 11V15M10 13H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path
+                                    d="M8.5 4C9.5 3 11 3 12 4C13 3 14.5 3 15.5 4C16 4.5 16 5.5 16 6C16 7 15 8 12 10C9 8 8 7 8 6C8 5.5 8 4.5 8.5 4Z"
+                                    fill="currentColor" opacity="0.2" />
+                                <path
+                                    d="M12 5.5C10.5 4 9 4 8 5C7 6 7 7.5 7 8.5C7 10 8.5 11.5 12 14C15.5 11.5 17 10 17 8.5C17 7.5 17 6 16 5C15 4 13.5 4 12 5.5Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <span>Record Donation</span>
+                    </a>
+                    <a href="../Send_Message/send_message.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-bell h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:151:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="151"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                            </svg></span>
+                        <span>Send Message</span>
+                    </a>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label"></div>
+                    <a href="../Settings/settings.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-settings h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:166:18" data-lov-name="Settings"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="166"
+                                data-component-file="AppSidebar.tsx" data-component-name="Settings"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path
+                                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+                                </path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg></span>
+                        <span>Settings</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search members, events, or anything...">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground"
+                        data-lov-id="src/components/Layout.tsx:24:16" data-lov-name="Search"
+                        data-component-path="src/components/Layout.tsx" data-component-line="24"
+                        data-component-file="Layout.tsx" data-component-name="Search"
+                        data-component-content="%7B%22className%22%3A%22absolute%20left-3%20top-1%2F2%20transform%20-translate-y-1%2F2%20h-4%20w-4%20text-muted-foreground%22%7D">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+                </div>
+                <div class="header-right">
+                    <div class="notification-icon">
+                        <span style="font-size: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:151:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="151"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                            </svg>
+                        </span>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <span style="font-size: 14px; font-weight: 500;">Pastor Lawrence</span>
+                        <span style="font-size: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-5 w-5"
+                                data-lov-id="src/components/Layout.tsx:41:16" data-lov-name="User"
+                                data-component-path="src/components/Layout.tsx" data-component-line="41"
+                                data-component-file="Layout.tsx" data-component-name="User"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function toggleSidebar() {
+                    const sidebar = document.querySelector('.sidebar');
+                    sidebar.classList.toggle('open');
+                }
+
+                // Close sidebar when clicking outside on mobile
+                document.addEventListener('click', function (event) {
+                    const sidebar = document.querySelector('.sidebar');
+                    const toggle = document.querySelector('.mobile-menu-toggle');
+
+                    if (window.innerWidth <= 768 &&
+                        !sidebar.contains(event.target) &&
+                        !toggle.contains(event.target) &&
+                        sidebar.classList.contains('open')) {
+                        sidebar.classList.remove('open');
+                    }
+                });
+            </script>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <div class="cf-em-page-header">
+                    <div class="cf-em-header-content">
+                        <h1>Event Management</h1>
+                        <p>Plan, organize, and track all church events and activities</p>
+                    </div>
+                    <div class="cf-em-header-actions">
+                        <button class="cf-em-btn cf-em-btn-secondary" onclick="exportEvents()">
+                            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7,10 12,15 17,10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg></span>
+                            <span></span>
+                            <span>Export</span>
+                        </button>
+                        <button class="cf-em-btn cf-em-btn-secondary" onclick="openFilterModal()">
+                            <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter h-4 w-4 mr-2"
+                                data-lov-id="src/pages/Members.tsx:170:12" data-lov-name="Filter" data-component-path="src/pages/Members.tsx"
+                                data-component-line="170" data-component-file="Members.tsx" data-component-name="Filter"
+                                data-component-content="%7B%22className%22%3A%22h-4%20w-4%20mr-2%22%7D">
+                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                            </svg></span>
+                            <span>Filter Events</span>
+                        </button>
+                        <button class="cf-em-btn cf-em-btn-primary" onclick="openAddEventModal()">
+                            <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:151:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="151" data-component-file="AppSidebar.tsx"
+                                data-component-name="item.icon" data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M8 2v4"></path>
+                                <path d="M16 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                            </svg></span>
+                            <span>New Event</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Event Metrics Section -->
+                <div class="cf-event-metrics-container">
+                    <div class="cf-event-metric-card">
+                        <div class="cf-metric-icon cf-metric-total">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </div>
+                        <div class="cf-metric-content">
+                            <h3 id="metric-total-events">0</h3>
+                            <p>Total Events</p>
+                            <span class="cf-metric-badge cf-badge-total">All Time</span>
+                        </div>
+                    </div>
+                
+                    <div class="cf-event-metric-card">
+                        <div class="cf-metric-icon cf-metric-upcoming">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <div class="cf-metric-content">
+                            <h3 id="metric-upcoming-events">0</h3>
+                            <p>Upcoming Events</p>
+                            <span class="cf-metric-badge cf-badge-upcoming">Future</span>
+                        </div>
+                    </div>
+                
+                    <div class="cf-event-metric-card">
+                        <div class="cf-metric-icon cf-metric-service">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                <polyline points="2 17 12 22 22 17"></polyline>
+                                <polyline points="2 12 12 17 22 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="cf-metric-content">
+                            <h3 id="metric-service-events">0</h3>
+                            <p>In Service</p>
+                            <span class="cf-metric-badge cf-badge-service">Today</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                
+
+                <div class="insights-section">
+                    <div class="insights-header">
+                        <div class="insight-header-row">
+                            <span class="insight-icon">
+                                <img src="../Assests/chatbot.png" alt="AI Insights">
+                            </span>
+                            <h2>AI-Powered Insights</h2>
+                        </div>
+                
+                
+                
+                        <div class="cf-alerts-layout">
+                            <div class="cf-alert-tile cf-success">
+                                <span class="cf-alert-symbol"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up h-4 w-4"
+                                    data-lov-id="src/pages/Events.tsx:174:18" data-lov-name="insight.icon" data-component-path="src/pages/Events.tsx"
+                                    data-component-line="174" data-component-file="Events.tsx" data-component-name="insight.icon"
+                                    data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D">
+                                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                                    <polyline points="16 7 22 7 22 13"></polyline>
+                                </svg>
+                            </span>
+                            <div class="cf-alert-text">
+                                <h3>Event Attendance Up 22%</h3>
+                                <p>Overall event attendance has increased significantly this quarter</p>
+                                </div>
+                            </div>
+                
+                            <div class="cf-alert-tile cf-warning">
+                                <span class="cf-alert-symbol"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="orange" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-triangle-alert h-4 w-4"
+                                        data-lov-id="src/pages/Members.tsx:187:18" data-lov-name="insight.icon"
+                                        data-component-path="src/pages/Members.tsx" data-component-line="187"
+                                        data-component-file="Members.tsx" data-component-name="insight.icon"
+                                        data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D">
+                                        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path>
+                                        <path d="M12 9v4"></path>
+                                        <path d="M12 17h.01"></path>
+                                    </svg></span>
+                                <div class="cf-alert-text">
+                                    <h3>Volunteer Shortage</h3>
+                                    <p>3 upcoming events need additional volunteers</p>
+                                </div>
+                            </div>
+                
+                            <div class="cf-alert-tile">
+                                <span class="cf-alert-symbol">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check h-4 w-4"
+                                        data-lov-id="src/pages/Events.tsx:174:18" data-lov-name="insight.icon" data-component-path="src/pages/Events.tsx"
+                                        data-component-line="174" data-component-file="Events.tsx" data-component-name="insight.icon"
+                                        data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <path d="m9 12 2 2 4-4"></path>
+                                    </svg>
+                                </span>
+                                <div class="cf-alert-text">
+                                    <h3>High Engagement Events</h3>
+                                    <p>Youth events show 95% attendance rate - consider expanding</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+          
+
+
+                <div class="cf-em-content-grid">
+                    <div class="cf-em-calendar-section">
+                        <div class="cf-em-calendar-header">
+                            <h2>Event Calendar</h2>
+                            <p>Select a date to view events</p>
+                        </div>
+                
+                        <div class="cf-em-calendar">
+                            <div class="cf-em-calendar-nav">
+                                <button onclick="previousMonth()">‹</button>
+                                <span class="cf-em-calendar-month">September 2025</span>
+                                <button onclick="nextMonth()">›</button>
+                            </div>
+                
+                            <div class="cf-em-calendar-grid">
+                                <div class="cf-em-calendar-day-header">Su</div>
+                                <div class="cf-em-calendar-day-header">Mo</div>
+                                <div class="cf-em-calendar-day-header">Tu</div>
+                                <div class="cf-em-calendar-day-header">We</div>
+                                <div class="cf-em-calendar-day-header">Th</div>
+                                <div class="cf-em-calendar-day-header">Fr</div>
+                                <div class="cf-em-calendar-day-header">Sa</div>
+                
+                                <div class="cf-em-calendar-day cf-em-inactive">31</div>
+                                <div class="cf-em-calendar-day">1</div>
+                                <div class="cf-em-calendar-day">2</div>
+                                <div class="cf-em-calendar-day">3</div>
+                                <div class="cf-em-calendar-day">4</div>
+                                <div class="cf-em-calendar-day">5</div>
+                                <div class="cf-em-calendar-day">6</div>
+                
+                                <div class="cf-em-calendar-day cf-em-has-event" onclick="filterEventsByDate('2024-01-07')">7</div>
+                                <div class="cf-em-calendar-day">8</div>
+                                <div class="cf-em-calendar-day">9</div>
+                                <div class="cf-em-calendar-day cf-em-has-event" onclick="filterEventsByDate('2024-01-10')">10</div>
+                                <div class="cf-em-calendar-day cf-em-has-event" onclick="filterEventsByDate('2024-01-11')">11</div>
+                                <div class="cf-em-calendar-day">12</div>
+                                <div class="cf-em-calendar-day cf-em-has-event" onclick="filterEventsByDate('2024-01-13')">13</div>
+                
+                                <div class="cf-em-calendar-day">14</div>
+                                <div class="cf-em-calendar-day">15</div>
+                                <div class="cf-em-calendar-day">16</div>
+                                <div class="cf-em-calendar-day">17</div>
+                                <div class="cf-em-calendar-day">18</div>
+                                <div class="cf-em-calendar-day cf-em-has-event" onclick="filterEventsByDate('2024-01-19')">19</div>
+                                <div class="cf-em-calendar-day">20</div>
+                
+                                <div class="cf-em-calendar-day">21</div>
+                                <div class="cf-em-calendar-day">22</div>
+                                <div class="cf-em-calendar-day">23</div>
+                                <div class="cf-em-calendar-day">24</div>
+                                <div class="cf-em-calendar-day">25</div>
+                                <div class="cf-em-calendar-day">26</div>
+                                <div class="cf-em-calendar-day">27</div>
+                
+                                <div class="cf-em-calendar-day">28</div>
+                                <div class="cf-em-calendar-day cf-em-today">29</div>
+                                <div class="cf-em-calendar-day">30</div>
+                                <div class="cf-em-calendar-day cf-em-inactive">1</div>
+                                <div class="cf-em-calendar-day cf-em-inactive">2</div>
+                                <div class="cf-em-calendar-day cf-em-inactive">3</div>
+                                <div class="cf-em-calendar-day cf-em-inactive">4</div>
+                            </div>
+                        </div>
+                
+                        <div class="cf-em-upcoming-section">
+                            <h3>Upcoming This Week</h3>
+                            <div class="cf-em-upcoming-list" id="cfEmUpcomingList"></div>
+                        </div>
+                    </div>
+
+
+                    
+                
+                    <div class="cf-em-events-section">
+                        <div class="cf-em-events-controls">
+                            <div class="cf-em-tabs">
+                                <button class="cf-em-tab cf-em-active" onclick="filterEvents('all')">All Events</button>
+                                <button class="cf-em-tab" onclick="filterEvents('upcoming')">Upcoming</button>
+                                <button class="cf-em-tab" onclick="filterEvents('service')">Services</button>
+                                <button class="cf-em-tab" onclick="filterEvents('ministry')">Ministry</button>
+                            </div>
+                            <div class="cf-em-search-bar">
+                                <span class="cf-em-search-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-search absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground"
+                                    data-lov-id="src/components/Layout.tsx:24:16" data-lov-name="Search" data-component-path="src/components/Layout.tsx"
+                                    data-component-line="24" data-component-file="Layout.tsx" data-component-name="Search"
+                                    data-component-content="%7B%22className%22%3A%22absolute%20left-3%20top-1%2F2%20transform%20-translate-y-1%2F2%20h-4%20w-4%20text-muted-foreground%22%7D">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.3-4.3"></path>
+                                </svg></span>
+                                <input type="text" class="cf-em-search-input" placeholder="Search events..." oninput="searchEvents()"
+                                    id="cfEmEventSearch">
+                            </div>
+                        </div>
+                
+                        <div class="cf-em-event-list" id="cfEmEventList"></div>
+                    </div>
+                </div>
+                
+                <div class="cf-em-modal" id="cfEmEventDetailModal">
+                    <div class="cf-em-modal-content">
+                        <div class="cf-em-modal-header">
+                            <h2 id="cfEmDetailModalTitle">Event Details</h2>
+                            <button class="cf-em-modal-close" onclick="closeModal('cfEmEventDetailModal')">×</button>
+                        </div>
+                        <div class="cf-em-modal-body" id="cfEmEventDetailBody"></div>
+                    </div>
+                </div>
+                
+                <div class="cf-em-modal" id="cfEmEditEventModal">
+                    <div class="cf-em-modal-content">
+                        <div class="cf-em-modal-header">
+                            <h2 id="cfEmEditModalTitle">Add New Event</h2>
+                            <button class="cf-em-modal-close" onclick="closeModal('cfEmEditEventModal')">×</button>
+                        </div>
+                        <div class="cf-em-modal-body">
+                            <form id="cfEmEventForm">
+                                <div class="cf-em-detail-grid">
+                                    <div class="cf-em-form-group">
+                                        <label class="cf-em-form-label">Event Name</label>
+                                        <input type="text" class="cf-em-form-input" id="cfEmEventName" required>
+                                    </div>
+                                    <div class="cf-em-form-group">
+                                        <label class="cf-em-form-label">Event Type</label>
+                                        <select class="cf-em-form-select" id="cfEmEventType">
+                                            <option value="service">Service</option>
+                                            <option value="ministry">Ministry</option>
+                                            <option value="study">Bible Study</option>
+                                            <option value="outreach">Outreach</option>
+                                            <option value="retreat">Retreat</option>
+                                        </select>
+                                    </div>
+                                    <div class="cf-em-form-group">
+                                        <label class="cf-em-form-label">Date</label>
+                                        <input type="date" class="cf-em-form-input" id="cfEmEventDate" required>
+                                    </div>
+                                    <div class="cf-em-form-group">
+                                        <label class="cf-em-form-label">Time</label>
+                                        <input type="time" class="cf-em-form-input" id="cfEmEventTime" required>
+                                    </div>
+                                    <div class="cf-em-form-group">
+                                        <label class="cf-em-form-label">Location</label>
+                                        <input type="text" class="cf-em-form-input" id="cfEmEventLocation" required>
+                                    </div>
+                                    <div class="cf-em-form-group">
+                                        <label class="cf-em-form-label">Capacity</label>
+                                        <input type="number" class="cf-em-form-input" id="cfEmEventCapacity" value="50">
+                                    </div>
+                                </div>
+                                <div class="cf-em-form-group">
+                                    <label class="cf-em-form-label">Description</label>
+                                    <textarea class="cf-em-form-textarea" id="cfEmEventDescription"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="cf-em-modal-footer">
+                            <button class="cf-em-btn cf-em-btn-secondary" onclick="closeModal('cfEmEditEventModal')">Cancel</button>
+                            <button class="cf-em-btn cf-em-btn-primary" onclick="saveEvent()">Save Event</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Birthday Section -->
+                <div class="cf-birthday-section">
+                    <div class="cf-birthday-header">
+                        <div class="cf-birthday-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <div>
+                                <h2>Member Birthdays</h2>
+                                <p style="font-size: 12px; color: #718096; margin: 4px 0 0 0; display: inline-flex; align-items: center; gap: 6px;">
+                                    <span class="cf-auto-refresh-indicator"></span>
+                                    Auto-updating every 30s
+                                </p>
+                            </div>
+                        </div>
+                        <div class="cf-birthday-month-selector">
+                            <button onclick="changeBirthdayMonth(-1)" class="cf-month-nav-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
+                            </button>
+                            <select id="birthday-month-select" onchange="loadBirthdayData()" class="cf-month-select">
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <button onclick="changeBirthdayMonth(1)" class="cf-month-nav-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                
+                    <div class="cf-birthday-tabs">
+                        <button class="cf-birthday-tab active" onclick="switchBirthdayTab('all')" data-tab="all">
+                            All <span class="cf-tab-count" id="count-all">0</span>
+                        </button>
+                        <button class="cf-birthday-tab" onclick="switchBirthdayTab('upcoming')" data-tab="upcoming">
+                            Upcoming <span class="cf-tab-count" id="count-upcoming">0</span>
+                        </button>
+                        <button class="cf-birthday-tab" onclick="switchBirthdayTab('celebrated')" data-tab="celebrated">
+                            Celebrated <span class="cf-tab-count" id="count-celebrated">0</span>
+                        </button>
+                       
+                    </div>
+                
+                    <div class="cf-birthday-table-container">
+                        <div id="birthday-loading" class="cf-birthday-loading" style="display: none;">
+                            <div class="cf-spinner"></div>
+                            <p>Loading birthdays...</p>
+                        </div>
+                        <table class="cf-birthday-table" id="birthday-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Group</th>
+                                    <th>Contact</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="birthday-table-body">
+                                <!-- Birthday rows will be inserted here -->
+                            </tbody>
+                        </table>
+                        <div id="birthday-empty" class="cf-birthday-empty" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <p>No birthdays found for this month</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                
+                <script>
+                    let events = [];
+                    let calendarData = null;
+                    let statistics = null;
+                    let currentYear = new Date().getFullYear();
+                    let currentMonth = new Date().getMonth() + 1; // JavaScript months are 0-indexed
+
+                        // SVG Icon Templates
+                        const icons = {
+                            search: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>`,
+                            calendar: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+                            users: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+                            clock: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+                            user: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+                            mapPin: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`
+                        };
+
+                        let currentFilter = 'all';
+                        let currentDate = null;
+
+                        // API Functions
+                        async function fetchEvents(filter = 'all', search = '', date = '') {
+                            try {
+                                let url = `fetch_events.php?filter=${filter}`;
+                                if (search) url += `&search=${encodeURIComponent(search)}`;
+                                if (date) url += `&date=${date}`;
+
+                                const response = await fetch(url);
+                                const data = await response.json();
+
+                                if (data.success) {
+                                    events = data.data.events.map(event => ({
+                                        ...event,
+                                        time: event.time_formatted,
+                                        date: event.start_date,
+                                        capacity: event.max_capacity,
+                                        attending: event.attending || Math.floor(event.max_capacity * 0.7), // Mock data
+                                        volunteers: event.volunteers_needed,
+                                        status: determineEventStatus(event)
+                                    }));
+                                    renderEvents();
+                                    renderUpcoming();
+                                } else {
+                                    console.error('Error fetching events:', data.message);
+                                }
+                            } catch (error) {
+                                console.error('Error:', error);
+                            }
+                        }
+
+                        async function fetchCalendarData(year, month) {
+                            try {
+                                const response = await fetch(`fetch_calendar_data.php?year=${year}&month=${month}`);
+                                const data = await response.json();
+
+                                if (data.success) {
+                                    calendarData = data.data;
+                                    renderCalendar();
+                                } else {
+                                    console.error('Error fetching calendar data:', data.message);
+                                }
+                            } catch (error) {
+                                console.error('Error:', error);
+                            }
+                        }
+
+                        async function fetchStatistics() {
+                            try {
+                                const response = await fetch('fetch_statistics.php');
+                                const data = await response.json();
+
+                                if (data.success) {
+                                    statistics = data.data;
+                                    updateStatisticsDisplay();
+                                } else {
+                                    console.error('Error fetching statistics:', data.message);
+                                }
+                            } catch (error) {
+                                console.error('Error:', error);
+                            }
+                        }
+
+                        function determineEventStatus(event) {
+                            if (event.volunteers_needed > 0 && event.volunteer_roles && event.volunteer_roles.length === 0) {
+                                return 'needs-volunteers';
+                            }
+                            if (event.status === 'Draft') {
+                                return 'needs-planning';
+                            }
+                            return 'confirmed';
+                        }
+
+                        function updateStatisticsDisplay() {
+                            if (!statistics) return;
+
+                            // Update AI insights with real data
+                            const alertsContainer = document.querySelector('.cf-alerts-layout');
+                            if (alertsContainer && statistics.needs_volunteers > 0) {
+                                const volunteerAlert = alertsContainer.querySelector('.cf-warning .cf-alert-text p');
+                                if (volunteerAlert) {
+                                    volunteerAlert.textContent = `${statistics.needs_volunteers} upcoming events need additional volunteers`;
+                                }
+                            }
+                        }
+
+                        function renderEvents() {
+                            const container = document.getElementById('cfEmEventList');
+                            let filteredEvents = events;
+
+                            if (currentDate) {
+                                filteredEvents = events.filter(e => e.date === currentDate);
+                            } else if (currentFilter !== 'all') {
+                                if (currentFilter === 'upcoming') {
+                                    const today = new Date();
+                                    filteredEvents = events.filter(e => new Date(e.date) > today);
+                                } else {
+                                    filteredEvents = events.filter(e => e.type === currentFilter);
+                                }
+                            }
+
+                            if (filteredEvents.length === 0) {
+                                container.innerHTML = '<div class="cf-em-no-events">No events found</div>';
+                                return;
+                            }
+
+                            container.innerHTML = filteredEvents.map(event => {
+                                const percentage = Math.round((event.attending / event.capacity) * 100);
+                                const imagePath = event.image_path || '../Assests/default-event.jpg';
+                                const statusLabel = event.status === 'confirmed' ? 'Confirmed' :
+                                                   event.status === 'needs-volunteers' ? 'Needs Volunteers' : 'Needs Planning';
+
+                                return `
+            <div class="cf-em-event-card">
+                <div class="cf-em-event-image-container">
+                    <img src="${imagePath}" alt="${event.name}" class="cf-em-event-image" onerror="this.src='../Assests/default-event.jpg'">
+                    <div class="cf-em-event-image-overlay">
+                        <div class="cf-em-event-badges">
+                            <span class="cf-em-badge cf-em-${event.type.toLowerCase()}">${event.type}</span>
+                            <span class="cf-em-badge cf-em-${event.status}">${statusLabel}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cf-em-event-content">
+                    <div class="cf-em-event-header">
+                        <div class="cf-em-event-title-row">
+                            <h3 class="cf-em-event-title">${event.name}</h3>
+                        </div>
+                        <div class="cf-em-event-actions">
+                            <button class="cf-em-event-btn" onclick="editEvent(${event.id})">Edit</button>
+                            <button class="cf-em-event-btn" onclick="viewEvent(${event.id})">View</button>
+                            <button class="cf-em-event-btn" onclick="deleteEvent(${event.id})" style="background: #ef4444; color: white;">Delete</button>
+                        </div>
+                    </div>
+                    <p class="cf-em-event-description">${event.description}</p>
+                    <div class="cf-em-event-details">
+                        <div class="cf-em-event-detail-item">
+                            <span class="cf-em-detail-icon">${icons.calendar}</span>
+                            <span>${event.date}</span>
+                        </div>
+                        <div class="cf-em-event-detail-item">
+                            <span class="cf-em-detail-icon">${icons.users}</span>
+                            <span>${event.attending} / ${event.capacity} attending</span>
+                        </div>
+                        <div class="cf-em-event-detail-item">
+                            <span class="cf-em-detail-icon">${icons.clock}</span>
+                            <span>${event.time}</span>
+                        </div>
+                        <div class="cf-em-event-detail-item">
+                            <span class="cf-em-detail-icon">${icons.user}</span>
+                            <span>${event.volunteers} volunteers</span>
+                        </div>
+                        <div class="cf-em-event-detail-item">
+                            <span class="cf-em-detail-icon">${icons.mapPin}</span>
+                            <span>${event.location}</span>
+                        </div>
+                    </div>
+                    <div class="cf-em-event-stats">
+                        <div class="cf-em-progress-bar">
+                            <div class="cf-em-progress-fill" style="width: ${percentage}%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+                            }).join('');
+                        }
+
+                        function renderUpcoming() {
+                            const container = document.getElementById('cfEmUpcomingList');
+                            const upcoming = events.slice(0, 3);
+
+                            container.innerHTML = upcoming.map(event => `
+        <div class="cf-em-upcoming-item" onclick="viewEvent(${event.id})">
+            <span class="cf-em-upcoming-dot"></span>
+            <div class="cf-em-upcoming-details">
+                <h4>${event.name}</h4>
+                <p>${event.date} at ${event.time}</p>
+            </div>
+        </div>
+    `).join('');
+                        }
+
+                        function renderCalendar() {
+                            if (!calendarData) return;
+
+                            // Update month display
+                            const monthDisplay = document.querySelector('.cf-em-calendar-month');
+                            if (monthDisplay) {
+                                monthDisplay.textContent = `${calendarData.month_name} ${calendarData.year}`;
+                            }
+
+                            // Get calendar grid container
+                            const gridContainer = document.querySelector('.cf-em-calendar-grid');
+                            if (!gridContainer) return;
+
+                            // Clear existing days (keep headers)
+                            const dayHeaders = Array.from(gridContainer.querySelectorAll('.cf-em-calendar-day-header'));
+                            gridContainer.innerHTML = '';
+                            dayHeaders.forEach(header => gridContainer.appendChild(header));
+
+                            // Add empty cells for days before first day of month
+                            for (let i = 0; i < calendarData.first_day_of_week; i++) {
+                                const emptyDay = document.createElement('div');
+                                emptyDay.className = 'cf-em-calendar-day cf-em-inactive';
+                                gridContainer.appendChild(emptyDay);
+                            }
+
+                            // Add days of the month
+                            const today = new Date();
+                            const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+                            for (let day = 1; day <= calendarData.days_in_month; day++) {
+                                const dayData = calendarData.calendar_days[day];
+                                const dayDiv = document.createElement('div');
+                                dayDiv.className = 'cf-em-calendar-day';
+                                dayDiv.textContent = day;
+
+                                // Add today class
+                                if (dayData.date === todayStr) {
+                                    dayDiv.classList.add('cf-em-today');
+                                }
+
+                                // Build tooltip content
+                                let tooltipContent = '';
+
+                                // Add event details to tooltip
+                                if (dayData.has_events) {
+                                    dayDiv.classList.add('cf-em-has-event');
+                                    tooltipContent += 'Events:\\n';
+                                    dayData.events.forEach(event => {
+                                        const eventType = event.type || 'Event';
+                                        const eventTime = event.start_time ? event.start_time.substring(0, 5) : '';
+                                        tooltipContent += `  • ${event.name} (${eventType}) - ${eventTime}\\n`;
+                                    });
+                                }
+
+                                // Add birthday details to tooltip
+                                if (dayData.has_birthdays) {
+                                    dayDiv.classList.add('cf-em-has-birthday');
+                                    if (tooltipContent) tooltipContent += '\\n';
+                                    tooltipContent += 'Birthdays:\\n';
+                                    dayData.birthdays.forEach(birthday => {
+                                        const fullName = `${birthday.first_name} ${birthday.last_name}`;
+                                        const age = birthday.age;
+                                        tooltipContent += `  🎂 ${fullName} (${age} years)\\n`;
+                                    });
+
+                                    // Add birthday emoji indicator
+                                    const indicator = document.createElement('span');
+                                    indicator.className = 'cf-em-birthday-indicator';
+                                    indicator.textContent = '🎂';
+                                    dayDiv.appendChild(indicator);
+                                }
+
+                                // Set tooltip if there are activities
+                                if (tooltipContent) {
+                                    dayDiv.setAttribute('title', tooltipContent);
+                                    dayDiv.setAttribute('data-tooltip', tooltipContent);
+                                }
+
+                                // Click handler
+                                if (dayData.has_activities) {
+                                    dayDiv.style.cursor = 'pointer';
+                                    dayDiv.onclick = () => showDayDetails(dayData);
+                                }
+
+                                gridContainer.appendChild(dayDiv);
+                            }
+
+                            // Add empty cells to complete the grid
+                            const totalCells = gridContainer.children.length - 7; // Subtract headers
+                            const remainingCells = 42 - totalCells - 7; // 6 rows * 7 days - existing cells - headers
+                            for (let i = 0; i < remainingCells && i < 14; i++) {
+                                const emptyDay = document.createElement('div');
+                                emptyDay.className = 'cf-em-calendar-day cf-em-inactive';
+                                gridContainer.appendChild(emptyDay);
+                            }
+                        }
+
+                        function showDayDetails(dayData) {
+                            const modal = document.getElementById('cfEmEventDetailModal');
+                            const body = document.getElementById('cfEmEventDetailBody');
+
+                            let detailsHTML = `
+                                <div class="cf-em-event-detail-section">
+                                    <h3>Activities for ${formatDateForDisplay(dayData.date)}</h3>
+                                </div>
+                            `;
+
+                            if (dayData.events.length > 0) {
+                                detailsHTML += `
+                                    <div class="cf-em-event-detail-section">
+                                        <h3>Events (${dayData.events.length})</h3>
+                                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                                `;
+                                dayData.events.forEach(event => {
+                                    const eventTime = event.start_time ? event.start_time.substring(0, 5) : 'TBD';
+                                    const eventType = event.type || 'Event';
+                                    detailsHTML += `
+                                        <div style="padding: 12px; background: #f8fafc; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                                            <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">${event.name}</div>
+                                            <div style="font-size: 13px; color: #64748b;">
+                                                <div>Type: ${eventType}</div>
+                                                <div>Time: ${eventTime}</div>
+                                                <div>Location: ${event.location || 'TBD'}</div>
+                                            </div>
+                                        </div>
+                                    `;
+                                });
+                                detailsHTML += `</div></div>`;
+                            }
+
+                            if (dayData.birthdays.length > 0) {
+                                detailsHTML += `
+                                    <div class="cf-em-event-detail-section">
+                                        <h3>Birthdays (${dayData.birthdays.length})</h3>
+                                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                                `;
+                                dayData.birthdays.forEach(birthday => {
+                                    const fullName = `${birthday.first_name} ${birthday.last_name}`;
+                                    detailsHTML += `
+                                        <div style="padding: 12px; background: #fef3c7; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                                            <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">
+                                                🎂 ${fullName}
+                                            </div>
+                                            <div style="font-size: 13px; color: #64748b;">
+                                                <div>Age: ${birthday.age} years old</div>
+                                                ${birthday.phone ? `<div>Phone: ${birthday.phone}</div>` : ''}
+                                                ${birthday.email ? `<div>Email: ${birthday.email}</div>` : ''}
+                                            </div>
+                                        </div>
+                                    `;
+                                });
+                                detailsHTML += `</div></div>`;
+                            }
+
+                            body.innerHTML = detailsHTML;
+                            modal.classList.add('cf-em-show');
+                        }
+
+                        function formatDateForDisplay(dateStr) {
+                            const date = new Date(dateStr);
+                            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                            return date.toLocaleDateString('en-US', options);
+                        }
+
+                        function previousMonth() {
+                            currentMonth--;
+                            if (currentMonth < 1) {
+                                currentMonth = 12;
+                                currentYear--;
+                            }
+                            fetchCalendarData(currentYear, currentMonth);
+                        }
+
+                        function nextMonth() {
+                            currentMonth++;
+                            if (currentMonth > 12) {
+                                currentMonth = 1;
+                                currentYear++;
+                            }
+                            fetchCalendarData(currentYear, currentMonth);
+                        }
+
+                        function filterEventsByDate(date) {
+                            currentDate = date;
+                            currentFilter = 'all';
+                            document.querySelectorAll('.cf-em-tab').forEach(t => t.classList.remove('cf-em-active'));
+                            document.querySelector('.cf-em-tab').classList.add('cf-em-active');
+
+                            fetchEvents('all', '', date);
+                        }
+
+                        function filterEvents(filter) {
+                            currentFilter = filter;
+                            currentDate = null;
+                            document.querySelectorAll('.cf-em-tab').forEach(t => t.classList.remove('cf-em-active'));
+                            event.target.classList.add('cf-em-active');
+                            fetchEvents(filter);
+                        }
+
+                        function searchEvents() {
+                            const searchTerm = document.getElementById('cfEmEventSearch').value;
+                            fetchEvents(currentFilter, searchTerm, currentDate);
+                        }
+
+                        function viewEvent(eventId) {
+                            const event = events.find(e => e.id === eventId);
+                            if (!event) return;
+
+                            const modal = document.getElementById('cfEmEventDetailModal');
+                            const body = document.getElementById('cfEmEventDetailBody');
+
+                            const imagePath = event.image_path || '../Assests/default-event.jpg';
+                            const percentage = Math.round((event.attending / event.capacity) * 100);
+
+                            // Format dates and times
+                            const startDate = new Date(event.start_date).toLocaleDateString('en-US', {
+                                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+                            });
+                            const endDate = new Date(event.end_date).toLocaleDateString('en-US', {
+                                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+                            });
+
+                            body.innerHTML = `
+        <!-- Event Image -->
+        <div class="cf-em-event-detail-image">
+            <img src="${imagePath}" alt="${event.name}" onerror="this.src='../Assests/default-event.jpg'">
+        </div>
+
+        <!-- Event Header -->
+        <div class="cf-em-event-detail-section">
+            <h3>${event.name}</h3>
+            <div class="cf-em-event-badges" style="margin: 10px 0;">
+                <span class="cf-em-badge cf-em-${event.type.toLowerCase()}">${event.type}</span>
+                <span class="cf-em-badge cf-em-${event.category ? event.category.toLowerCase() : 'general'}">${event.category || 'General'}</span>
+                <span class="cf-em-badge cf-em-${event.status}">${event.status}</span>
+            </div>
+            <p style="color: #64748b; margin-bottom: 20px;">${event.description}</p>
+
+            <div class="cf-em-stats-row">
+                <div class="cf-em-stat-box">
+                    <div class="cf-em-stat-box-value">${event.attending}</div>
+                    <div class="cf-em-stat-box-label">Attending</div>
+                </div>
+                <div class="cf-em-stat-box">
+                    <div class="cf-em-stat-box-value">${event.max_capacity || event.capacity}</div>
+                    <div class="cf-em-stat-box-label">Capacity</div>
+                </div>
+                <div class="cf-em-stat-box">
+                    <div class="cf-em-stat-box-value">${event.volunteers_needed || event.volunteers}</div>
+                    <div class="cf-em-stat-box-label">Volunteers</div>
+                </div>
+                <div class="cf-em-stat-box">
+                    <div class="cf-em-stat-box-value">${percentage}%</div>
+                    <div class="cf-em-stat-box-label">Filled</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Date & Time Information -->
+        <div class="cf-em-event-detail-section">
+            <h3>Date & Time</h3>
+            <div class="cf-em-detail-grid">
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">Start Date</span>
+                    <span class="cf-em-detail-value">${startDate}</span>
+                </div>
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">Start Time</span>
+                    <span class="cf-em-detail-value">${event.start_time || event.time}</span>
+                </div>
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">End Date</span>
+                    <span class="cf-em-detail-value">${endDate}</span>
+                </div>
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">End Time</span>
+                    <span class="cf-em-detail-value">${event.end_time || 'N/A'}</span>
+                </div>
+                ${event.is_recurring ? `
+                <div class="cf-em-detail-item" style="grid-column: 1 / -1;">
+                    <span class="cf-em-detail-label">Recurring Event</span>
+                    <span class="cf-em-detail-value">Yes</span>
+                </div>
+                ` : ''}
+            </div>
+        </div>
+
+        <!-- Location Information -->
+        <div class="cf-em-event-detail-section">
+            <h3>Location</h3>
+            <div class="cf-em-detail-grid">
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">Venue</span>
+                    <span class="cf-em-detail-value">${event.location}</span>
+                </div>
+                ${event.room_building ? `
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">Room/Building</span>
+                    <span class="cf-em-detail-value">${event.room_building}</span>
+                </div>
+                ` : ''}
+                ${event.full_address ? `
+                <div class="cf-em-detail-item" style="grid-column: 1 / -1;">
+                    <span class="cf-em-detail-label">Address</span>
+                    <span class="cf-em-detail-value">${event.full_address}</span>
+                </div>
+                ` : ''}
+                ${event.is_virtual ? `
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">Virtual Event</span>
+                    <span class="cf-em-detail-value">Yes</span>
+                </div>
+                ${event.virtual_link ? `
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">Virtual Link</span>
+                    <span class="cf-em-detail-value"><a href="${event.virtual_link}" target="_blank">${event.virtual_link}</a></span>
+                </div>
+                ` : ''}
+                ` : ''}
+            </div>
+        </div>
+
+        <!-- Registration & Access -->
+        <div class="cf-em-event-detail-section">
+            <h3>Registration & Access</h3>
+            <div class="cf-em-detail-grid">
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">Requires Registration</span>
+                    <span class="cf-em-detail-value">${event.require_registration ? 'Yes' : 'No'}</span>
+                </div>
+                ${event.registration_deadline ? `
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">Registration Deadline</span>
+                    <span class="cf-em-detail-value">${new Date(event.registration_deadline).toLocaleDateString()}</span>
+                </div>
+                ` : ''}
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">Open to Public</span>
+                    <span class="cf-em-detail-value">${event.open_to_public ? 'Yes' : 'No'}</span>
+                </div>
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">Age Group</span>
+                    <span class="cf-em-detail-value">${event.age_group || 'All'}</span>
+                </div>
+            </div>
+        </div>
+
+        ${event.volunteer_roles && event.volunteer_roles.length > 0 ? `
+        <!-- Volunteer Roles -->
+        <div class="cf-em-event-detail-section">
+            <h3>Volunteer Roles Needed</h3>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                ${event.volunteer_roles.map(role => `
+                    <div style="padding: 10px; background: #f8fafc; border-radius: 6px; display: flex; justify-content: space-between;">
+                        <span style="font-weight: 500;">${role.name}</span>
+                        <span style="color: #64748b;">${role.quantity} needed</span>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+        ` : ''}
+
+        ${event.tags && event.tags.length > 0 ? `
+        <!-- Tags -->
+        <div class="cf-em-event-detail-section">
+            <h3>Tags</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                ${event.tags.map(tag => `
+                    <span style="padding: 4px 12px; background: #e2e8f0; border-radius: 16px; font-size: 13px;">${tag}</span>
+                `).join('')}
+            </div>
+        </div>
+        ` : ''}
+
+        <!-- Contact Information -->
+        ${event.contact_person || event.contact_email || event.contact_phone ? `
+        <div class="cf-em-event-detail-section">
+            <h3>Contact Information</h3>
+            <div class="cf-em-detail-grid">
+                ${event.contact_person ? `
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">Contact Person</span>
+                    <span class="cf-em-detail-value">${event.contact_person}</span>
+                </div>
+                ` : ''}
+                ${event.contact_email ? `
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">Email</span>
+                    <span class="cf-em-detail-value"><a href="mailto:${event.contact_email}">${event.contact_email}</a></span>
+                </div>
+                ` : ''}
+                ${event.contact_phone ? `
+                <div class="cf-em-detail-item">
+                    <span class="cf-em-detail-label">Phone</span>
+                    <span class="cf-em-detail-value"><a href="tel:${event.contact_phone}">${event.contact_phone}</a></span>
+                </div>
+                ` : ''}
+            </div>
+        </div>
+        ` : ''}
+
+        ${event.special_notes ? `
+        <!-- Special Notes -->
+        <div class="cf-em-event-detail-section">
+            <h3>Special Notes</h3>
+            <p style="color: #475569; line-height: 1.6;">${event.special_notes}</p>
+        </div>
+        ` : ''}
+
+        <!-- Action Buttons -->
+        <div class="cf-em-action-buttons">
+            <button class="cf-em-btn cf-em-btn-secondary" onclick="closeModal('cfEmEventDetailModal')">Close</button>
+            <button class="cf-em-btn cf-em-btn-primary" onclick="editEvent(${event.id})">Edit Event</button>
+        </div>
+    `;
+
+                            modal.classList.add('cf-em-show');
+                        }
+
+                        function editEvent(eventId) {
+                            // Redirect to edit event page with event ID
+                            window.location.href = `../Add_Event/edit_event.html?id=${eventId}`;
+                        }
+
+                        async function deleteEvent(eventId) {
+                            const event = events.find(e => e.id === eventId);
+                            if (!event) return;
+
+                            // Confirm deletion
+                            const confirmDelete = confirm(`Are you sure you want to delete "${event.name}"? This action cannot be undone.`);
+                            if (!confirmDelete) return;
+
+                            try {
+                                const formData = new FormData();
+                                formData.append('event_id', eventId);
+
+                                const response = await fetch('delete_event.php', {
+                                    method: 'POST',
+                                    body: formData
+                                });
+
+                                // Log the response for debugging
+                                console.log('Response status:', response.status);
+                                const responseText = await response.text();
+                                console.log('Response text:', responseText);
+
+                                // Try to parse as JSON
+                                let data;
+                                try {
+                                    data = JSON.parse(responseText);
+                                } catch (e) {
+                                    console.error('JSON parse error:', e);
+                                    alert('Server error: Invalid response format. Check console for details.');
+                                    return;
+                                }
+
+                                if (data.success) {
+                                    alert('Event deleted successfully!');
+                                    // Refresh the events list
+                                    await initializePage();
+                                } else {
+                                    alert('Error deleting event: ' + data.message);
+                                }
+                            } catch (error) {
+                                console.error('Error:', error);
+                                alert('An error occurred while deleting the event. Please try again. Error: ' + error.message);
+                            }
+                        }
+
+                        function openAddEventModal() {
+                            // Redirect to the dedicated Add Event page
+                            window.location.href = '../Add_Event/New_Event.html';
+                        }
+
+                        function saveEvent() {
+                            const name = document.getElementById('cfEmEventName').value;
+                            alert(`Event "${name}" saved successfully!`);
+                            closeModal('cfEmEditEventModal');
+                        }
+
+                        function closeModal(modalId) {
+                            document.getElementById(modalId).classList.remove('cf-em-show');
+                        }
+
+                        function manageVolunteers(eventId) {
+                            alert('Opening volunteer management...');
+                        }
+
+                        function sendReminder(eventId) {
+                            const event = events.find(e => e.id === eventId);
+                            alert(`Sending reminder to ${event.attending} attendees for ${event.name}`);
+                        }
+
+                        function exportEvents() {
+                            alert('Exporting all events to CSV...');
+                        }
+
+                        function openFilterModal() {
+                            alert('Opening advanced filters...');
+                        }
+
+                        // ==================== Event Metrics Functions ====================
+                        async function loadEventMetrics() {
+                            try {
+                                const response = await fetch('get_event_metrics.php');
+                                const result = await response.json();
+
+                                if (result.success) {
+                                    const metrics = result.data;
+                                    document.getElementById('metric-total-events').textContent = metrics.total_events || 0;
+                                    document.getElementById('metric-upcoming-events').textContent = metrics.upcoming_events || 0;
+                                    document.getElementById('metric-service-events').textContent = metrics.in_service_events || 0;
+                                } else {
+                                    console.error('Error loading event metrics:', result.message);
+                                }
+                            } catch (error) {
+                                console.error('Error loading event metrics:', error);
+                            }
+                        }
+
+                        // ==================== Birthday Functions ====================
+                        let currentBirthdayTab = 'all';
+                        let birthdayData = null;
+
+                        async function loadBirthdayData() {
+                            const monthSelect = document.getElementById('birthday-month-select');
+                            const selectedMonth = monthSelect.value;
+
+                            // Show loading
+                            document.getElementById('birthday-loading').style.display = 'flex';
+                            document.getElementById('birthday-table').style.display = 'none';
+                            document.getElementById('birthday-empty').style.display = 'none';
+
+                            try {
+                                const response = await fetch(`get_birthdays.php?month=${selectedMonth}`);
+                                const result = await response.json();
+
+                                if (result.success) {
+                                    birthdayData = result.data;
+
+                                    // Update counts
+                                    document.getElementById('count-all').textContent = birthdayData.total_count;
+                                    document.getElementById('count-celebrated').textContent = birthdayData.celebrated_count;
+                                    document.getElementById('count-upcoming').textContent = birthdayData.upcoming_count;
+
+                                    // Render current tab
+                                    renderBirthdayTable();
+                                } else {
+                                    console.error('Error loading birthdays:', result.message);
+                                    showBirthdayEmpty();
+                                }
+                            } catch (error) {
+                                console.error('Error loading birthdays:', error);
+                                showBirthdayEmpty();
+                            } finally {
+                                document.getElementById('birthday-loading').style.display = 'none';
+                            }
+                        }
+
+                        function renderBirthdayTable() {
+                            if (!birthdayData) return;
+
+                            let dataToRender = [];
+                            switch (currentBirthdayTab) {
+                                case 'all':
+                                    dataToRender = birthdayData.all_birthdays;
+                                    break;
+                                case 'celebrated':
+                                    dataToRender = birthdayData.celebrated;
+                                    break;
+                                case 'upcoming':
+                                    dataToRender = birthdayData.upcoming;
+                                    break;
+                            }
+
+                            const tbody = document.getElementById('birthday-table-body');
+
+                            if (dataToRender.length === 0) {
+                                showBirthdayEmpty();
+                                return;
+                            }
+
+                            document.getElementById('birthday-table').style.display = 'table';
+                            document.getElementById('birthday-empty').style.display = 'none';
+
+                            tbody.innerHTML = dataToRender.map(member => {
+                                const monthName = birthdayData.month_name;
+                                const day = member.birth_day;
+                                const groupClass = (member.church_group || 'none').toLowerCase();
+
+                                return `
+                                    <tr>
+                                        <td>
+                                            <div class="cf-birthday-date">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                                </svg>
+                                                ${monthName} ${day}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="cf-birthday-name">${member.name}</span>
+                                        </td>
+                                        <td>
+                                            <span class="cf-birthday-status ${currentBirthdayTab === 'celebrated' ? 'celebrated' : 'upcoming'}">
+                                                ${currentBirthdayTab === 'celebrated' ? 'Celebrated' : 'Upcoming'}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="cf-birthday-group ${groupClass}">${member.church_group || 'N/A'}</span>
+                                        </td>
+                                        <td>
+                                            <div class="cf-birthday-contact">
+                                                <div>${member.phone || 'N/A'}</div>
+                                                <div style="font-size: 12px; color: #a0aec0;">${member.email || ''}</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="cf-birthday-action-btn" onclick="sendBirthdayWish('${member.name}', '${member.phone}')">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                                </svg>
+                                                Send Wish
+                                            </button>
+                                        </td>
+                                    </tr>
+                                `;
+                            }).join('');
+                        }
+
+                        function showBirthdayEmpty() {
+                            document.getElementById('birthday-table').style.display = 'none';
+                            document.getElementById('birthday-empty').style.display = 'flex';
+                        }
+
+                        function switchBirthdayTab(tab) {
+                            currentBirthdayTab = tab;
+
+                            // Update active tab
+                            document.querySelectorAll('.cf-birthday-tab').forEach(tabBtn => {
+                                tabBtn.classList.remove('active');
+                            });
+                            document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+
+                            // Render table
+                            renderBirthdayTable();
+                        }
+
+                        function changeBirthdayMonth(direction) {
+                            const monthSelect = document.getElementById('birthday-month-select');
+                            let currentMonth = parseInt(monthSelect.value);
+                            currentMonth += direction;
+
+                            if (currentMonth < 1) currentMonth = 12;
+                            if (currentMonth > 12) currentMonth = 1;
+
+                            monthSelect.value = currentMonth;
+                            loadBirthdayData();
+                        }
+
+                        function sendBirthdayWish(name, phone) {
+                            alert(`Sending birthday wish to ${name} at ${phone}`);
+                            // You can implement actual SMS/WhatsApp integration here
+                        }
+
+                        // Initialize page on load
+                        async function initializePage() {
+                            // Show loading state
+                            console.log('Initializing events page...');
+
+                            // Set current month in birthday selector
+                            const currentMonth = new Date().getMonth() + 1;
+                            document.getElementById('birthday-month-select').value = currentMonth;
+
+                            // Fetch all data in parallel
+                            await Promise.all([
+                                fetchEvents(),
+                                fetchCalendarData(currentYear, currentMonth),
+                                fetchStatistics(),
+                                loadEventMetrics(),
+                                loadBirthdayData()
+                            ]);
+
+                            console.log('Events page initialized successfully');
+
+                            // Start auto-refresh for metrics and birthday data
+                            startAutoRefresh();
+                        }
+
+                        // Auto-refresh functionality
+                        let autoRefreshInterval = null;
+
+                        function startAutoRefresh() {
+                            // Auto-refresh every 30 seconds
+                            autoRefreshInterval = setInterval(() => {
+                                loadEventMetrics();
+                                loadBirthdayData();
+                            }, 30000); // 30 seconds
+                        }
+
+                        // Pause auto-refresh when tab is hidden to save resources
+                        document.addEventListener('visibilitychange', function() {
+                            if (document.hidden) {
+                                if (autoRefreshInterval) {
+                                    clearInterval(autoRefreshInterval);
+                                    autoRefreshInterval = null;
+                                }
+                            } else {
+                                // Resume auto-refresh when tab becomes visible
+                                if (!autoRefreshInterval) {
+                                    startAutoRefresh();
+                                }
+                            }
+                        });
+
+                        // Run initialization when DOM is ready
+                        if (document.readyState === 'loading') {
+                            document.addEventListener('DOMContentLoaded', initializePage);
+                        } else {
+                            initializePage();
+                        }
+
+                </script>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

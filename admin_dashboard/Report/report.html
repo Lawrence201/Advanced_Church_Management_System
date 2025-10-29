@@ -1,0 +1,2516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChurchFlow Management System</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Advanced Finance Report Custom Styles */
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            color: #475569;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .rank-badge.gold {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+        }
+
+        .rank-badge.silver {
+            background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
+            color: #1e293b;
+            font-size: 15px;
+            box-shadow: 0 3px 10px rgba(148, 163, 184, 0.4);
+        }
+
+        .rank-badge.bronze {
+            background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+            color: white;
+            font-size: 15px;
+            box-shadow: 0 3px 10px rgba(251, 146, 60, 0.4);
+        }
+
+        .export-btn {
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+
+        .pdf-btn:hover {
+            background: #dc2626 !important;
+        }
+
+        .excel-btn:hover {
+            background: #059669 !important;
+        }
+
+        /* Gradient card animations */
+        .sum-card[style*="gradient"] {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sum-card[style*="gradient"]:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        /* Auto-refresh indicator animation */
+        .cf-auto-refresh-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        /* Table row hover effect */
+        .dat-tab tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .dat-tab tbody tr:hover {
+            background-color: #f8fafc;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="executive_summary.js" defer></script>
+    <script src="visitor_analytics.js" defer></script>
+    <script src="finance_analytics_advanced.js" defer></script>
+    <script src="attendance_analytics_advanced.js" defer></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+            
+                <svg class="church-logo" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 9h4" />
+                    <path d="M12 7v5" />
+                    <path d="M14 22v-4a2 2 0 0 0-4 0v4" />
+                    <path d="M18 22V5.618a1 1 0 0 0-.553-.894l-4.553-2.277a2 2 0 0 0-1.788 0L6.553 4.724A1 1 0 0 0 6 5.618V22" />
+                    <path d="m18 7 3.447 1.724a1 1 0 0 1 .553.894V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.618a1 1 0 0 1 .553-.894L6 7" />
+                </svg>
+            
+            
+                <div class="logo-text">
+                    <h3>Church</h3>
+                    <p>Management System</p>
+                </div>
+            
+                <!-- Close button for mobile -->
+                <button class="sidebar-close" onclick="toggleSidebar()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="sidebar-content">
+                <div class="menu-section">
+                    <div class="menu-label">Main Menu</div>
+                    <a href="../index.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-layout-dashboard h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:110:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="110"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                            </svg></span>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="../Members/members.html" class="menu-item ">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-users h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:110:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="110"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </span>
+                        <span>Members</span>
+                    </a>
+                    <a href="../Members/visitors_management.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-user-check h-5 w-5">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <polyline points="16 11 18 13 22 9"></polyline>
+                            </svg>
+                        </span>
+                        <span>Visitors</span>
+                    </a>
+                    <a href="../Events/events.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-calendar h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:110:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="110"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M8 2v4"></path>
+                                <path d="M16 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                            </svg>
+                        </span>
+                        <span>Events</span>
+                    </a>
+                    <a href="../Finance/finance.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-dollar-sign h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:110:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="110"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <line x1="12" x2="12" y1="2" y2="22"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </span>
+                        <span>Finances</span>
+                    </a>
+                    <a href="../Communication/communication.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-message-square h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:110:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="110"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </span>
+                        <span>Communications</span>
+                    </a>
+                    <a href="../Attendance/attendance.html" class="menu-item">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-user-check h-5 w-5" data-lov-id="src/components/AppSidebar.tsx:112:22"
+                                data-lov-name="item.icon" data-component-path="src/components/AppSidebar.tsx" data-component-line="112"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <polyline points="16 11 18 13 22 9"></polyline>
+                            </svg>
+                        </span>
+                        <span>Attendance</span>
+                    </a>
+                    <a href="#" class="menu-item active">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-chart-column h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:110:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="110"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                <path d="M18 17V9"></path>
+                                <path d="M13 17V5"></path>
+                                <path d="M8 17v-3"></path>
+                            </svg>
+                        </span>
+                        <span>Reports</span>
+                    </a>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">AI Features</div>
+                    <a href="../AI/ai_insight.html" class="menu-item has-badge">
+                        <span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L13.5 7.5H19L14.5 11L16 16.5L12 13L8 16.5L9.5 11L5 7.5H10.5L12 2Z" fill="currentColor"
+                                    opacity="0.2" />
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" />
+                                <path d="M12 5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M12 16V19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M5 12H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M16 12H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M7.5 7.5L9.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M14.5 14.5L16.5 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M7.5 16.5L9.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M14.5 9.5L16.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <circle cx="12" cy="5" r="1.5" fill="currentColor" />
+                                <circle cx="19" cy="12" r="1.5" fill="currentColor" />
+                                <circle cx="12" cy="19" r="1.5" fill="currentColor" />
+                                <circle cx="5" cy="12" r="1.5" fill="currentColor" />
+                            </svg>
+                    
+                        </span>
+                        <span>AI Insights</span>
+                        <span class="badge">New</span>
+                    </a>
+                    <a href="../AI/members_analytics.html" class="menu-item has-badge">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-chart-column h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:131:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="131"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                <path d="M18 17V9"></path>
+                                <path d="M13 17V5"></path>
+                                <path d="M8 17v-3"></path>
+                            </svg></span>
+                        <span>Member Analytics</span>
+                        <span class="badge">New</span>
+                    </a>
+                    <a href="../AI/ai_smart_report.html" class="menu-item has-badge">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-file-text h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:131:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="131"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                <path d="M10 9H8"></path>
+                                <path d="M16 13H8"></path>
+                                <path d="M16 17H8"></path>
+                            </svg></span>
+                        <span>Smart Reports</span>
+                        <span class="badge">New</span>
+                    </a>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">Quick Actions</div>
+                    <a href="../Add_Members/enroll_members.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-user-plus h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:151:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="151"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <line x1="19" x2="19" y1="8" y2="14"></line>
+                                <line x1="22" x2="16" y1="11" y2="11"></line>
+                            </svg></span>
+                        <span>Add Member</span>
+                    </a>
+                    <a href="../Add_Event/New_Event.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-calendar h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:151:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="151"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M8 2v4"></path>
+                                <path d="M16 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                            </svg></span>
+                        <span>New Event</span>
+                    </a>
+                    <a href="../Record_Donations/record_donations.html" class="menu-item">
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 10C20 6.5 17 4 14 4C12.5 4 11.2 4.6 10.3 5.6C9.9 5.2 9.4 5 8.8 5C7.3 5 6 6.3 6 7.8C6 8.4 6.2 8.9 6.5 9.3C4.5 10.2 3 12.2 3 14.5C3 17.5 5.5 20 8.5 20H16.5C19 20 21 18 21 15.5C21 13.2 19.5 11.3 17.5 10.5C18.4 10.8 19 11.7 19 12.7"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M12 20C11.4 20 9.5 19.5 8.5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <circle cx="12" cy="8" r="1" fill="currentColor" />
+                                <path d="M12 11V15M10 13H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path
+                                    d="M8.5 4C9.5 3 11 3 12 4C13 3 14.5 3 15.5 4C16 4.5 16 5.5 16 6C16 7 15 8 12 10C9 8 8 7 8 6C8 5.5 8 4.5 8.5 4Z"
+                                    fill="currentColor" opacity="0.2" />
+                                <path
+                                    d="M12 5.5C10.5 4 9 4 8 5C7 6 7 7.5 7 8.5C7 10 8.5 11.5 12 14C15.5 11.5 17 10 17 8.5C17 7.5 17 6 16 5C15 4 13.5 4 12 5.5Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <span>Record Donation</span>
+                    </a>
+                    <a href="../Send_Message/send_message.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-bell h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:151:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="151"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                            </svg></span>
+                        <span>Send Message</span>
+                    </a>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label"></div>
+                    <a href="../Settings/settings.html" class="menu-item">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-settings h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:166:18" data-lov-name="Settings"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="166"
+                                data-component-file="AppSidebar.tsx" data-component-name="Settings"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path
+                                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+                                </path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg></span>
+                        <span>Settings</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search members, events, or anything...">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground"
+                        data-lov-id="src/components/Layout.tsx:24:16" data-lov-name="Search"
+                        data-component-path="src/components/Layout.tsx" data-component-line="24"
+                        data-component-file="Layout.tsx" data-component-name="Search"
+                        data-component-content="%7B%22className%22%3A%22absolute%20left-3%20top-1%2F2%20transform%20-translate-y-1%2F2%20h-4%20w-4%20text-muted-foreground%22%7D">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+                </div>
+                <div class="header-right">
+                    <div class="notification-icon">
+                        <span style="font-size: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell h-5 w-5"
+                                data-lov-id="src/components/AppSidebar.tsx:151:22" data-lov-name="item.icon"
+                                data-component-path="src/components/AppSidebar.tsx" data-component-line="151"
+                                data-component-file="AppSidebar.tsx" data-component-name="item.icon"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                            </svg>
+                        </span>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <span style="font-size: 14px; font-weight: 500;">Pastor Lawrence</span>
+                        <span style="font-size: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-5 w-5"
+                                data-lov-id="src/components/Layout.tsx:41:16" data-lov-name="User"
+                                data-component-path="src/components/Layout.tsx" data-component-line="41"
+                                data-component-file="Layout.tsx" data-component-name="User"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function toggleSidebar() {
+                    const sidebar = document.querySelector('.sidebar');
+                    sidebar.classList.toggle('open');
+                }
+
+                // Close sidebar when clicking outside on mobile
+                document.addEventListener('click', function (event) {
+                    const sidebar = document.querySelector('.sidebar');
+                    const toggle = document.querySelector('.mobile-menu-toggle');
+
+                    if (window.innerWidth <= 768 &&
+                        !sidebar.contains(event.target) &&
+                        !toggle.contains(event.target) &&
+                        sidebar.classList.contains('open')) {
+                        sidebar.classList.remove('open');
+                    }
+                });
+            </script>
+
+            <div class="dashboard-content">
+
+                <div class="ran-header">
+                    <div class="zap-content">
+                        <h1>Reports & Analytics</h1>
+                        <p>Comprehensive insights and data-driven decisions for your church</p>
+                    </div>
+                    <div class="xap-actions">
+                        <button class="gen-btn gen-btn-sec"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-column h-5 w-5"
+                            data-lov-id="src/components/AppSidebar.tsx:110:22" data-lov-name="item.icon"
+                            data-component-path="src/components/AppSidebar.tsx" data-component-line="110" data-component-file="AppSidebar.tsx"
+                            data-component-name="item.icon" data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                            <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                            <path d="M18 17V9"></path>
+                            <path d="M13 17V5"></path>
+                            <path d="M8 17v-3"></path>
+                        </svg>
+                        Schedule Report</button>
+                        <button class="gen-btn gen-btn-pri">
+
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7,10 12,15 17,10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>Export All</button>
+                    </div>
+                </div>
+                
+                <div class="fil-section">
+                    <div class="fil-group">
+                        <label class="fil-label">Date Range</label>
+                        <select class="fil-select">
+                            <option>Last 30 Days</option>
+                            <option>Last 90 Days</option>
+                            <option>Last 6 Months</option>
+                            <option>Last Year</option>
+                        </select>
+                    </div>
+                    <div class="fil-group">
+                        <label class="fil-label">Compare To</label>
+                        <select class="fil-select">
+                            <option>Previous Period</option>
+                            <option>Last Year</option>
+                        </select>
+                    </div>
+                    <div class="fil-group">
+                        <label class="fil-label">Ministry</label>
+                        <select class="fil-select">
+                            <option>All Ministries</option>
+                            <option>Youth Ministry</option>
+                            <option>Worship Team</option>
+                        </select>
+                    </div>
+                    <button class="gen-btn gen-btn-pri" style="margin-bottom: 0;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter h-4 w-4 mr-2"
+                            data-lov-id="src/pages/Members.tsx:170:12" data-lov-name="Filter" data-component-path="src/pages/Members.tsx"
+                            data-component-line="170" data-component-file="Members.tsx" data-component-name="Filter"
+                            data-component-content="%7B%22className%22%3A%22h-4%20w-4%20mr-2%22%7D">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                        </svg>
+                        Apply Filters</button>
+                </div>
+                
+                <div class="tab-container">
+                    <div class="tab-navi">
+                        <button class="tab-butt acti" data-tab="executive">Executive Summary</button>
+                        <button class="tab-butt" data-tab="insights">Key Insights</button>
+                        <button class="tab-butt" data-tab="attendance">Attendance</button>
+                        <button class="tab-butt" data-tab="visitors">Visitors</button>
+                        <button class="tab-butt" data-tab="financial">Financial</button>
+                        <button class="tab-butt" data-tab="birthdays">Birthday Analytics</button>
+                        <button class="tab-butt" data-tab="social">Social Media</button>
+                        <button class="tab-butt" data-tab="communication">Communication</button>
+                        <button class="tab-butt" data-tab="engagement">Engagement</button>
+                    </div>
+                
+                    <!-- Executive Summary -->
+                    <div class="tab-pann acti" id="executive">
+                        <!-- Loading State -->
+                        <div id="executive-loading" style="text-align: center; padding: 40px;">
+                            <p style="color: #94a3b8; font-size: 16px;">Loading executive summary...</p>
+                        </div>
+
+                        <!-- Main Content (Hidden until loaded) -->
+                        <div id="executive-content" style="display: none;">
+                            <!-- System Overview Cards -->
+                            <div class="sum-grid">
+                                <div class="sum-card succ" id="card-membership">
+                                    <div class="sum-lab">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="9" cy="7" r="4"></circle>
+                                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                        </svg>
+                                        Total Members</div>
+                                    <div class="sum-val" id="total-members">0</div>
+                                    <div class="sum-chan" id="member-growth">Loading...</div>
+                                </div>
+                                <div class="sum-card" id="card-engagement">
+                                    <div class="sum-lab">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6366f1"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                                        </svg>
+                                        Active Engagement</div>
+                                    <div class="sum-val" id="engagement-rate">0%</div>
+                                    <div class="sum-chan" id="engagement-detail">Loading...</div>
+                                </div>
+                                <div class="sum-card succ" id="card-financial">
+                                    <div class="sum-lab">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                        </svg>
+                                        Financial Health</div>
+                                    <div class="sum-val" id="total-income">GH₵0</div>
+                                    <div class="sum-chan" id="income-growth">Loading...</div>
+                                </div>
+                                <div class="sum-card" id="card-attendance">
+                                    <div class="sum-lab">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6366f1"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg>
+                                        Avg Attendance</div>
+                                    <div class="sum-val" id="avg-attendance">0</div>
+                                    <div class="sum-chan" id="attendance-growth">Loading...</div>
+                                </div>
+
+                                <div class="sum-card inff" id="card-events">
+                                    <div class="sum-lab">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg>
+                                        Upcoming Events</div>
+                                    <div class="sum-val" id="total-events">0</div>
+                                    <div class="sum-chan" id="events-detail">Loading...</div>
+                                </div>
+
+                                <div class="sum-card succ" id="card-messages">
+                                    <div class="sum-lab">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                        </svg>
+                                        Messages Sent</div>
+                                    <div class="sum-val" id="total-messages">0</div>
+                                    <div class="sum-chan" id="messages-detail">Loading...</div>
+                                </div>
+
+                                <div class="sum-card warn" id="card-at-risk">
+                                    <div class="sum-lab">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                        </svg>
+                                        Members at Risk</div>
+                                    <div class="sum-val" id="at-risk-count">0</div>
+                                    <div class="sum-chan" id="at-risk-detail">Loading...</div>
+                                </div>
+
+                                <div class="sum-card succ" id="card-retention">
+                                    <div class="sum-lab">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                                        </svg>
+                                        Retention Rate</div>
+                                    <div class="sum-val" id="retention-rate">0%</div>
+                                    <div class="sum-chan" id="retention-detail">Loading...</div>
+                                </div>
+                            </div>
+                
+                        <!-- Dynamic Alert Box -->
+                        <div class="ale-box succ" id="performance-alert" style="display: none;">
+                            <div class="ale-cont">
+                                <div class="ale-tit" id="alert-title">Loading...</div>
+                                <div class="ale-tex" id="alert-text">Loading performance summary...</div>
+                            </div>
+                        </div>
+                
+                        <div class="sec-hea">
+                            <h2 class="sec-tit">Key Performance Indicators</h2>
+                        </div>
+                
+                        <table class="dat-tab">
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Current</th>
+                                    <th>Previous</th>
+                                    <th>Change</th>
+                                    <th>Target</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="kpi-table-body">
+                                <tr>
+                                    <td colspan="6" style="text-align: center; padding: 20px; color: #94a3b8;">Loading KPI data...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                
+                        <!-- Comprehensive Charts Section -->
+                        <div style="margin-top: 24px;">
+                            <div class="cha-grid">
+                                <!-- Growth Trend Chart -->
+                                <div class="cha-card">
+                                    <div class="cha-hea">
+                                        <h3>Growth Trends</h3>
+                                        <p class="cha-sub">Members & Attendance (6 months)</p>
+                                    </div>
+                                    <div class="cha-can">
+                                        <canvas id="executiveGrowthChart"></canvas>
+                                    </div>
+                                </div>
+                                
+                                <!-- Ministry Distribution Chart -->
+                                <div class="cha-card">
+                                    <div class="cha-hea">
+                                        <h3>Ministry Distribution</h3>
+                                        <p class="cha-sub">Members by church group</p>
+                                    </div>
+                                    <div class="cha-can">
+                                        <canvas id="executiveDeptChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Additional Charts Row -->
+                            <div class="cha-grid" style="margin-top: 24px;">
+                                <!-- Financial Trend Chart -->
+                                <div class="cha-card">
+                                    <div class="cha-hea">
+                                        <h3>Financial Trends</h3>
+                                        <p class="cha-sub">Income over 6 months (GH₵)</p>
+                                    </div>
+                                    <div class="cha-can">
+                                        <canvas id="executiveFinancialChart"></canvas>
+                                    </div>
+                                </div>
+                                
+                                <!-- Attendance Trend Chart -->
+                                <div class="cha-card">
+                                    <div class="cha-hea">
+                                        <h3>Attendance Trends</h3>
+                                        <p class="cha-sub">Average attendance (6 months)</p>
+                                    </div>
+                                    <div class="cha-can">
+                                        <canvas id="executiveAttendanceChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Engagement Chart -->
+                            <div class="cha-grid" style="margin-top: 24px;">
+                                <div class="cha-card">
+                                    <div class="cha-hea">
+                                        <h3>Member Engagement Overview</h3>
+                                        <p class="cha-sub">Active, Inactive, Visitors & At Risk</p>
+                                    </div>
+                                    <div class="cha-can">
+                                        <canvas id="executiveEngagementChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                
+                    <!-- Key Insights -->
+                    <div class="tab-pann" id="insights">
+                        <div class="ins-grid">
+                            <div class="ins-card succ">
+                                <div class="ins-ico">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                                        <polyline points="16 7 22 7 22 13"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="ins-tit">Strong Growth Trajectory</div>
+                                <div class="ins-tex">Youth ministry attendance up 95%. Consider expanding programs and adding staff.</div>
+                            </div>
+                            <div class="ins-card warn">
+                                <div class="ins-ico">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                                        </path>
+                                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                    </svg>
+                                </div>
+                                <div class="ins-tit">Retention Alert</div>
+                                <div class="ins-tex">23 members haven't attended in 45+ days. Automated follow-up recommended.</div>
+                            </div>
+                            <div class="ins-card succ">
+                                <div class="ins-ico">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                    </svg>
+                                </div>
+                                <div class="ins-tit">Financial Surplus</div>
+                                <div class="ins-tex">December giving exceeded budget by 6.4%. Best month with $4,500 surplus.</div>
+                            </div>
+                            <div class="ins-card">
+                                <div class="ins-ico">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                </div>
+                                <div class="ins-tit">Event Performance</div>
+                                <div class="ins-tex">Community outreach events have 60% attendance. Consider better promotion.</div>
+                            </div>
+                            <div class="ins-card succ">
+                                <div class="ins-ico">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="ins-tit">Communication Excellence</div>
+                                <div class="ins-tex">89% message open rate exceeds industry average of 71%.</div>
+                            </div>
+                            <div class="ins-card warn">
+                                <div class="ins-ico">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </div>
+                                <div class="ins-tit">Volunteer Gap</div>
+                                <div class="ins-tex">3 upcoming events need more volunteers. Recruitment campaign suggested.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                
+                    <!-- Attendance -->
+                    <div class="tab-pann" id="attendance">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h2 class="sec-tit" style="margin: 0;">Advanced Attendance Analytics</h2>
+                            <p style="font-size: 12px; color: #64748b; margin: 0; display: inline-flex; align-items: center; gap: 6px;">
+                                <span class="cf-auto-refresh-indicator"></span>
+                                Auto-updating every 30s
+                            </p>
+                        </div>
+
+                        <!-- Main KPI Cards -->
+                        <div class="sum-grid">
+                            <div class="sum-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                <div class="sum-lab" style="color: rgba(255,255,255,0.9);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                    Total Members
+                                </div>
+                                <div class="sum-val" id="total-members-att" style="color: white;">0</div>
+                                <div class="sum-chan" style="color: rgba(255,255,255,0.8);">Registered in system</div>
+                            </div>
+                            <div class="sum-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                                <div class="sum-lab" style="color: rgba(255,255,255,0.9);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <polyline points="16 11 18 13 22 9"></polyline>
+                                    </svg>
+                                    Members Attended
+                                </div>
+                                <div class="sum-val" id="members-attended" style="color: white;">0</div>
+                                <div class="sum-chan" id="att-growth-indicator" style="color: rgba(255,255,255,0.8);">This month</div>
+                            </div>
+                            <div class="sum-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
+                                <div class="sum-lab" style="color: rgba(255,255,255,0.9);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    Total Visitors
+                                </div>
+                                <div class="sum-val" id="total-visitors-att" style="color: white;">0</div>
+                                <div class="sum-chan" style="color: rgba(255,255,255,0.8);">First-time guests</div>
+                            </div>
+                            <div class="sum-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white;">
+                                <div class="sum-lab" style="color: rgba(255,255,255,0.9);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                        <path d="M18 17V9"></path>
+                                        <path d="M13 17V5"></path>
+                                        <path d="M8 17v-3"></path>
+                                    </svg>
+                                    Avg Attendance
+                                </div>
+                                <div class="sum-val" id="avg-attendance-att" style="color: white;">0</div>
+                                <div class="sum-chan" style="color: rgba(255,255,255,0.8);">Per service</div>
+                            </div>
+                        </div>
+
+                        <!-- Secondary Metrics -->
+                        <div class="sum-grid" style="margin-top: 20px;">
+                            <div class="met-card">
+                                <div class="met-lab">Attendance Rate</div>
+                                <div class="met-val" id="attendance-rate">0%</div>
+                                <div class="met-chan">Of total members</div>
+                            </div>
+                            <div class="met-card">
+                                <div class="met-lab">Peak Attendance</div>
+                                <div class="met-val" id="peak-attendance">0</div>
+                                <div class="met-chan">Highest this month</div>
+                            </div>
+                            <div class="met-card">
+                                <div class="met-lab">Growth Rate</div>
+                                <div class="met-val" id="att-growth-percentage">0%</div>
+                                <div class="met-chan">Month over month</div>
+                            </div>
+                            <div class="met-card">
+                                <div class="met-lab">New Attendees</div>
+                                <div class="met-val" id="new-attendees">0</div>
+                                <div class="met-chan">First time this month</div>
+                            </div>
+                        </div>
+
+                        <!-- Demographics Metrics -->
+                        <div class="sum-grid" style="margin-top: 20px;">
+                            <div class="met-card">
+                                <div class="met-lab">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; vertical-align: middle; margin-right: 6px;">
+                                        <circle cx="12" cy="8" r="5"></circle>
+                                        <path d="M20 21a8 8 0 1 0-16 0"></path>
+                                    </svg>
+                                    Males
+                                </div>
+                                <div class="met-val" id="males-count-att">0</div>
+                                <div class="met-chan">Present this month</div>
+                            </div>
+                            <div class="met-card">
+                                <div class="met-lab">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; vertical-align: middle; margin-right: 6px;">
+                                        <circle cx="12" cy="8" r="5"></circle>
+                                        <path d="M20 21a8 8 0 1 0-16 0"></path>
+                                        <circle cx="12" cy="8" r="2"></circle>
+                                    </svg>
+                                    Females
+                                </div>
+                                <div class="met-val" id="females-count-att">0</div>
+                                <div class="met-chan">Present this month</div>
+                            </div>
+                            <div class="met-card">
+                                <div class="met-lab">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; vertical-align: middle; margin-right: 6px;">
+                                        <path d="M12 2a3 3 0 0 0-3 3c0 1.3.8 2.4 2 2.8V9H8v2h3v2H8v2h3v5a1 1 0 0 0 2 0v-5h3v-2h-3v-2h3V9h-3V7.8c1.2-.4 2-1.5 2-2.8a3 3 0 0 0-3-3z"></path>
+                                    </svg>
+                                    Children
+                                </div>
+                                <div class="met-val" id="children-count-att">0</div>
+                                <div class="met-chan">Under 18 years</div>
+                            </div>
+                            <div class="met-card">
+                                <div class="met-lab">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; vertical-align: middle; margin-right: 6px;">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                    Adults
+                                </div>
+                                <div class="met-val" id="adults-count-att">0</div>
+                                <div class="met-chan">18+ years</div>
+                            </div>
+                        </div>
+                
+                        <!-- Charts Section -->
+                        <div class="cha-grid" style="margin-top: 30px;">
+                            <div class="cha-card fulw">
+                                <div class="cha-hea">
+                                    <h3>Weekly Attendance Trends</h3>
+                                    <p class="cha-sub">12-week comparison: Total, Members & Visitors</p>
+                                </div>
+                                <div class="cha-can tall">
+                                    <canvas id="weeklyTrendsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cha-grid">
+                            <div class="cha-card">
+                                <div class="cha-hea">
+                                    <h3>Age Demographics</h3>
+                                    <p class="cha-sub">Distribution by age groups</p>
+                                </div>
+                                <div class="cha-can">
+                                    <canvas id="demographicsChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="cha-card">
+                                <div class="cha-hea">
+                                    <h3>Service Breakdown</h3>
+                                    <p class="cha-sub">Attendance by service type</p>
+                                </div>
+                                <div class="cha-can">
+                                    <canvas id="serviceBreakdownChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cha-grid">
+                            <div class="cha-card">
+                                <div class="cha-hea">
+                                    <h3>Peak Days</h3>
+                                    <p class="cha-sub">Attendance by day of week</p>
+                                </div>
+                                <div class="cha-can">
+                                    <canvas id="peakTimesChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="cha-card">
+                                <div class="cha-hea">
+                                    <h3>Church Groups Participation</h3>
+                                    <p class="cha-sub">Ministry engagement levels</p>
+                                </div>
+                                <div class="cha-can">
+                                    <canvas id="churchGroupsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cha-grid">
+                            <div class="cha-card fulw">
+                                <div class="cha-hea">
+                                    <h3>Retention Metrics</h3>
+                                    <p class="cha-sub">Regular, Returning & First-time Attendees (6 months)</p>
+                                </div>
+                                <div class="cha-can">
+                                    <canvas id="retentionChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Attendance Insights -->
+                        <div class="sec-hea" style="margin-top: 40px;">
+                            <h2 class="sec-tit">Attendance Insights</h2>
+                            <p style="font-size: 14px; color: #64748b;">Key observations and recommendations</p>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                            <div class="ins-card succ">
+                                <div class="ins-ico">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="ins-tit">Consistent Growth</div>
+                                <div class="ins-tex">Track attendance patterns and identify growth opportunities across all services.</div>
+                            </div>
+                            <div class="ins-card info">
+                                <div class="ins-ico">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </div>
+                                <div class="ins-tit">Member Engagement</div>
+                                <div class="ins-tex">Monitor attendance rates and identify members who may need follow-up or support.</div>
+                            </div>
+                            <div class="ins-card warn">
+                                <div class="ins-ico">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                    </svg>
+                                </div>
+                                <div class="ins-tit">Visitor Follow-up</div>
+                                <div class="ins-tex">Ensure timely follow-up with first-time visitors to improve retention and conversion rates.</div>
+                            </div>
+                        </div>
+
+                    </div>
+                
+                    <!-- Visitors -->
+                    <div class="tab-pann" id="visitors">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h2 class="sec-tit" style="margin: 0;">Visitor Analytics</h2>
+                            <p style="font-size: 12px; color: #64748b; margin: 0; display: inline-flex; align-items: center; gap: 6px;">
+                                <span class="cf-auto-refresh-indicator"></span>
+                                Auto-updating every 30s
+                            </p>
+                        </div>
+                        <div class="sum-grid">
+                            <div class="met-card">
+                                <div class="met-lab">Total Visitors</div>
+                                <div class="met-val" id="visitor-total">0</div>
+                                <div class="met-chan" id="visitor-total-change">New visitors</div>
+                            </div>
+                            <div class="met-card">
+                                <div class="met-lab">Pending Follow-Ups</div>
+                                <div class="met-val" id="visitor-pending">0</div>
+                                <div class="met-chan">Needs attention</div>
+                            </div>
+                            <div class="met-card">
+                                <div class="met-lab">Conversion Rate</div>
+                                <div class="met-val" id="visitor-conversion">0%</div>
+                                <div class="met-chan" id="visitor-converted">0 new members</div>
+                            </div>
+                            <div class="met-card">
+                                <div class="met-lab">Returning Visitors</div>
+                                <div class="met-val" id="visitor-returning">0</div>
+                                <div class="met-chan">Visited more than once</div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Stats -->
+                        <div class="sum-grid" style="margin-top: 20px;">
+                            <div class="met-card">
+                                <div class="met-lab">New This Week</div>
+                                <div class="met-val" id="visitor-new-week">0</div>
+                                <div class="met-chan">Last 7 days</div>
+                            </div>
+                            <div class="met-card">
+                                <div class="met-lab">Contacted</div>
+                                <div class="met-val" id="visitor-contacted">0</div>
+                                <div class="met-chan">Follow-up made</div>
+                            </div>
+                            <div class="met-card">
+                                <div class="met-lab">Scheduled</div>
+                                <div class="met-val" id="visitor-scheduled">0</div>
+                                <div class="met-chan">Appointments set</div>
+                            </div>
+                            <div class="met-card">
+                                <div class="met-lab">Urgent Follow-Ups</div>
+                                <div class="met-val" id="visitor-urgent">0</div>
+                                <div class="met-chan">Over 3 days old</div>
+                            </div>
+                        </div>
+                
+                        <!-- Visitor Charts -->
+                        <div class="cha-grid" style="margin-top: 30px;">
+                            <div class="cha-card">
+                                <div class="cha-hea">
+                                    <h3>Follow-Up Status</h3>
+                                    <p class="cha-sub">Visitor engagement pipeline</p>
+                                </div>
+                                <div class="cha-can">
+                                    <canvas id="visitorFunnelChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="cha-card">
+                                <div class="cha-hea">
+                                    <h3>Visitor Sources</h3>
+                                    <p class="cha-sub">How they heard about us</p>
+                                </div>
+                                <div class="cha-can">
+                                    <canvas id="visitorSourcesChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="cha-card fulw">
+                                <div class="cha-hea">
+                                    <h3>Visitor Overview</h3>
+                                    <p class="cha-sub">First-time vs returning visitors</p>
+                                </div>
+                                <div class="cha-can">
+                                    <canvas id="visitorTrendsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Visitors Table -->
+                        <div class="sec-hea" style="margin-top: 40px;">
+                            <h2 class="sec-tit">Recent Visitors</h2>
+                            <p style="color: #64748b; margin-top: 8px;">Latest visitors to track and follow up</p>
+                        </div>
+                        <table class="dat-tab">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Source</th>
+                                    <th>First Visit</th>
+                                    <th>Last Visit</th>
+                                    <th>Follow-Up Status</th>
+                                    <th>Assigned To</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-visitors-table">
+                                <!-- Data will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Financial - Ultra Advanced -->
+                    <div class="tab-pann" id="financial">
+                        <!-- Header with Export Buttons -->
+                        <div class="sec-hea" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                            <div>
+                                <h2 class="sec-tit" style="font-size: 28px; font-weight: 700; display: flex; align-items: center; gap: 12px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #10b981;">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    Advanced Financial Intelligence Dashboard
+                                </h2>
+                                <p style="color: #64748b; margin-top: 8px; font-size: 14px;">AI-Powered Analytics • Predictive Forecasting • Real-Time Insights • <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="cf-auto-refresh-indicator"></span>Auto-updating every 30s</span></p>
+                            </div>
+                            <div style="display: flex; gap: 12px;">
+                                <button onclick="exportFinancePDF()" class="export-btn pdf-btn" style="background: #ef4444; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-file-pdf"></i> Export PDF
+                                </button>
+                                <button onclick="exportFinanceExcel()" class="export-btn excel-btn" style="background: #10b981; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-file-excel"></i> Export Excel
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Primary KPI Cards (Row 1) -->
+                        <div class="sum-grid" style="margin-bottom: 24px;">
+                            <div class="sum-card succ">
+                                <div class="sum-lab">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="green" stroke-width="2">
+                                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                    </svg>
+                                    Total Income (This Year)
+                                </div>
+                                <div class="sum-val" id="total-income">₵0.00</div>
+                                <div class="sum-chan" id="income-change">From all sources</div>
+                            </div>
+
+                            <div class="sum-card">
+                                <div class="sum-lab">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="blue" stroke-width="2">
+                                        <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8m5 5V3"></path>
+                                    </svg>
+                                    Total Tithes (CPS)
+                                </div>
+                                <div class="sum-val" id="total-tithes">₵0.00</div>
+                                <div class="sum-chan">Member contributions</div>
+                            </div>
+
+                            <div class="sum-card warn">
+                                <div class="sum-lab">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="red" stroke-width="2">
+                                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                                    </svg>
+                                    Total Expenses
+                                </div>
+                                <div class="sum-val" id="total-expenses">₵0.00</div>
+                                <div class="sum-chan" id="expense-change">Operating costs</div>
+                            </div>
+
+                            <div class="sum-card succ" id="net-income-card">
+                                <div class="sum-lab">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="green" stroke-width="2">
+                                        <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                    </svg>
+                                    Net Income
+                                </div>
+                                <div class="sum-val" id="net-income">₵0.00</div>
+                                <div class="sum-chan">Surplus/Deficit</div>
+                            </div>
+                        </div>
+
+                        <!-- Advanced KPI Cards (Row 2) - NEW -->
+                        <style>
+                            .sum-grid {
+                                display: grid;
+                                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                                gap: 22px;
+                                margin-bottom: 30px;
+                            }
+                        
+                            .sum-card {
+                                background: #ffffff;
+                                border-radius: 16px;
+                                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                                padding: 20px 24px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: space-between;
+                                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                            }
+                        
+                            .sum-card:hover {
+                                transform: translateY(-4px);
+                                box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+                            }
+                        
+                            .sum-lab {
+                                display: flex;
+                                align-items: center;
+                                font-size: 15px;
+                                font-weight: 600;
+                                color: #555;
+                                margin-bottom: 10px;
+                                gap: 8px;
+                            }
+                        
+                            .sum-lab svg {
+                                width: 22px;
+                                height: 22px;
+                                stroke: #3b82f6;
+                            }
+                        
+                            .sum-val {
+                                font-size: 36px;
+                                font-weight: 700;
+                                color: #1f2937;
+                            }
+                        
+                            .sum-chan {
+                                font-size: 13px;
+                                color: #888;
+                                margin-top: 4px;
+                            }
+                        
+                            /* Accent colors for icons */
+                            .income svg {
+                                stroke: #22c55e;
+                            }
+                        
+                            /* Green */
+                            .expense svg {
+                                stroke: #ef4444;
+                            }
+                        
+                            /* Red */
+                            .health svg {
+                                stroke: #3b82f6;
+                            }
+                        
+                            /* Blue */
+                            .ratio svg {
+                                stroke: #f59e0b;
+                            }
+                        
+                            /* Yellow */
+                        </style>
+                        
+                        <div class="sum-grid">
+                            <div class="sum-card income">
+                                <div class="sum-lab">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                                        <path
+                                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                        </path>
+                                    </svg>
+                                    YoY Income Growth
+                                </div>
+                                <div class="sum-val" id="yoy-income-growth">0%</div>
+                                <div class="sum-chan"><span id="yoy-income-indicator">vs last year</span></div>
+                            </div>
+                        
+                            <div class="sum-card expense">
+                                <div class="sum-lab">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                                        <path d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path>
+                                    </svg>
+                                    YoY Expense Growth
+                                </div>
+                                <div class="sum-val" id="yoy-expense-growth">0%</div>
+                                <div class="sum-chan"><span id="yoy-expense-indicator">vs last year</span></div>
+                            </div>
+                        
+                            <div class="sum-card health">
+                                <div class="sum-lab">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    Financial Health Score
+                                </div>
+                                <div class="sum-val" id="financial-health-score">0</div>
+                                <div class="sum-chan">out of 100</div>
+                            </div>
+                        
+                            <div class="sum-card ratio">
+                                <div class="sum-lab">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                                        <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                                        <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                                    </svg>
+                                    Expense Ratio
+                                </div>
+                                <div class="sum-val" id="expense-ratio">0%</div>
+                                <div class="sum-chan">of total income</div>
+                            </div>
+                        </div>
+
+
+                        <!-- Top Contributors Section - NEW -->
+                        <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 30px;">
+                            <div class="sec-hea" style="margin-bottom: 20px;">
+                                <h2 class="sec-tit" style="font-size: 20px; display: flex; align-items: center; gap: 10px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #f59e0b;">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                                    </svg>
+                                    Top 10 Contributors
+                                </h2>
+                                <p style="color: #64748b; margin-top: 4px; font-size: 13px;">Highest contributing members this year</p>
+                            </div>
+                            <table class="dat-tab">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Member Name</th>
+                                        <th>Total Contribution</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="top-contributors-tbody">
+                                    <tr>
+                                        <td colspan="4" style="text-align: center; padding: 20px; color: #64748b;">Loading contributors...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Advanced Charts - Row 1 -->
+                        <div class="sec-hea" style="margin-bottom: 20px;">
+                            <h2 class="sec-tit" style="font-size: 20px; display: flex; align-items: center; gap: 10px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #3b82f6;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                </svg>
+                                Predictive Analytics & Forecasting
+                            </h2>
+                            <p style="color: #64748b; margin-top: 4px; font-size: 13px;">AI-powered financial predictions and trend analysis</p>
+                        </div>
+
+                        <div class="cha-grid" style="margin-bottom: 24px;">
+                            <!-- Cashflow Analysis Chart - NEW -->
+                            <div class="cha-card">
+                                <div class="cha-hea">
+                                    <h3 style="display: flex; align-items: center; gap: 8px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #10b981;">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+                                        </svg>
+                                        Cashflow Analysis
+                                    </h3>
+                                    <p class="cha-sub">Operating • Investing • Financing</p>
+                                </div>
+                                <div class="cha-can" style="height: 300px;">
+                                    <canvas id="cashflowChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Forecast Chart - NEW -->
+                            <div class="cha-card">
+                                <div class="cha-hea">
+                                    <h3 style="display: flex; align-items: center; gap: 8px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #8b5cf6;">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                        </svg>
+                                        3-Month Forecast
+                                    </h3>
+                                    <p class="cha-sub">AI-powered predictive analysis</p>
+                                </div>
+                                <div class="cha-can" style="height: 300px;">
+                                    <canvas id="forecastChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Charts - Row 2 -->
+                        <div class="cha-grid" style="margin-bottom: 24px;">
+                            <!-- Budget Gauge Chart - NEW -->
+                            <div class="cha-card">
+                                <div class="cha-hea">
+                                    <h3 style="display: flex; align-items: center; gap: 8px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #f59e0b;">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                        </svg>
+                                        Budget Utilization
+                                    </h3>
+                                    <p class="cha-sub">Real-time budget tracking</p>
+                                </div>
+                                <div class="cha-can" style="height: 300px;">
+                                    <canvas id="budgetGaugeChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Donor Retention Chart - NEW -->
+                            <div class="cha-card">
+                                <div class="cha-hea">
+                                    <h3 style="display: flex; align-items: center; gap: 8px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #06b6d4;">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                        Donor Retention
+                                    </h3>
+                                    <p class="cha-sub">New vs Returning vs Lapsed</p>
+                                </div>
+                                <div class="cha-can" style="height: 300px;">
+                                    <canvas id="donorRetentionChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Charts - Row 3 -->
+                        <div class="cha-grid" style="margin-bottom: 24px;">
+                            <!-- YoY Comparison Chart - NEW -->
+                            <div class="cha-card">
+                                <div class="cha-hea">
+                                    <h3 style="display: flex; align-items: center; gap: 8px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #22c55e;">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                        </svg>
+                                        Year-over-Year Comparison
+                                    </h3>
+                                    <p class="cha-sub">This Year vs Last Year</p>
+                                </div>
+                                <div class="cha-can" style="height: 300px;">
+                                    <canvas id="yoyComparisonChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Expense Ratio Chart - NEW -->
+                            <div class="cha-card">
+                                <div class="cha-hea">
+                                    <h3 style="display: flex; align-items: center; gap: 8px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #ef4444;">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                                        </svg>
+                                        Expense Distribution
+                                    </h3>
+                                    <p class="cha-sub">Category breakdown analysis</p>
+                                </div>
+                                <div class="cha-can" style="height: 300px;">
+                                    <canvas id="expenseRatioChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Birthday Analytics -->
+                    <div class="tab-pann" id="birthdays">
+                        <div class="sec-hea" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h2 class="sec-tit">Birthday Distribution Analysis</h2>
+                                <p style="color: #64748b; margin-top: 8px;">Comprehensive breakdown of member birthdays across all months • <span id="auto-refresh-status" style="display: inline-flex; align-items: center; gap: 6px;"><span class="cf-auto-refresh-indicator"></span>Auto-updating every 30s</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Summary Cards -->
+                        <div class="sum-grid" style="margin-bottom: 30px;">
+                            <div class="met-card">
+                                <div class="met-lab">Total Birthdays</div>
+                                <div class="met-val" id="total-birthdays">0</div>
+                                <div class="met-chan">Members with birthdays</div>
+                            </div>
+                            <div class="met-card">
+                                <div class="met-lab">Busiest Month</div>
+                                <div class="met-val" id="busiest-month">-</div>
+                                <div class="met-chan" id="busiest-count">0 birthdays</div>
+                            </div>
+                            <div class="met-card">
+                                <div class="met-lab">Average Per Month</div>
+                                <div class="met-val" id="average-month">0</div>
+                                <div class="met-chan">Birthdays per month</div>
+                            </div>
+                        </div>
+
+                        <!-- Charts Section -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 30px;">
+                            <!-- Pie Chart -->
+                            <div class="cf-chart-container">
+                                <div class="cf-chart-header">
+                                    <h3>Distribution by Month</h3>
+                                    <p>Percentage breakdown</p>
+                                </div>
+                                <div class="cf-chart-canvas-wrapper">
+                                    <canvas id="birthday-pie-chart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Bar Chart -->
+                            <div class="cf-chart-container">
+                                <div class="cf-chart-header">
+                                    <h3>Monthly Comparison</h3>
+                                    <p>Birthday count by month</p>
+                                </div>
+                                <div class="cf-chart-canvas-wrapper">
+                                    <canvas id="birthday-bar-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Month Details Table -->
+                        <div class="sec-hea" style="margin-top: 40px;">
+                            <h2 class="sec-tit">Detailed Monthly Breakdown</h2>
+                        </div>
+                        <table class="dat-tab">
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>Birthday Count</th>
+                                    <th>Percentage</th>
+                                    <th>Visual</th>
+                                </tr>
+                            </thead>
+                            <tbody id="birthday-month-table">
+                                <!-- Data will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div class="tab-pann" id="social">
+                        <div class="ale-box succ">
+                            <div class="ale-cont">
+                                <div class="ale-tit">Social Media Growth</div>
+                                <div class="ale-tex">Total reach increased 34% this month. Instagram engagement up 45%, Facebook
+                                    video views doubled, and YouTube subscribers grew by 28.</div>
+                            </div>
+                        </div>
+                
+                        <div class="gri-2" style="margin-bottom: 24px;">
+                            <div class="soc-card">
+                                <div class="social-icon fb">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                <div class="soc-cont">
+                                    <div class="soc-plat">Facebook</div>
+                                    <div class="soc-metr">
+                                        <div class="soc-metri">
+                                            <div class="soc-metri-lab">Followers</div>
+                                            <div class="soc-metri-val">3,845</div>
+                                        </div>
+                                        <div class="soc-metri">
+                                            <div class="soc-metri-lab">Reach</div>
+                                            <div class="soc-metri-val">8,420</div>
+                                        </div>
+                                        <div class="soc-metri">
+                                            <div class="soc-metri-lab">Engagement</div>
+                                            <div class="soc-metri-val">6.8%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="soc-card">
+                                <div class="social-icon ig">
+                                    <i class="fab fa-instagram"></i>
+                                </div>
+                                <div class="soc-cont">
+                                    <div class="soc-plat">Instagram</div>
+                                    <div class="soc-metr">
+                                        <div class="soc-metri">
+                                            <div class="soc-metri-lab">Followers</div>
+                                            <div class="soc-metri-val">2,156</div>
+                                        </div>
+                                        <div class="soc-metri">
+                                            <div class="soc-metri-lab">Reach</div>
+                                            <div class="soc-metri-val">4,890</div>
+                                        </div>
+                                        <div class="soc-metri">
+                                            <div class="soc-metri-lab">Engagement</div>
+                                            <div class="soc-metri-val">9.2%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="soc-card">
+                                <div class="social-icon yt">
+                                    <i class="fab fa-youtube"></i>
+                                </div>
+                                <div class="soc-cont">
+                                    <div class="soc-plat">YouTube</div>
+                                    <div class="soc-metr">
+                                        <div class="soc-metri">
+                                            <div class="soc-metri-lab">Subscribers</div>
+                                            <div class="soc-metri-val">1,428</div>
+                                        </div>
+                                        <div class="soc-metri">
+                                            <div class="soc-metri-lab">Views</div>
+                                            <div class="soc-metri-val">12,340</div>
+                                        </div>
+                                        <div class="soc-metri">
+                                            <div class="soc-metri-lab">Watch Time</div>
+                                            <div class="soc-metri-val">245h</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="soc-card">
+                                <div class="social-icon tw">
+                                    <i class="fab fa-x-twitter"></i> <!-- X/Twitter icon -->
+                                </div>
+                                <div class="soc-cont">
+                                    <div class="soc-plat">Twitter / X</div>
+                                    <div class="soc-metr">
+                                        <div class="soc-metri">
+                                            <div class="soc-metri-lab">Followers</div>
+                                            <div class="soc-metri-val">892</div>
+                                        </div>
+                                        <div class="soc-metri">
+                                            <div class="soc-metri-lab">Impressions</div>
+                                            <div class="soc-metri-val">3,240</div>
+                                        </div>
+                                        <div class="soc-metri">
+                                            <div class="soc-metri-lab">Engagement</div>
+                                            <div class="soc-metri-val">4.1%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="sec-hea">
+                            <h2 class="sec-tit">Platform Performance</h2>
+                        </div>
+                
+                        <table class="dat-tab">
+                            <thead>
+                                <tr>
+                                    <th>Platform</th>
+                                    <th>Posts</th>
+                                    <th>Reach</th>
+                                    <th>Engagement</th>
+                                    <th>Growth</th>
+                                    <th>Performance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="tab-nam">Facebook</td>
+                                    <td>18</td>
+                                    <td>8,420</td>
+                                    <td>6.8%</td>
+                                    <td><span class="tre-ind tre-up">↑ 12%</span></td>
+                                    <td><span class="badg badg-succ">Strong</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tab-nam">Instagram</td>
+                                    <td>24</td>
+                                    <td>4,890</td>
+                                    <td>9.2%</td>
+                                    <td><span class="tre-ind tre-up">↑ 45%</span></td>
+                                    <td><span class="badg badg-succ">Excellent</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tab-nam">YouTube</td>
+                                    <td>4</td>
+                                    <td>12,340</td>
+                                    <td>5.4%</td>
+                                    <td><span class="tre-ind tre-up">↑ 28%</span></td>
+                                    <td><span class="badg badg-inff">Growing</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tab-nam">Twitter/X</td>
+                                    <td>32</td>
+                                    <td>3,240</td>
+                                    <td>4.1%</td>
+                                    <td><span class="tre-ind tre-up">↑ 8%</span></td>
+                                    <td><span class="badg badg-inff">Steady</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                
+                        <div style="margin-top: 24px;">
+                            <div class="cha-grid">
+                                <div class="cha-card">
+                                    <div class="cha-hea">
+                                        <h3>Social Media Growth</h3>
+                                        <p class="cha-sub">Follower trends</p>
+                                    </div>
+                                    <div class="cha-can">
+                                        <canvas id="socialGrowthChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="cha-card">
+                                    <div class="cha-hea">
+                                        <h3>Engagement by Platform</h3>
+                                        <p class="cha-sub">Rate comparison</p>
+                                    </div>
+                                    <div class="cha-can">
+                                        <canvas id="socialEngagementChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Communication -->
+                    <div class="tab-pann" id="communication">
+                        <div class="sum-grid">
+                            <div class="met-card">
+                                <div class="met-lab">
+                                    <!-- Paper Plane/Send Icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                    </svg>
+                                    Messages Sent
+                                </div>
+                                <div class="met-val">2,847</div>
+                                <div class="met-chan">+15% vs last month</div>
+                            </div>
+                        
+                            <div class="met-card">
+                                <div class="met-lab">
+                                    <!-- Mail Open Icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l9 6 9-6" opacity="0.5" />
+                                    </svg>
+                                    Open Rate
+                                </div>
+                                <div class="met-val">89%</div>
+                                <div class="met-chan">Above industry avg</div>
+                            </div>
+                        
+                            <div class="met-card">
+                                <div class="met-lab">
+                                    <!-- Cursor Click Icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                                    </svg>
+                                    Click Rate
+                                </div>
+                                <div class="met-val">34%</div>
+                                <div class="met-chan">+5% improvement</div>
+                            </div>
+                        
+                            <div class="met-card">
+                                <div class="met-lab">
+                                    <!-- Chat Bubble/SMS Icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                    </svg>
+                                    SMS Delivered
+                                </div>
+                                <div class="met-val">1,245</div>
+                                <div class="met-chan">98% delivery rate</div>
+                            </div>
+                        </div>
+                
+                        <div class="ale-box inff">
+                            <div class="ale-cont">
+                                <div class="ale-tit">Communication Excellence</div>
+                                <div class="ale-tex">Your 89% email open rate exceeds the industry average of 71%. SMS engagement
+                                    is strong with 98% delivery and 67% response rate.</div>
+                            </div>
+                        </div>
+                
+                        <div class="sec-hea">
+                            <h2 class="sec-tit">Channel Performance</h2>
+                        </div>
+                
+                        <table class="dat-tab">
+                            <thead>
+                                <tr>
+                                    <th>Channel</th>
+                                    <th>Messages</th>
+                                    <th>Delivered</th>
+                                    <th>Open Rate</th>
+                                    <th>Response Rate</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="tab-nam">Email Newsletter</td>
+                                    <td>1,245</td>
+                                    <td>1,238</td>
+                                    <td>89%</td>
+                                    <td>12%</td>
+                                    <td><span class="badg badg-succ">Excellent</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tab-nam">SMS Alerts</td>
+                                    <td>1,245</td>
+                                    <td>1,220</td>
+                                    <td>95%</td>
+                                    <td>67%</td>
+                                    <td><span class="badg badg-succ">Strong</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tab-nam">Push Notifications</td>
+                                    <td>357</td>
+                                    <td>348</td>
+                                    <td>76%</td>
+                                    <td>8%</td>
+                                    <td><span class="badg badg-inff">Good</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                
+                        <div style="margin-top: 24px;">
+                            <div class="cha-grid">
+                                <div class="cha-card">
+                                    <div class="cha-hea">
+                                        <h3>Communication Trends</h3>
+                                        <p class="cha-sub">Open rates over time</p>
+                                    </div>
+                                    <div class="cha-can">
+                                        <canvas id="commTrendsChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="cha-card">
+                                    <div class="cha-hea">
+                                        <h3>Channel Distribution</h3>
+                                        <p class="cha-sub">Message breakdown</p>
+                                    </div>
+                                    <div class="cha-can">
+                                        <canvas id="channelDistChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Engagement -->
+                    <div class="tab-pann" id="engagement">
+                        <div class="sum-grid">
+                            <div class="sum-card succ">
+                                <div class="sum-lab">Overall Engagement</div>
+                                <div class="sum-val">87%</div>
+                                <div class="sum-chan">+8% improvement</div>
+                            </div>
+                            <div class="sum-card">
+                                <div class="sum-lab">Active Volunteers</div>
+                                <div class="sum-val">47</div>
+                                <div class="sum-chan">9.7% of members</div>
+                            </div>
+                            <div class="sum-card warn">
+                                <div class="sum-lab">At-Risk Members</div>
+                                <div class="sum-val">23</div>
+                                <div class="sum-chan nega">Need follow-up</div>
+                            </div>
+                            <div class="sum-card inff">
+                                <div class="sum-lab">Small Group Participation</div>
+                                <div class="sum-val">32%</div>
+                                <div class="sum-chan">+3% growth</div>
+                            </div>
+                        </div>
+                
+                        <div class="ale-box warn">
+                            <div class="ale-cont">
+                                <div class="ale-tit">Retention Alert</div>
+                                <div class="ale-tex">23 members haven't attended in 45+ days. Automated follow-up messages
+                                    queued. Consider personal outreach for high-priority members.</div>
+                            </div>
+                        </div>
+                
+                        <div class="sec-hea">
+                            <h2 class="sec-tit">Ministry Engagement</h2>
+                        </div>
+                
+                        <table class="dat-tab">
+                            <thead>
+                                <tr>
+                                    <th>Ministry</th>
+                                    <th>Participants</th>
+                                    <th>Attendance Rate</th>
+                                    <th>Growth</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="tab-nam">Worship Team</td>
+                                    <td>32</td>
+                                    <td>
+                                        <div class="pro-bar">
+                                            <div class="pro-fil succ" style="width: 89%"></div>
+                                        </div>
+                                        <small style="color: #64748b; margin-top: 4px; display: block;">89%</small>
+                                    </td>
+                                    <td><span class="tre-ind tre-up">↑ 6.7%</span></td>
+                                    <td><span class="badg badg-succ">High</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tab-nam">Youth Ministry</td>
+                                    <td>89</td>
+                                    <td>
+                                        <div class="pro-bar">
+                                            <div class="pro-fil succ" style="width: 95%"></div>
+                                        </div>
+                                        <small style="color: #64748b; margin-top: 4px; display: block;">95%</small>
+                                    </td>
+                                    <td><span class="tre-ind tre-up">↑ 17.1%</span></td>
+                                    <td><span class="badg badg-succ">Excellent</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tab-nam">Children's Ministry</td>
+                                    <td>124</td>
+                                    <td>
+                                        <div class="pro-bar">
+                                            <div class="pro-fil" style="width: 78%"></div>
+                                        </div>
+                                        <small style="color: #64748b; margin-top: 4px; display: block;">78%</small>
+                                    </td>
+                                    <td><span class="tre-ind tre-up">↑ 5.1%</span></td>
+                                    <td><span class="badg badg-inff">Good</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tab-nam">Small Groups</td>
+                                    <td>156</td>
+                                    <td>
+                                        <div class="pro-bar">
+                                            <div class="pro-fil" style="width: 82%"></div>
+                                        </div>
+                                        <small style="color: #64748b; margin-top: 4px; display: block;">82%</small>
+                                    </td>
+                                    <td><span class="tre-ind tre-up">↑ 8.3%</span></td>
+                                    <td><span class="badg badg-succ">High</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                
+                        <div style="margin-top: 24px;">
+                            <div class="cha-grid">
+                                <div class="cha-card">
+                                    <div class="cha-hea">
+                                        <h3>Ministry Participation</h3>
+                                        <p class="cha-sub">Member involvement</p>
+                                    </div>
+                                    <div class="cha-can">
+                                        <canvas id="ministryParticipationChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="cha-card">
+                                    <div class="cha-hea">
+                                        <h3>Volunteer Hours</h3>
+                                        <p class="cha-sub">Monthly tracking</p>
+                                    </div>
+                                    <div class="cha-can">
+                                        <canvas id="volunteerHoursChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+                <!-- Main Header -->
+                
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+  <script>
+        // Tab Switching
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabBtns = document.querySelectorAll('.tab-butt');
+            const tabPanes = document.querySelectorAll('.tab-pann');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetTab = btn.getAttribute('data-tab');
+                    tabBtns.forEach(b => b.classList.remove('acti'));
+                    tabPanes.forEach(p => p.classList.remove('acti'));
+                    btn.classList.add('acti');
+                    document.getElementById(targetTab).classList.add('acti');
+
+                    // Stop all auto-refresh first
+                    if (typeof window.stopAdvancedFinanceAutoRefresh === 'function') {
+                        window.stopAdvancedFinanceAutoRefresh();
+                    }
+                    if (typeof window.stopAttendanceAutoRefresh === 'function') {
+                        window.stopAttendanceAutoRefresh();
+                    }
+
+                    // Initialize ADVANCED finance analytics when financial tab is clicked
+                    if (targetTab === 'financial' && typeof window.startAdvancedFinanceAutoRefresh === 'function') {
+                        window.startAdvancedFinanceAutoRefresh();
+                    }
+                    
+                    // Initialize attendance analytics when attendance tab is clicked
+                    if (targetTab === 'attendance') {
+                        if (typeof window.initializeAttendanceAnalytics === 'function') {
+                            window.initializeAttendanceAnalytics();
+                        }
+                        if (typeof window.startAttendanceAutoRefresh === 'function') {
+                            window.startAttendanceAutoRefresh();
+                        }
+                    }
+                });
+            });
+        });
+
+        // Executive Charts
+        new Chart(document.getElementById('executiveGrowthChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Growth %',
+                    data: [8.2, 9.5, 10.3, 12.1, 13.8, 15.2],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(document.getElementById('executiveDeptChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Attendance', 'Giving', 'Engagement', 'Social'],
+                datasets: [{
+                    data: [85, 92, 87, 78],
+                    backgroundColor: ['#3b82f6', '#10b981', '#8b5cf6', '#f59e0b'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, max: 100 } }
+            }
+        });
+
+        // Attendance Charts - Now loaded dynamically from attendance_analytics_advanced.js
+        // Charts are populated with real database data via auto-refresh every 30s
+
+        // Visitor Charts - Now loaded dynamically from visitor_analytics.js
+        // Charts are populated with real database data via auto-refresh
+
+        // Financial Charts - Now loaded dynamically from finance_analytics_advanced.js
+        // Charts are populated with real database data via auto-refresh every 30s
+
+        // Social Media Charts
+        new Chart(document.getElementById('socialGrowthChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [
+                    {
+                        label: 'Facebook',
+                        data: [3420, 3510, 3620, 3710, 3780, 3845],
+                        borderColor: '#1877f2',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Instagram',
+                        data: [1820, 1890, 1940, 2010, 2080, 2156],
+                        borderColor: '#e1306c',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'YouTube',
+                        data: [1200, 1245, 1290, 1340, 1385, 1428],
+                        borderColor: '#ff0000',
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } },
+                scales: { y: { beginAtZero: false } }
+            }
+        });
+
+        new Chart(document.getElementById('socialEngagementChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Facebook', 'Instagram', 'YouTube', 'Twitter'],
+                datasets: [{
+                    label: 'Engagement %',
+                    data: [6.8, 9.2, 5.4, 4.1],
+                    backgroundColor: ['#1877f2', '#e1306c', '#ff0000', '#1da1f2'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, max: 10 } }
+            }
+        });
+
+        // Communication Charts
+        new Chart(document.getElementById('commTrendsChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [
+                    {
+                        label: 'Email Open Rate',
+                        data: [82, 84, 86, 87, 88, 89],
+                        borderColor: '#3b82f6',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'SMS Response Rate',
+                        data: [62, 63, 65, 65, 66, 67],
+                        borderColor: '#10b981',
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } },
+                scales: { y: { beginAtZero: false, min: 60, max: 100 } }
+            }
+        });
+
+        new Chart(document.getElementById('channelDistChart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Email', 'SMS', 'Push', 'Direct'],
+                datasets: [{
+                    data: [1245, 1245, 357, 892],
+                    backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+
+        // Engagement Charts
+        new Chart(document.getElementById('ministryParticipationChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Worship', 'Youth', 'Children', 'Small Groups', 'Outreach'],
+                datasets: [{
+                    label: 'Participants',
+                    data: [32, 89, 124, 156, 67],
+                    backgroundColor: '#3b82f6',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(document.getElementById('volunteerHoursChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Volunteer Hours',
+                    data: [420, 445, 460, 485, 510, 540],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: false } }
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
+<script>
+// ==================== Birthday Analytics Charts ====================
+let birthdayPieChart = null;
+let birthdayBarChart = null;
+
+async function loadBirthdayAnalytics() {
+    try {
+        const response = await fetch('get_birthday_analytics.php');
+        const result = await response.json();
+
+        if (result.success) {
+            const data = result.data;
+
+            // Update summary cards
+            document.getElementById('total-birthdays').textContent = data.total_birthdays;
+            document.getElementById('busiest-month').textContent = data.highest_month.month_name;
+            document.getElementById('busiest-count').textContent = `${data.highest_month.count} birthdays`;
+            document.getElementById('average-month').textContent = data.average_per_month;
+
+            // Render charts
+            renderBirthdayPieChart(data.monthly);
+            renderBirthdayBarChart(data.monthly);
+            renderBirthdayTable(data.monthly, data.total_birthdays);
+        }
+    } catch (error) {
+        console.error('Error loading birthday analytics:', error);
+    }
+}
+
+function renderBirthdayPieChart(monthlyData) {
+    const ctx = document.getElementById('birthday-pie-chart').getContext('2d');
+
+    if (birthdayPieChart) {
+        birthdayPieChart.destroy();
+    }
+
+    const labels = monthlyData.map(m => m.month_name);
+    const counts = monthlyData.map(m => m.count);
+
+    const colors = [
+        '#667eea', '#764ba2', '#f093fb', '#f5576c',
+        '#4facfe', '#00f2fe', '#43e97b', '#38f9d7',
+        '#fa709a', '#fee140', '#30cfd0', '#330867'
+    ];
+
+    birthdayPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: counts,
+                backgroundColor: colors,
+                borderWidth: 2,
+                borderColor: '#ffffff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        padding: 15,
+                        font: { size: 12 },
+                        generateLabels: function(chart) {
+                            const data = chart.data;
+                            if (data.labels.length && data.datasets.length) {
+                                return data.labels.map((label, i) => {
+                                    const value = data.datasets[0].data[i];
+                                    return {
+                                        text: `${label}: ${value}`,
+                                        fillStyle: data.datasets[0].backgroundColor[i],
+                                        hidden: false,
+                                        index: i
+                                    };
+                                });
+                            }
+                            return [];
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const label = context.label || '';
+                            const value = context.parsed || 0;
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                            return `${label}: ${value} (${percentage}%)`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function renderBirthdayBarChart(monthlyData) {
+    const ctx = document.getElementById('birthday-bar-chart').getContext('2d');
+
+    if (birthdayBarChart) {
+        birthdayBarChart.destroy();
+    }
+
+    const labels = monthlyData.map(m => m.month_name.substring(0, 3));
+    const counts = monthlyData.map(m => m.count);
+
+    birthdayBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Birthday Count',
+                data: counts,
+                backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                borderColor: 'rgba(102, 126, 234, 1)',
+                borderWidth: 2,
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `Birthdays: ${context.parsed.y}`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { stepSize: 1, font: { size: 11 } },
+                    grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: { font: { size: 11 } }
+                }
+            }
+        }
+    });
+}
+
+function renderBirthdayTable(monthlyData, total) {
+    const tbody = document.getElementById('birthday-month-table');
+
+    tbody.innerHTML = monthlyData.map(month => {
+        const percentage = total > 0 ? ((month.count / total) * 100).toFixed(1) : 0;
+
+        return `
+            <tr>
+                <td style="font-weight: 500;">${month.month_name}</td>
+                <td><strong>${month.count}</strong></td>
+                <td>${percentage}%</td>
+                <td>
+                    <div class="cf-birthday-progress-bar" style="width: 200px;">
+                        <div class="cf-birthday-progress-fill" style="width: ${percentage}%;"></div>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+// Auto-refresh interval (30 seconds)
+let birthdayRefreshInterval = null;
+
+function startBirthdayAutoRefresh() {
+    // Initial load
+    loadBirthdayAnalytics();
+
+    // Set up auto-refresh every 30 seconds
+    birthdayRefreshInterval = setInterval(() => {
+        loadBirthdayAnalytics();
+        updateRefreshStatus();
+    }, 30000); // 30 seconds
+}
+
+function updateRefreshStatus() {
+    const statusElement = document.getElementById('auto-refresh-status');
+    if (statusElement) {
+        // Flash the indicator
+        const indicator = statusElement.querySelector('.cf-auto-refresh-indicator');
+        if (indicator) {
+            indicator.style.animation = 'none';
+            setTimeout(() => {
+                indicator.style.animation = 'pulse-dot 2s ease-in-out infinite';
+            }, 10);
+        }
+    }
+}
+
+// Stop auto-refresh when tab is hidden to save resources
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        if (birthdayRefreshInterval) {
+            clearInterval(birthdayRefreshInterval);
+        }
+    } else {
+        // Resume auto-refresh when tab becomes visible
+        if (!birthdayRefreshInterval) {
+            startBirthdayAutoRefresh();
+        }
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    startBirthdayAutoRefresh();
+});
+</script>
